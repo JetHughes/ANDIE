@@ -67,3 +67,4 @@ public class ConvertToGrey implements ImageOperation, java.io.Serializable {
     }
     
 }
+//This is a comment that is not destructive
