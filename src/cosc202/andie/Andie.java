@@ -1,5 +1,4 @@
 package cosc202.andie;
-//meow meow moo moo
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
