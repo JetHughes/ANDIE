@@ -35,7 +35,7 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new AdjustBrightnessAction("Brightness", null, "Adjust Brightness", Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new AdjustBrightnessAction("Brightness/Contast", null, "Adjust Brightness and Contrast", Integer.valueOf(KeyEvent.VK_B)));
     }
 
     /**
@@ -127,20 +127,32 @@ public class ColourActions {
          */
         public void actionPerformed(ActionEvent e) {
 
-            double percent = 0;
+            double brightness = 0;
+            double contrast = 0;
 
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, -100, 100, 10);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            SpinnerNumberModel brightnessModel = new SpinnerNumberModel(0, -100, 100, 10);
+            JSpinner radiusSpinner = new JSpinner(brightnessModel);
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Brightness Value", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.
             if (option == JOptionPane.CANCEL_OPTION) {
                 return;
             } else if (option == JOptionPane.OK_OPTION) {
-                percent = radiusModel.getNumber().intValue();
+                brightness = brightnessModel.getNumber().intValue();
             }
 
-            target.getImage().apply(new AdjustBrightness(percent));
+            SpinnerNumberModel contrastModel = new SpinnerNumberModel(0, -100, 100, 10);
+            radiusSpinner = new JSpinner(contrastModel);
+            option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Contrast Value", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                contrast = contrastModel.getNumber().intValue();
+            }
+
+            target.getImage().apply(new AdjustBrightness(contrast, brightness));
             target.repaint();
             target.getParent().revalidate();
         }
