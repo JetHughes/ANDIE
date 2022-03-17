@@ -126,7 +126,21 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new AdjustBrightness());
+
+            double percent = 0;
+
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, -100, 100, 10);
+            JSpinner radiusSpinner = new JSpinner(radiusModel);
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                percent = radiusModel.getNumber().intValue();
+            }
+
+            target.getImage().apply(new AdjustBrightness(percent));
             target.repaint();
             target.getParent().revalidate();
         }

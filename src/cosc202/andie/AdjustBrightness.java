@@ -1,12 +1,11 @@
 package cosc202.andie;
 
 import java.awt.image.*;
-import java.util.*;
 
 public class AdjustBrightness implements ImageOperation, java.io.Serializable{
-    private int percent;
+    private double percent;
 
-    AdjustBrightness(int percent){
+    AdjustBrightness(double percent){
         this.percent = percent;
     }
 
@@ -15,7 +14,7 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
     }
 
     public BufferedImage apply(BufferedImage input) {
-        double amount = 255 * (percent/100);
+        double amount = 255.0 * (percent/100.0);
 
         System.out.println("Adjust Brightness by: " + amount);
 
