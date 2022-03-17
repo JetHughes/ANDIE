@@ -4,16 +4,16 @@ import java.awt.image.*;
 import java.awt.Color;
 
 public class AdjustBrightness implements ImageOperation, java.io.Serializable{
-    private double contrast;
+
     private double brightness;
 
-    AdjustBrightness(double contrast, double brightness){
-        this.contrast = contrast;
+    AdjustBrightness(double brightness){
+
         this.brightness = brightness;
     }
 
     AdjustBrightness(){
-        this(10, 10);
+        this(10);
     }
 
     public BufferedImage apply(BufferedImage input) {
@@ -28,9 +28,9 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
                 int b=c.getBlue();
                 int g=c.getGreen();
 
-                r = (int)getAdjustedValue(contrast, brightness, r);
-                g = (int)getAdjustedValue(contrast, brightness, g);
-                b = (int)getAdjustedValue(contrast, brightness, b);
+                r = (int)getAdjustedValue(brightness, r);
+                g = (int)getAdjustedValue(brightness, g);
+                b = (int)getAdjustedValue(brightness, b);
 
                 output.setRGB(x, y, new Color(r,g,b).getRGB());           
         
@@ -40,8 +40,8 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
         return output;
     }
 
-    public double getAdjustedValue(double c, double b, double v){      
-        double result = (1+(c/100))*(v-127.5) + 127.5 * (1+(b/100));
+    public double getAdjustedValue(double b, double v){      
+        double result = 127.5 * (1+(b/100));
 
         if(result > 255){
             result = 255;
