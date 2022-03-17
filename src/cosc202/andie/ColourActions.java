@@ -35,6 +35,7 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new AdjustBrightnessAction("Brightness/Contast", null, "Adjust Brightness and Contrast", Integer.valueOf(KeyEvent.VK_B)));
     }
 
     /**
@@ -94,7 +95,67 @@ public class ColourActions {
             target.repaint();
             target.getParent().revalidate();
         }
+    }
 
+    public class AdjustBrightnessAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new convert-to-grey action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        AdjustBrightnessAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+    
+        /**
+         * <p>
+         * Callback for when the convert-to-grey action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ConvertToGreyAction is triggered.
+         * It changes the image to greyscale.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+
+            double brightness = 0;
+            double contrast = 0;
+
+            SpinnerNumberModel brightnessModel = new SpinnerNumberModel(0, -100, 100, 10);
+            JSpinner radiusSpinner = new JSpinner(brightnessModel);
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Brightness Value", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                brightness = brightnessModel.getNumber().intValue();
+            }
+
+            SpinnerNumberModel contrastModel = new SpinnerNumberModel(0, -100, 100, 10);
+            radiusSpinner = new JSpinner(contrastModel);
+            option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Contrast Value", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                contrast = contrastModel.getNumber().intValue();
+            }
+
+            target.getImage().apply(new AdjustBrightness(contrast, brightness));
+            target.repaint();
+            target.getParent().revalidate();
+        }
     }
 
 }

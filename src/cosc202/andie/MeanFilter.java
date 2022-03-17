@@ -87,6 +87,4 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
 
         return output;
     }
-
-
 }
