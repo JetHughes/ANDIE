@@ -41,7 +41,7 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
     }
 
     public double getAdjustedValue(double b, double v){      
-        double result = 127.5 * (1+(b/100));
+        double result = (v - 127.5) + 127.5 * (1+(b/100));
 
         if(result > 255){
             result = 255;
