@@ -36,13 +36,11 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         float [][] array = new float[size][size];
         float sigma = radius/3.0f;
         double sum = 0;
-        int row = 0;
-        int col = 0;
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {                
-                double base = Math.E * (1/(2 * Math.PI * Math.pow(sigma, 2.0)));
-                double pow = -((Math.pow(x, 2) + Math.pow(y, 2)) / (2*Math.pow(sigma, 2)));    
-                array[x+radius][y+radius] = (float)Math.pow(base, pow);  
+                double answer = (1 / (2 * Math.PI * Math.pow(sigma, 2)) 
+                    * Math.exp(-(Math.pow(x, 2) + Math.pow(y, 2)) / (2 * Math.pow(sigma, 2)))); 
+                array[x+radius][y+radius] = (float)answer;
                 sum += array[x+radius][y+radius];
             }
         }
@@ -57,9 +55,9 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
             }
         }
 
-        //print arrat (for debugging)
+        //print array (for debugging)
         for (float f : normflatArr) {
-            System.out.println(f + ", \n");
+            System.out.println(f + ", ");
         }
 
         Kernel kernel = new Kernel(2*radius+1, 2*radius+1, normflatArr);
