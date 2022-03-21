@@ -4,6 +4,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument.HTMLReader.ParagraphAction;
 
 /**
  * <p>
@@ -38,6 +39,7 @@ public class ViewActions {
         actions = new ArrayList<Action>();
         actions.add(new ZoomInAction("Zoom In", null, "Zoom In", Integer.valueOf(KeyEvent.VK_PLUS)));
         actions.add(new ZoomOutAction("Zoom Out", null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new ZoomFitAction("Zoom Fit", null, "Zoom Fit", Integer.valueOf(KeyEvent.VK_1)));
         actions.add(new ZoomFullAction("Zoom Full", null, "Zoom Full", Integer.valueOf(KeyEvent.VK_1)));
     }
 
@@ -144,6 +146,56 @@ public class ViewActions {
             target.setZoom(target.getZoom()-10);
             target.repaint();
             target.getParent().revalidate();
+        }
+
+    }
+
+    /**
+     * <p>
+     * Action to reset the zoom level to make the image fit the screen.
+     * </p>
+     * 
+     * <p>
+     * Note that this action only affects the way the image is displayed, not its actual contents.
+     * </p>
+     */
+    public class ZoomFitAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new zoom-fit action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        ZoomFitAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the zoom-Fit action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ZoomFitAction is triggered.
+         * It resets the Zoom level to 100%.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            if(target.getImage().hasImage()){
+                double panelWidth = (double)target.getParent().getWidth();
+                double imageWidth= target.getImage().getCurrentImage().getWidth();
+                double zoom = (panelWidth/imageWidth)*100;
+                target.setZoom(zoom);
+                target.revalidate();
+                target.getParent().revalidate();    
+            }
         }
 
     }
