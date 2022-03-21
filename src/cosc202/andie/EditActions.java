@@ -36,6 +36,7 @@ public class EditActions {
         actions = new ArrayList<Action>();
         actions.add(new UndoAction("Undo", null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new RedoAction("Redo", null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
+        actions.add(new RotateImageAction("Rotate", null, "Rotate", null));
     }
 
     /**
@@ -135,6 +136,19 @@ public class EditActions {
          */
         public void actionPerformed(ActionEvent e) {
             target.getImage().redo();
+            target.repaint();
+            target.getParent().revalidate();
+        }
+    }
+
+    public class RotateImageAction extends ImageAction{
+        
+        RotateImageAction(String name, ImageIcon icon, String desc, Integer mnemonic){
+            super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e){
+            target.getImage().apply(new RotateImage());
             target.repaint();
             target.getParent().revalidate();
         }
