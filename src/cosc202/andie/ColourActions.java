@@ -102,7 +102,7 @@ public class ColourActions {
 
         /**
          * <p>
-         * Create a new convert-to-grey action.
+         * Create a new AdjustBrightness action.
          * </p>
          * 
          * @param name The name of the action (ignored if null).
@@ -116,12 +116,12 @@ public class ColourActions {
     
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the AdjustBrightness action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the ConvertToGreyAction is triggered.
-         * It changes the image to greyscale.
+         * This method is called whenever the AdjustBrightnessAction is triggered.
+         * It changes the image's brightness.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -154,7 +154,7 @@ public class ColourActions {
 
         /**
          * <p>
-         * Create a new convert-to-grey action.
+         * Create a new AdjustContrast action.
          * </p>
          * 
          * @param name The name of the action (ignored if null).
@@ -168,12 +168,12 @@ public class ColourActions {
     
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the AdjustContrast action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the ConvertToGreyAction is triggered.
-         * It changes the image to greyscale.
+         * This method is called whenever the AdjustContrastAction is triggered.
+         * It changes the image's contast.
          * </p>
          * 
          * @param e The event triggering this callback.
