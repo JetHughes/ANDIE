@@ -38,7 +38,8 @@ public class FilterActions {
         actions = new ArrayList<Action>();
         actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new GaussianFilterAction("Gaussian Filter", null, "Apply a sharpen filter", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new GaussianFilterAction("Gaussian Filter", null, "Apply a gaussian filter", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_E)));
 
     }
 
@@ -121,6 +122,7 @@ public class FilterActions {
 
     }
 
+    
     public class SharpenFilterAction extends ImageAction {
 
         SharpenFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
@@ -133,6 +135,7 @@ public class FilterActions {
             target.getParent().revalidate();
         }
     }
+
 
     public class GaussianFilterAction extends ImageAction {
 
@@ -158,6 +161,36 @@ public class FilterActions {
             }
 
             target.getImage().apply(new GaussianFilter(radius));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+    }
+
+
+    public class MedianFilterAction extends ImageAction {
+
+        MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e){
+
+            int radius = 1;
+
+            // Pop-up dialog box to ask for the radius value.
+            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+            JSpinner radiusSpinner = new JSpinner(radiusModel);
+            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;            
+            } else if (option == JOptionPane.OK_OPTION) {
+                radius = radiusModel.getNumber().intValue();
+            }
+
+            target.getImage().apply(new MedianFilter(radius));
             target.repaint();
             target.getParent().revalidate();
         }
