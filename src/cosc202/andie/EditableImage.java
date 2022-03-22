@@ -229,6 +229,13 @@ class EditableImage {
         }
     }
 
+    public void export(String imageFilename) throws Exception {
+        this.imageFilename = imageFilename;
+        
+        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+        ImageIO.write(current, extension, new File(imageFilename));
+    }
+
     /**
      * <p>
      * Apply an {@link ImageOperation} to this image.
