@@ -132,7 +132,7 @@ class EditableImage {
      * @param filePath The file to open the image from.
      * @throws Exception If something goes wrong.
      */
-    public void open(String filePath) throws Exception {
+    public void open(String filePath) throws IOException{
         imageFilename = filePath;
         opsFilename = imageFilename + ".ops";
         File imageFile = new File(imageFilename);
@@ -156,10 +156,6 @@ class EditableImage {
             redoOps.clear();
             objIn.close();
             fileIn.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
-            System.out.println("File not found");
-            //  File not found error
         } catch (Exception ex){
             System.out.println(ex);
             System.out.println("Unknown Error");

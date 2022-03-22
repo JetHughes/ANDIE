@@ -2,6 +2,8 @@ package cosc202.andie;
 
 import java.util.*;
 import java.awt.event.*;
+import java.io.*;
+
 import javax.swing.*;
 
 /**
@@ -101,7 +103,11 @@ public class FileActions {
                 try {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().open(imageFilepath);
-                } catch (Exception ex) {
+                } catch (IOException ex) {
+                    System.out.println("ImageIO read error: Check file name and/or type");
+                    return;
+                }catch (Exception ex) {
+                    System.out.println("Unknown");
                     System.exit(1);
                 }
             }
