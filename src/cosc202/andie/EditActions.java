@@ -36,7 +36,7 @@ public class EditActions {
         actions = new ArrayList<Action>();
         actions.add(new UndoAction("Undo", null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new RedoAction("Redo", null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
-        actions.add(new RotateImageAction("Rotate", null, "Rotate", null));
+        actions.add(new RotateImageAction("Rotate 180", null, "Rotate 180", null));
     }
 
     /**
@@ -141,12 +141,25 @@ public class EditActions {
         }
     }
 
+    
     public class RotateImageAction extends ImageAction{
         
         RotateImageAction(String name, ImageIcon icon, String desc, Integer mnemonic){
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the rotate action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the RotateImageAction is triggered.
+         * It rotates the image by the specified number of degrees
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e){
             target.getImage().apply(new RotateImage());
             target.repaint();
