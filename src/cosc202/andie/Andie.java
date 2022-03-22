@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
 
+
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
@@ -55,6 +56,22 @@ public class Andie {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // The main content area is an ImagePanel
+        JPanel sideBar = new JPanel();
+        JButton b, b1, b2;
+        b = new JButton("button1");
+        b1 = new JButton("button2");
+        b2 = new JButton("button3");
+    
+        // Creating a panel to add buttons
+  
+        // Adding buttons and textfield to panel
+        // using add() method
+        sideBar.add(b);
+        sideBar.add(b1);
+        sideBar.add(b2);
+
+        
+
         ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
@@ -82,8 +99,24 @@ public class Andie {
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
-        
+
+
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, imagePanel);
+
+
+        Dimension minimumSize = new Dimension(100, 50);
+        Dimension minimumSize2 = new Dimension(10, 50);
+        sideBar.setMinimumSize(minimumSize2);
+        splitPane.setDividerSize(10);
+
+        menuBar.setMinimumSize(minimumSize);
+        splitPane.setDividerLocation(70);
+
+        splitPane.setEnabled( false );
         frame.setJMenuBar(menuBar);
+        frame.add(splitPane);
+
         frame.pack();
         frame.setVisible(true);
     }
