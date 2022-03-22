@@ -15,6 +15,10 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
         this(10);
     }
 
+    public double returnContrast(){
+        return contrast;
+    }
+
     public BufferedImage apply(BufferedImage input) {
 
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);

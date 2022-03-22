@@ -76,15 +76,25 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
      * @return The resulting (blurred)) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        int size = (2*radius+1) * (2*radius+1);
-        float [] array = new float[size];
-        Arrays.fill(array, 1.0f/size);
+        try{
+            int size = (2*radius+1) * (2*radius+1);
+            float [] array = new float[size];
+            Arrays.fill(array, 1.0f/size);
 
-        Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
-        ConvolveOp convOp = new ConvolveOp(kernel);
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
-        convOp.filter(input, output);
+            Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
+            ConvolveOp convOp = new ConvolveOp(kernel);
+            BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
+            convOp.filter(input, output);
 
-        return output;  
+            return output;  
+        } catch (ArrayIndexOutOfBoundsException ex){
+            System.out.println(ex);
+            System.out.println("An ArrayIndexOutOfBounds has occured. Returning input");
+            return input;
+        } catch (Exception e){
+            System.out.println(e);
+            System.out.println("An unknown error has occured. Returning input");
+            return input;
+        }
     }
 }

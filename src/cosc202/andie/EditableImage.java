@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.*;
 import javax.imageio.*;
-
+import java.nio.file.InvalidPathException;
 /**
  * <p>
  * An image with a set of operations applied to it.
@@ -156,8 +156,14 @@ class EditableImage {
             redoOps.clear();
             objIn.close();
             fileIn.close();
-        } catch (Exception ex) {
-            // Could be no file or something else. Carry on for now.
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+            System.out.println("File not found");
+            //  File not found error
+        } catch (Exception ex){
+            System.out.println(ex);
+            System.out.println("Unknown Error");
+            //Unknown Error
         }
         this.refresh();
     }
@@ -177,18 +183,23 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void save() throws Exception {
-        if (this.opsFilename == null) {
-            this.opsFilename = this.imageFilename + ".ops";
-        }
-        // Write image file based on file extension
-        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-        ImageIO.write(original, extension, new File(imageFilename));
-        // Write operations file
-        FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
-        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-        objOut.writeObject(this.ops);
-        objOut.close();
-        fileOut.close();
+        try{
+            if (this.opsFilename == null) {
+                this.opsFilename = this.imageFilename + ".ops";
+            }
+            // Write image file based on file extension
+            String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+            ImageIO.write(original, extension, new File(imageFilename));
+            // Write operations file
+            FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
+            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+            objOut.writeObject(this.ops);
+            objOut.close();
+            fileOut.close();
+        } catch (IOException ex){
+            System.out.println(ex);
+            System.out.println("IO Error has occured");
+        } 
     }
 
 
@@ -208,9 +219,14 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void saveAs(String imageFilename) throws Exception {
-        this.imageFilename = imageFilename;
-        this.opsFilename = imageFilename + ".ops";
-        save();
+        try{
+            this.imageFilename = imageFilename;
+            this.opsFilename = imageFilename + ".ops";
+            save();
+        } catch (InvalidPathException ex){
+            System.out.println(ex);
+            System.out.println("Invalid File name");
+        }
     }
 
     /**
@@ -231,8 +247,13 @@ class EditableImage {
      * </p>
      */
     public void undo() {
-        redoOps.push(ops.pop());
-        refresh();
+        try{
+            redoOps.push(ops.pop());
+            refresh();
+        } catch (EmptyStackException ex) {
+            System.out.println(ex);
+            System.out.println("Stack is empty. No more Undos");
+        }
     }
 
     /**
@@ -241,7 +262,12 @@ class EditableImage {
      * </p>
      */
     public void redo()  {
-        apply(redoOps.pop());
+        try{
+            apply(redoOps.pop());
+        } catch (EmptyStackException ex){
+            System.out.println(ex);
+            System.out.println("Stack is empty. No more redos");
+        }
     }
 
     /**

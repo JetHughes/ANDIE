@@ -15,6 +15,10 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
     AdjustBrightness(){
         this(10);
     }
+    //For Testing
+    public double returnBrightness(){
+        return brightness;
+    }
 
     public BufferedImage apply(BufferedImage input) {
 
