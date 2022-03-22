@@ -285,7 +285,7 @@ public class FileActions {
 
             String[] types = {".png",".jpg"};
             
-            JComboBox exportComboBox = new JComboBox(types);
+            JComboBox<String> exportComboBox = new JComboBox<String>(types);
 
             int option = JOptionPane.showOptionDialog(null, exportComboBox, "Enter export type", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
