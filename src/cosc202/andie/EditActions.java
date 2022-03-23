@@ -36,7 +36,9 @@ public class EditActions {
         actions = new ArrayList<Action>();
         actions.add(new UndoAction("Undo", null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new RedoAction("Redo", null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
-        actions.add(new RotateImageAction("Rotate 180", null, "Rotate 180", null));
+        actions.add(new RotateImageAction("Rotate 180", null, "Rotate 180", null, 180));
+        actions.add(new RotateImageAction("Rotate Left 90", null, "Rotate 180", null, 90));
+        actions.add(new RotateImageAction("Rotate Right 90", null, "Rotate 180", null, -90));
     }
 
     /**
@@ -144,8 +146,10 @@ public class EditActions {
     
     public class RotateImageAction extends ImageAction{
         
-        RotateImageAction(String name, ImageIcon icon, String desc, Integer mnemonic){
+        int degrees;
+        RotateImageAction(String name, ImageIcon icon, String desc, Integer mnemonic, Integer degrees){
             super(name, icon, desc, mnemonic);
+            this.degrees = degrees;
         }
 
         /**
@@ -161,7 +165,7 @@ public class EditActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e){
-            target.getImage().apply(new RotateImage());
+            target.getImage().apply(new RotateImage(degrees));
             target.repaint();
             target.getParent().revalidate();
         }
