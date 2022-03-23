@@ -57,19 +57,10 @@ public class Andie {
 
         // The main content area is an ImagePanel
         JPanel sideBar = new JPanel();
-        JButton b, b1, b2;
-        b = new JButton("button1");
-        b1 = new JButton("button2");
-        b2 = new JButton("button3");
-    
-        // Creating a panel to add buttons
-  
-        // Adding buttons and textfield to panel
-        // using add() method
-        sideBar.add(b);
-        sideBar.add(b1);
-        sideBar.add(b2);
+        ToolBarActions toolBarActions = new ToolBarActions(); 
 
+
+        sideBar.add(toolBarActions.createMenu());
         
 
         ImagePanel imagePanel = new ImagePanel();
@@ -106,12 +97,12 @@ public class Andie {
 
 
         Dimension minimumSize = new Dimension(100, 50);
-        Dimension minimumSize2 = new Dimension(10, 50);
+        Dimension minimumSize2 = new Dimension(5, 50);
         sideBar.setMinimumSize(minimumSize2);
         splitPane.setDividerSize(10);
 
         menuBar.setMinimumSize(minimumSize);
-        splitPane.setDividerLocation(70);
+        splitPane.setDividerLocation(50);
 
         splitPane.setEnabled( false );
         frame.setJMenuBar(menuBar);
