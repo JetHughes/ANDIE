@@ -156,7 +156,11 @@ class EditableImage {
             redoOps.clear();
             objIn.close();
             fileIn.close();
-        } catch (Exception ex){
+        } catch (FileNotFoundException ex){
+            System.out.println(ex);
+            System.out.println("no .obs file found");
+            //when a new image is opened that doesn't have a .obs file.
+        }catch (Exception ex){
             System.out.println(ex);
             System.out.println("Unknown Error");
             //Unknown Error
@@ -178,7 +182,7 @@ class EditableImage {
      * 
      * @throws Exception If something goes wrong.
      */
-    public void save() throws Exception {
+    public void save() throws IOException{
         try{
             if (this.opsFilename == null) {
                 this.opsFilename = this.imageFilename + ".ops";
@@ -192,9 +196,13 @@ class EditableImage {
             objOut.writeObject(this.ops);
             objOut.close();
             fileOut.close();
-        } catch (IOException ex){
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException : Check file name and/or type");
+            
+            
+        }catch (Exception ex){
             System.out.println(ex);
-            System.out.println("IO Error has occured");
+            System.out.println("Unkown Error has occured");
         } 
     }
 
@@ -214,14 +222,14 @@ class EditableImage {
      * @param imageFilename The file location to save the image to.
      * @throws Exception If something goes wrong.
      */
-    public void saveAs(String imageFilename) throws Exception {
+    public void saveAs(String imageFilename) throws FileNotFoundException {
         try{
             this.imageFilename = imageFilename;
             this.opsFilename = imageFilename + ".ops";
             save();
-        } catch (InvalidPathException ex){
+        } catch (Exception ex){
             System.out.println(ex);
-            System.out.println("Invalid File name");
+            System.out.println("An Error has occured");
         }
     }
 

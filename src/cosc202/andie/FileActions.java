@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import java.io.*;
+import java.nio.file.InvalidPathException;
 
 import javax.swing.*;
 
@@ -156,7 +157,9 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
             try {
                 target.getImage().save();           
-            } catch (Exception ex) {
+            } catch (IOException ex) {
+                System.out.println("IO EXCEPTION");
+
                 System.exit(1);
             }
         }
