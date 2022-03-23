@@ -62,11 +62,11 @@ public class Andie {
 
         sideBar.add(toolBarActions.createMenu());
         
-
+        
         ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
-        frame.add(scrollPane, BorderLayout.CENTER);
+        
         
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
@@ -93,9 +93,9 @@ public class Andie {
 
 
 
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, imagePanel);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, scrollPane);
 
-
+        
         Dimension minimumSize = new Dimension(100, 50);
         Dimension minimumSize2 = new Dimension(5, 50);
         sideBar.setMinimumSize(minimumSize2);
