@@ -3,7 +3,9 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+import java.io.*;
+import java.awt.*;
+import javax.imageio.*;
  /**
  * <p>
  * Actions provided by the Edit menu.
@@ -23,7 +25,6 @@ import javax.swing.*;
  * @version 1.0
  */
 public class ToolBarActions {
-    
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;
 
@@ -32,10 +33,12 @@ public class ToolBarActions {
      * Create a set of Edit menu actions.
      * </p>
      */
-    public ToolBarActions() {
+    public ToolBarActions() throws Exception{
+        ImageIcon zoomin = new ImageIcon(ImageIO.read(new File("./src/zoomPlus.png")));
+        ImageIcon zoomout = new ImageIcon(ImageIO.read(new File("./src/zoomMinus.png")));
         actions = new ArrayList<Action>();
-        actions.add(new zoom("zoom", null, "zoom", Integer.valueOf(KeyEvent.VK_Z)));
-        actions.add(new zoom("test1", null, "zoom1", Integer.valueOf(KeyEvent.VK_Z)));
+        actions.add(new ZoomInAction(null, zoomin, "ZoomInAction", Integer.valueOf(KeyEvent.VK_Z)));
+        actions.add(new ZoomOutAction(null, zoomout, "ZoomOutAction", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new zoom("test2", null, "zoom2", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new zoom("test3", null, "zoom3", Integer.valueOf(KeyEvent.VK_Z)));
     }
@@ -70,6 +73,78 @@ public class ToolBarActions {
             target.repaint();
             target.getParent().revalidate();
         }
+    }
+
+    public class ZoomOutAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new zoom-out action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        ZoomOutAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the zoom-iout action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ZoomOutAction is triggered.
+         * It decreases the zoom level by 10%, to a minimum of 50%.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            target.setZoom(target.getZoom()-10);
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
+
+    public class ZoomInAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new zoom-in action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        ZoomInAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the zoom-in action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ZoomInAction is triggered.
+         * It increases the zoom level by 10%, to a maximum of 200%.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            target.setZoom(target.getZoom()+10);
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
     }
 
 }
