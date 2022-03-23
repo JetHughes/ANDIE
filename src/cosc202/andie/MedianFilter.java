@@ -10,9 +10,8 @@ import java.util.*;
  * </p>
  * 
  * <p>
- * A Median filter blurs an image by replacing each pixel by the average of the
- * pixels in a surrounding neighbourhood, and can be implemented by a
- * convoloution.
+ * A Median filter blurs an image by replacing each pixel by the median value of the
+ * pixels in a surrounding neighbourhood
  * </p>
  */
 public class MedianFilter implements ImageOperation, java.io.Serializable {
@@ -24,16 +23,6 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
     private int radius;
 
     /**
-     * <p>
-     * Construct a Median filter with the given size.
-     * </p>
-     * 
-     * <p>
-     * The size of the filter is the 'radius' of the convolution kernel used.
-     * A size of 1 is a 3x3 filter, 2 is 5x5, and so on.
-     * Larger filters give a stronger blurring effect.
-     * </p>
-     * 
      * @param radius The radius of the newly constructed MedianFilter
      */
     MedianFilter(int radius) {
@@ -65,7 +54,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      */
     public int getMedian(int[] vals) {
         Arrays.sort(vals);
-        return vals[radius + 1];
+        int centVal = ((2*radius+1)*(2*radius+1)+1)/2;
+        return vals[centVal];
     }
 
     /**
@@ -74,8 +64,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * </p>
      * 
      * <p>
-     * The Median filter is implemented through convolution.
-     * The size of the convolution kernel is specified by the {@link radius}.
+     * The strength of the blur is specified by the {@link radius}.
      * a larger radius leads to stronger blurring.
      * </p>
      * 
@@ -90,8 +79,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                     input.copyData(null), input.isAlphaPremultiplied(), null);
 
             // Iterate over pixels within the image
-            for (int y = radius; y < input.getHeight() - (radius + 1); y++) {
-                for (int x = radius; x < input.getWidth() - (radius + 1); x++) {
+            for (int y = radius; y < input.getHeight() - (2*radius); y++) {
+                for (int x = radius; x < input.getWidth() - (2*radius); x++) {
 
                     // Initialise arrays to contain each pixel colour value within a kernel
                     int[] arrA = new int[size];
