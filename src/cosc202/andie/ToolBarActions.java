@@ -66,7 +66,7 @@ public class ToolBarActions {
 
         public void actionPerformed(ActionEvent e){
             System.out.println("ZOOOOOOOOM");
-            target.getImage().apply(new RotateImage());
+            target.getImage();
             target.repaint();
             target.getParent().revalidate();
         }
