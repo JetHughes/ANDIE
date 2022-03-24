@@ -39,8 +39,6 @@ public class ToolBarActions {
         actions = new ArrayList<Action>();
         actions.add(new ZoomInAction(null, zoomin, "ZoomInAction", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new ZoomOutAction(null, zoomout, "ZoomOutAction", Integer.valueOf(KeyEvent.VK_Z)));
-        actions.add(new zoom("test2", null, "zoom2", Integer.valueOf(KeyEvent.VK_Z)));
-        actions.add(new zoom("test3", null, "zoom3", Integer.valueOf(KeyEvent.VK_Z)));
     }
 
     /**
