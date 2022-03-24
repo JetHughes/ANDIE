@@ -107,9 +107,14 @@ public class FileActions {
                 } catch (IOException ex) {
                     System.out.println("ImageIO read error: Check file name and/or type");
                     return;
+                } catch (NullPointerException ex) {
+                    System.out.println(ex);
+                    System.out.println("Did you try open a ops file huh?");
+                    return;
                 }catch (Exception ex) {
-                    System.out.println("Unknown");
-                    System.exit(1);
+                    System.out.println(ex);
+                    return;
+                    //System.exit(1);
                 }
             }
 
