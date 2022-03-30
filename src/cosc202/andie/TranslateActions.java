@@ -16,9 +16,11 @@ public class TranslateActions {
      */
     public TranslateActions() {
         actions = new ArrayList<Action>();
-        actions.add(new RotateImageAction("Rotate 180", null, "Rotate 180", null, 180));
-        actions.add(new RotateImageAction("Rotate Left 90", null, "Rotate 180", null, -90));
-        actions.add(new RotateImageAction("Rotate Right 90", null, "Rotate 180", null, 90));
+        actions.add(new RotateImageAction("Rotate 180°", null, "Rotate 180°", null, 180));
+        actions.add(new RotateImageAction("Rotate Left 90°", null, "Rotate 180°", null, -90));
+        actions.add(new RotateImageAction("Rotate Right 90°", null, "Rotate 180°", null, 90));
+        actions.add(new FlipImageAction("Flip Horizontal", null, "Flip Horizontal", null, true));
+        actions.add(new FlipImageAction("Flip Vertical", null, "Flip Vertical", null, false));
 
     }
 
@@ -81,6 +83,42 @@ public class TranslateActions {
          */
         public void actionPerformed(ActionEvent e){
             target.getImage().apply(new RotateImage(degrees));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+    }
+
+    public class FlipImageAction extends ImageAction{
+        boolean isX;
+        /**
+         * <p>
+         * Create a new rotate action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        FlipImageAction(String name, ImageIcon icon, String desc, Integer mnemonic, Boolean isX){
+            super(name, icon, desc, mnemonic);
+            this.isX = isX;
+        }
+
+        /**
+         * <p>
+         * Callback for when the rotate action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the RotateImageAction is triggered.
+         * It rotates the image by the specified number of degrees
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e){
+            target.getImage().apply(new FlipImage(isX));
             target.repaint();
             target.getParent().revalidate();
         }

@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.awt.image.BufferedImage;
+import java.util.jar.Attributes.Name;
 
 /**
  * <p>
@@ -12,14 +13,8 @@ import java.awt.image.BufferedImage;
  * to the right, or by 180 degrees
  * </p>
  */
-public class RotateImage implements ImageOperation, java.io.Serializable {
-    
-    /**
-    * The number of degrees to rotate the image, also used to 
-    * differentiate between left and right rotation
-    */
-    private int degrees;
-    
+public class FlipImage implements ImageOperation, java.io.Serializable {
+    boolean isX;
     /**
      * <p>
      * Construct a Rotate of given degrees
@@ -32,8 +27,8 @@ public class RotateImage implements ImageOperation, java.io.Serializable {
      * 
      * @param degrees The degrees for the image to be rotated
      */
-    RotateImage(int degrees){
-        this.degrees = degrees;
+    FlipImage(boolean isX){
+        this.isX = isX;
     }
 
     /**
@@ -52,44 +47,30 @@ public class RotateImage implements ImageOperation, java.io.Serializable {
      */
     public BufferedImage apply (BufferedImage input){       
         try{
-            BufferedImage output;
-            //Rotates image 180 degrees
-            if(degrees == 180){
-                output = new BufferedImage(input.getWidth(), input.getHeight(), input.getType());
+            BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), input.getType()); 
+            if(!isX){
                 for (int y = 0; y < output.getHeight(); y++) {
                     for (int x = 0; x < output.getWidth(); x++) {
-                        output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - x), ((input.getHeight() - 1) - y)));
+                        output.setRGB(x, y, input.getRGB(x, ((input.getHeight() - 1) - y)));
                     }
                 }
             }
-            //Rotates Image 90 degrees to the LEFT
-            else if(degrees == -90){
-                output = new BufferedImage(input.getHeight(), input.getWidth(), input.getType());
+            else{
                 for (int y = 0; y < output.getHeight(); y++) {
                     for (int x = 0; x < output.getWidth(); x++) {
-                        output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - y), x));
+                        output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - x), y));
                     }
                 }
             }
-            //Rotates Image 90 degrees to the RIGHT
-            else {
-                output = new BufferedImage(input.getHeight(), input.getWidth(), input.getType());
-                for (int y = 0; y < output.getHeight(); y++) {
-                    for (int x = 0; x < output.getWidth(); x++) {
-                        output.setRGB(x, y, input.getRGB(y, (input.getHeight() - 1) - x));
-                    }
-                }
-            }
-        
             return output;
 
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println(ex);
-            System.out.println("An ArrayIndexOutOfBounds has occured. Returning input");
+            PopUp.showMessageDialog("An ArrayIndexOutOfBounds has occured. Returning input");
             return input;
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("An unknown error has occured. Returning input");
+            PopUp.showMessageDialog("An unknown error has occured. Returning input");
             return input;
         }
     }
