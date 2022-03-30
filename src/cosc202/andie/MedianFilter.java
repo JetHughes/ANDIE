@@ -65,7 +65,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * 
      * <p>
      * The strength of the blur is specified by the {@link radius}.
-     * a larger radius leads to stronger blurring.
+     * a larger radius leads to stronger blurring through a greater surrounding quantity of values to find the median values.
      * </p>
      * 
      * @param input The image to apply the Median filter to.
@@ -82,13 +82,13 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             for (int y = radius; y < input.getHeight() - (2*radius); y++) {
                 for (int x = radius; x < input.getWidth() - (2*radius); x++) {
 
-                    // Initialise arrays to contain each pixel colour value within a kernel
+                    // Initialise arrays to contain each pixel colour (and transparency) value within an area determined by the radius
                     int[] arrA = new int[size];
                     int[] arrR = new int[size];
                     int[] arrG = new int[size];
                     int[] arrB = new int[size];
 
-                    // Iterate over pixels within the kernel
+                    // Iterate over pixels within the area of the given radius, push colour and transparency values into arrays 
                     int innPos = 0;
                     for (int e = y; e < y + (2 * radius + 1); e++) {
                         for (int i = x; i < x + (2 * radius + 1); i++) {
@@ -106,12 +106,14 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                         }
                     }
 
+                    // Find the median values of the colour and transparency values within the determined area
                     int medianA = getMedian(arrA);
                     int medianR = getMedian(arrR);
                     int medianG = getMedian(arrG);
                     int medianB = getMedian(arrB);
 
-                    // Create new colour value equal to the median of all values within the kernel
+                    // Transform copied image to apply the new colour and transparency to the given pixel,
+                        // Create new colour and transparency value equal to the median of the values within the area determined,
                     int argb = (medianA << 24) | (medianR << 16) | (medianG << 8) | medianB;
                     output.setRGB(x, y, argb);
                 }
