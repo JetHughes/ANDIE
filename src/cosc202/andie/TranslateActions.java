@@ -20,8 +20,8 @@ public class TranslateActions {
         actions.add(new RotateImageAction("Rotate Right 90°", null, "Rotate 180°", null, 90));
         actions.add(new FlipImageAction("Flip Horizontal", null, "Flip Horizontal", null, true));
         actions.add(new FlipImageAction("Flip Vertical", null, "Flip Vertical", null, false));
-        actions.add(new ScaleImageAction("Scale %150", null, "Scale %150", null, 150));
-        actions.add(new ScaleImageAction("Scale %50", null, "Scale 150", null, 50));
+        actions.add(new ScaleImageAction("Scale %150", null, "Scale %150", null, 1.5));
+        actions.add(new ScaleImageAction("Scale %50", null, "Scale 150", null, 0.5));
 
     }
 
@@ -126,7 +126,7 @@ public class TranslateActions {
     }
 
     public class ScaleImageAction extends ImageAction{
-        int scale;
+        double scale;
         /**
          * <p>
          * Create a new rotate action.
@@ -137,8 +137,9 @@ public class TranslateActions {
          * @param desc A brief description of the action  (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
          */
-        ScaleImageAction(String name, ImageIcon icon, String desc, Integer mnemonic, Integer scale){
+        ScaleImageAction(String name, ImageIcon icon, String desc, Integer mnemonic, Double scale){
             super(name, icon, desc, mnemonic);
+            this.scale = scale;
         }
 
         /**

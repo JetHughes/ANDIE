@@ -1,57 +1,55 @@
 package cosc202.andie;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
  * <p>
- * ImageOperation to flip Image
+ * ImageOperation to resize Image
  * </p>
  * 
  * <p>
- * flip either vertically or horizontally
+ * resize either by %150 or %50
  * </p>
  */
 public class ScaleImage implements ImageOperation, java.io.Serializable {
-    int scale;
+    double scale;
     /**
      * <p>
-     * Construct a Flip by given axis
+     * Construct a Resize by given scale
      * </p>
      * 
      * <p>
-     * The 'isX' determines what axis the image
-     * is flipped about
+     * The 'scale' determines what scale the image
+     * is resized to
      * </p>
      * 
      * @param scale The scale for the image to be resized to
      */
-    ScaleImage(int scale){
+    ScaleImage(double scale){
         this.scale = scale;
     }
 
     /**
      * <p>
-     * Apply a Flip to an image.
-     * </p>
-     * 
-     * <p>
-     * The flip is done by taking the pixels of the origonal image
-     * and placing them in their 'flipped' positions in a new image
-     * and then returning the new image
+     * Apply a Scale to an image.
      * </p>
      * 
      * @param input The image to be flipped.
-     * @return The resulting (flipped) image.
+     * @return The resulting (scaled) image.
      */
     public BufferedImage apply (BufferedImage input){       
+        int newWidth = (int) Math.round(input.getWidth()*scale);
+        int newHeight = (int) Math.round(input.getHeight()*scale);
         try{
-            BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), input.getType()); 
-            if(scale == 150){
-                
-            }
-            else{
-                
-            }
+            BufferedImage output = new BufferedImage(newWidth, newHeight, input.getType()); 
+            
+            //BufferedImage resized = new BufferedImage(newWidth, newHeight, input.getType());
+            Graphics2D g = output.createGraphics();
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g.drawImage(input, 0, 0, newWidth, newHeight, 0, 0, input.getWidth(), input.getHeight(), null);
+            g.dispose();
+
             return output;
 
         } catch (ArrayIndexOutOfBoundsException ex) {
