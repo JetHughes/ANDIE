@@ -277,6 +277,7 @@ class EditableImage {
             apply(redoOps.pop());
         } catch (EmptyStackException ex){
             System.out.println(ex);
+            PopUp.showMessageDialog("Stack is empty. No more redos");
             System.out.println("Stack is empty. No more redos");
         }
     }
