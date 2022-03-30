@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
  * flip either vertically or horizontally
  * </p>
  */
-public class FlipImage implements ImageOperation, java.io.Serializable {
-    boolean isX;
+public class ScaleImage implements ImageOperation, java.io.Serializable {
+    int scale;
     /**
      * <p>
      * Construct a Flip by given axis
@@ -23,10 +23,10 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
      * is flipped about
      * </p>
      * 
-     * @param isX The axis for the image to be flipped on
+     * @param scale The scale for the image to be resized to
      */
-    FlipImage(boolean isX){
-        this.isX = isX;
+    ScaleImage(int scale){
+        this.scale = scale;
     }
 
     /**
@@ -46,19 +46,11 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
     public BufferedImage apply (BufferedImage input){       
         try{
             BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), input.getType()); 
-            if(!isX){
-                for (int y = 0; y < output.getHeight(); y++) {
-                    for (int x = 0; x < output.getWidth(); x++) {
-                        output.setRGB(x, y, input.getRGB(x, ((input.getHeight() - 1) - y)));
-                    }
-                }
+            if(scale == 150){
+                
             }
             else{
-                for (int y = 0; y < output.getHeight(); y++) {
-                    for (int x = 0; x < output.getWidth(); x++) {
-                        output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - x), y));
-                    }
-                }
+                
             }
             return output;
 

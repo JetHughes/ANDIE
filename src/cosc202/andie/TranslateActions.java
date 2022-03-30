@@ -3,7 +3,6 @@ package cosc202.andie;
 import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.*;
 
 public class TranslateActions {
 
@@ -21,6 +20,8 @@ public class TranslateActions {
         actions.add(new RotateImageAction("Rotate Right 90°", null, "Rotate 180°", null, 90));
         actions.add(new FlipImageAction("Flip Horizontal", null, "Flip Horizontal", null, true));
         actions.add(new FlipImageAction("Flip Vertical", null, "Flip Vertical", null, false));
+        actions.add(new ScaleImageAction("Scale %150", null, "Scale %150", null, 150));
+        actions.add(new ScaleImageAction("Scale %50", null, "Scale 150", null, 50));
 
     }
 
@@ -119,6 +120,41 @@ public class TranslateActions {
          */
         public void actionPerformed(ActionEvent e){
             target.getImage().apply(new FlipImage(isX));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+    }
+
+    public class ScaleImageAction extends ImageAction{
+        int scale;
+        /**
+         * <p>
+         * Create a new rotate action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        ScaleImageAction(String name, ImageIcon icon, String desc, Integer mnemonic, Integer scale){
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the rotate action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the RotateImageAction is triggered.
+         * It rotates the image by the specified number of degrees
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e){
+            target.getImage().apply(new ScaleImage(scale));
             target.repaint();
             target.getParent().revalidate();
         }
