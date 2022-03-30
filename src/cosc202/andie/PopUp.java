@@ -12,6 +12,6 @@ public class PopUp {
      * @param message String to show in the pop up box
      */
     public static void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, "ImageIO read error: Check file name and/or type");
+        JOptionPane.showMessageDialog(null, message);
     }
 }
