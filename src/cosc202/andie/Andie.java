@@ -91,6 +91,10 @@ public class Andie {
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
 
+        // Actions that affect the representation of colour in the image
+        TranslateActions translateActions = new TranslateActions();
+        menuBar.add(translateActions.createMenu());
+
 
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, scrollPane);

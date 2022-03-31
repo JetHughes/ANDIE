@@ -67,11 +67,6 @@ public class RotateImage implements ImageOperation, java.io.Serializable {
                 output = new BufferedImage(input.getHeight(), input.getWidth(), input.getType());
                 for (int y = 0; y < output.getHeight(); y++) {
                     for (int x = 0; x < output.getWidth(); x++) {
-                        output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - y), ((input.getHeight() - 1) - x)));
-                    }
-                }
-                for (int y = 0; y < output.getHeight(); y++) {
-                    for (int x = 0; x < output.getWidth(); x++) {
                         output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - y), x));
                     }
                 }
@@ -79,11 +74,6 @@ public class RotateImage implements ImageOperation, java.io.Serializable {
             //Rotates Image 90 degrees to the RIGHT
             else {
                 output = new BufferedImage(input.getHeight(), input.getWidth(), input.getType());
-                for (int y = 0; y < output.getHeight(); y++) {
-                    for (int x = 0; x < output.getWidth(); x++) {
-                        output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - y), ((input.getHeight() - 1) - x)));
-                    }
-                }
                 for (int y = 0; y < output.getHeight(); y++) {
                     for (int x = 0; x < output.getWidth(); x++) {
                         output.setRGB(x, y, input.getRGB(y, (input.getHeight() - 1) - x));
@@ -95,11 +85,11 @@ public class RotateImage implements ImageOperation, java.io.Serializable {
 
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println(ex);
-            System.out.println("An ArrayIndexOutOfBounds has occured. Returning input");
+            PopUp.showMessageDialog("An ArrayIndexOutOfBounds has occured. Returning input");
             return input;
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("An unknown error has occured. Returning input");
+            PopUp.showMessageDialog("An unknown error has occured. Returning input");
             return input;
         }
     }
