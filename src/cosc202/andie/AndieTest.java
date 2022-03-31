@@ -1,17 +1,9 @@
 package cosc202.andie;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.Rule;
 import org.junit.jupiter.api.*;
-import org.junit.rules.ExpectedException;
-import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 public class AndieTest {
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
 
     @Test 
     void dumbyTest(){
