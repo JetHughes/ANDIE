@@ -3,7 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import java.io.*;
-import java.nio.file.InvalidPathException;
+
 
 import javax.swing.*;
 
@@ -109,7 +109,7 @@ public class FileActions {
                     return;
                 } catch (NullPointerException ex) {
                     System.out.println(ex);
-                    System.out.println("Did you try open a ops file huh?");
+                    PopUp.showMessageDialog("Unable to open .ops files. Please open corresponding image file");
                     return;
                 }catch (Exception ex) {
                     System.out.println(ex);

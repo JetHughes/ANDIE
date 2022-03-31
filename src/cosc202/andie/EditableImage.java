@@ -197,12 +197,18 @@ class EditableImage {
             objOut.close();
             fileOut.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException : Check file name and/or type");
+            PopUp.showMessageDialog("FileNotFoundException : Check file name and/or type");
             
             
-        }catch (Exception ex){
+        }catch (IllegalArgumentException ex){
             System.out.println(ex);
-            System.out.println("Unkown Error has occured");
+            PopUp.showMessageDialog("Error: There is no image to save!");
+        } catch (NullPointerException ex){
+            System.out.println(ex);
+            PopUp.showMessageDialog("Error: There is nothing to save!");
+        } catch (Exception ex){
+            System.out.println(ex);
+            PopUp.showMessageDialog("Unkown Error has occured");
         } 
     }
 
@@ -229,7 +235,7 @@ class EditableImage {
             save();
         } catch (Exception ex){
             System.out.println(ex);
-            System.out.println("An Error has occured");
+            PopUp.showMessageDialog("An Error has occured");
         }
     }
 
@@ -263,7 +269,7 @@ class EditableImage {
             refresh();
         } catch (EmptyStackException ex) {
             System.out.println(ex);
-            System.out.println("Stack is empty. No more Undos");
+            PopUp.showMessageDialog("Stack is empty. No more Undos");
         }
     }
 
