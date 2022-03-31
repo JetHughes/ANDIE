@@ -7,12 +7,12 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
 
     private double brightness;
 
-    AdjustBrightness(double brightness){
+    public AdjustBrightness(double brightness){
 
         this.brightness = brightness;
     }
 
-    AdjustBrightness(){
+    public AdjustBrightness(){
         this(10);
     }
     //For Testing

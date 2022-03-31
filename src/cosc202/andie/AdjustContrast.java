@@ -6,12 +6,12 @@ import java.awt.Color;
 public class AdjustContrast implements ImageOperation, java.io.Serializable{
     private double contrast;
 
-    AdjustContrast(double contrast){
+    public AdjustContrast(double contrast){
         this.contrast = contrast;
 
     }
 
-    AdjustContrast(){
+    public AdjustContrast(){
         this(10);
     }
 
