@@ -10,7 +10,7 @@ import java.util.*;
  * </p>
  * 
  * <p>
- * A Median filter blurs an image by replacing each pixel by the median value of the
+ * A Median filter blurs an image by replacing each pixel with the median value of the
  * pixels in a surrounding neighbourhood
  * </p>
  */
