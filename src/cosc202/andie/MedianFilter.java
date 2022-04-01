@@ -40,7 +40,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * 
      * @see MedianFilter(int)
      */
-    MedianFilter() {
+    public MedianFilter() {
         this(1);
     }
 
@@ -54,7 +54,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      */
     public int getMedian(int[] vals) {
         Arrays.sort(vals);
-        int centVal = ((2*radius+1)*(2*radius+1)+1)/2;
+        int centVal = ((2*radius+1)*(2*radius+1))/2;
         return vals[centVal];
     }
 

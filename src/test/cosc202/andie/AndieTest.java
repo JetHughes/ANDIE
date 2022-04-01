@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import cosc202.andie.AdjustBrightness;
 import cosc202.andie.AdjustContrast;
 import cosc202.andie.ImagePanel;
+import cosc202.andie.MedianFilter;
 
 public class AndieTest {
 
@@ -105,7 +106,12 @@ public class AndieTest {
     //Image Operation
 
     //Mean Filter
-    
+    @Test
+    void medianFilterMedianCalculation(){
+        MedianFilter test = new MedianFilter();
+        int[] testArray = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        Assertions.assertEquals(5, test.getMedian(testArray));
+    }
 
 
 
