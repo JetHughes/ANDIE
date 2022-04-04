@@ -39,7 +39,7 @@ public class FileActions {
         actions = new ArrayList<Action>();
         actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new Export("Export", null, "Export file", Integer.valueOf(KeyEvent.VK_P)));
         actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
         
@@ -197,6 +197,8 @@ public class FileActions {
          */
         FileSaveAsAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("shift ctrl pressed S"));
         }
 
          /**
