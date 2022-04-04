@@ -41,7 +41,10 @@ public class FileActions {
         actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
         actions.add(new Export("Export", null, "Export file", Integer.valueOf(KeyEvent.VK_P)));
-        actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
+        actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(KeyEvent.VK_ESCAPE)));
+        
+
+
     }
 
     /**
@@ -145,6 +148,8 @@ public class FileActions {
          */
         FileSaveAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -242,7 +247,7 @@ public class FileActions {
         FileExitAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon);
             putValue(SHORT_DESCRIPTION, desc);
-            putValue(MNEMONIC_KEY, mnemonic);
+            putValue(ACCELERATOR_KEY, mnemonic);
         }
 
          /**
@@ -280,6 +285,7 @@ public class FileActions {
          */
         Export(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            
         }
 
          /**
