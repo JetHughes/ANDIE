@@ -87,6 +87,10 @@ public class RotateImage implements ImageOperation, java.io.Serializable {
             System.out.println(ex);
             PopUp.showMessageDialog("An ArrayIndexOutOfBounds has occured. Returning input");
             return input;
+        } catch (NullPointerException e) {
+            System.out.println(e);
+            PopUp.showMessageDialog("No Image to Rotate!");
+            return input;
         } catch (Exception e) {
             System.out.println(e);
             PopUp.showMessageDialog("An unknown error has occured. Returning input");

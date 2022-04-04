@@ -36,8 +36,8 @@ public class ToolBarActions {
         ImageIcon zoomin = new ImageIcon(ImageIO.read(new File("./src/zoomPlus.png")));
         ImageIcon zoomout = new ImageIcon(ImageIO.read(new File("./src/zoomMinus.png")));
         actions = new ArrayList<Action>();
-        actions.add(new ZoomInAction(null, zoomin, "ZoomInAction", Integer.valueOf(KeyEvent.VK_Z)));
-        actions.add(new ZoomOutAction(null, zoomout, "ZoomOutAction", Integer.valueOf(KeyEvent.VK_Z)));
+        actions.add(new ZoomInAction(null, zoomin, "ZoomInAction", Integer.valueOf(KeyEvent.VK_EQUALS)));
+        actions.add(new ZoomOutAction(null, zoomout, "ZoomOutAction", Integer.valueOf(KeyEvent.VK_MINUS)));
     }
 
     /**
@@ -86,6 +86,7 @@ public class ToolBarActions {
          */
         ZoomOutAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+
         }
 
         /**
@@ -109,6 +110,7 @@ public class ToolBarActions {
     }
 
     public class ZoomInAction extends ImageAction {
+
 
         /**
          * <p>

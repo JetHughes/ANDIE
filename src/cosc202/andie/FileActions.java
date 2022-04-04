@@ -39,7 +39,7 @@ public class FileActions {
         actions = new ArrayList<Action>();
         actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new Export("Export", null, "Export file", Integer.valueOf(KeyEvent.VK_P)));
         actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
         
@@ -197,6 +197,8 @@ public class FileActions {
          */
         FileSaveAsAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("shift ctrl pressed S"));
         }
 
          /**
@@ -302,28 +304,34 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to export!");
 
-            String[] types = {".png",".jpg"};
-            
-            JComboBox<String> exportComboBox = new JComboBox<String>(types);
+            } else {
 
-            int option = JOptionPane.showOptionDialog(null, exportComboBox, "Enter export type", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (option == JOptionPane.OK_OPTION) {
-
-                String output = ""+ exportComboBox.getItemAt(exportComboBox.getSelectedIndex());
+                String[] types = {".png",".jpg"};
                 
-                JFileChooser fileChooser = new JFileChooser();
-                int result = fileChooser.showOpenDialog(target);
-                System.out.println(output);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath()+output;
-                        target.getImage().export(imageFilepath);
-                    } catch (Exception ex) {
-                        System.exit(1);
+                JComboBox<String> exportComboBox = new JComboBox<String>(types);
+
+                int option = JOptionPane.showOptionDialog(null, exportComboBox, "Enter export type", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+
+                    String output = ""+ exportComboBox.getItemAt(exportComboBox.getSelectedIndex());
+                    
+                    JFileChooser fileChooser = new JFileChooser();
+                    int result = fileChooser.showOpenDialog(target);
+                    System.out.println(output);
+                    if (result == JFileChooser.APPROVE_OPTION) {
+                        try {
+                            String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath()+output;
+                            target.getImage().export(imageFilepath);
+                        } catch (Exception ex) {
+                            System.exit(1);
+                        }
                     }
                 }
             }
