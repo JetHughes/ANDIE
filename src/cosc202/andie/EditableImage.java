@@ -157,11 +157,11 @@ class EditableImage {
             fileIn.close();
         } catch (FileNotFoundException ex){
             System.out.println(ex);
-            System.out.println("no .obs file found");
+            PopUp.showMessageDialog("no .obs file found");
             //when a new image is opened that doesn't have a .obs file.
         }catch (Exception ex){
             System.out.println(ex);
-            System.out.println("Unknown Error");
+            PopUp.showMessageDialog("Unknown error");
             //Unknown Error
         }
         this.refresh();
@@ -283,7 +283,6 @@ class EditableImage {
         } catch (EmptyStackException ex){
             System.out.println(ex);
             PopUp.showMessageDialog("Stack is empty. No more redos");
-            System.out.println("Stack is empty. No more redos");
         }
     }
 

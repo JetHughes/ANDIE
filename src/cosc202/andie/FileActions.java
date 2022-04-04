@@ -108,7 +108,7 @@ public class FileActions {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().open(imageFilepath);
                 } catch (IOException ex) {
-                    System.out.println("ImageIO read error: Check file name and/or type");
+                    PopUp.showMessageDialog("ImageIO read error: Check file name and/or type");
                     return;
                 } catch (NullPointerException ex) {
                     System.out.println(ex);
@@ -169,7 +169,7 @@ public class FileActions {
                 target.getImage().save();           
             } catch (IOException ex) {
                 System.out.println("IO EXCEPTION");
-
+                PopUp.showMessageDialog("IO EXCEPTION");
                 System.exit(1);
             }
         }

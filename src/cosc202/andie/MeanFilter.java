@@ -89,11 +89,11 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
             return output;  
         } catch (ArrayIndexOutOfBoundsException ex){
             System.out.println(ex);
-            System.out.println("An ArrayIndexOutOfBounds has occured. Returning input");
+            PopUp.showMessageDialog("An ArrayIndexOutOfBounds has occured. Returning input");
             return input;
         } catch (Exception e){
             System.out.println(e);
-            System.out.println("An unknown error has occured. Returning input");
+            PopUp.showMessageDialog("An unknown error has occured. Returning input");
             return input;
         }
     }
