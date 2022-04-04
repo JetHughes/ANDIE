@@ -66,7 +66,11 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
             System.out.println(ex);
             PopUp.showMessageDialog("An ArrayIndexOutOfBounds has occured. Returning input");
             return input;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
+            System.out.println(e);
+            PopUp.showMessageDialog("No Image to Flip!");
+            return input;
+        }catch (Exception e) {
             System.out.println(e);
             PopUp.showMessageDialog("An unknown error has occured. Returning input");
             return input;

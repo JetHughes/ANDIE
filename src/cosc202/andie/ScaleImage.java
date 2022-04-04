@@ -39,9 +39,10 @@ public class ScaleImage implements ImageOperation, java.io.Serializable {
      * @return The resulting (scaled) image.
      */
     public BufferedImage apply (BufferedImage input){       
-        int newWidth = (int) Math.round(input.getWidth()*scale);
-        int newHeight = (int) Math.round(input.getHeight()*scale);
+        
         try{
+            int newWidth = (int) Math.round(input.getWidth()*scale);
+            int newHeight = (int) Math.round(input.getHeight()*scale);
             BufferedImage output = new BufferedImage(newWidth, newHeight, input.getType()); 
             
             //BufferedImage resized = new BufferedImage(newWidth, newHeight, input.getType());
@@ -56,7 +57,11 @@ public class ScaleImage implements ImageOperation, java.io.Serializable {
             System.out.println(ex);
             PopUp.showMessageDialog("An ArrayIndexOutOfBounds has occured. Returning input");
             return input;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
+            System.out.println(e);
+            PopUp.showMessageDialog("No Image to Scale!");
+            return input;
+        }catch (Exception e) {
             System.out.println(e);
             PopUp.showMessageDialog("An unknown error has occured. Returning input");
             return input;
