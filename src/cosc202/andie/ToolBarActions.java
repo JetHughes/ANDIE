@@ -4,7 +4,6 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
-import java.awt.*;
 import javax.imageio.*;
  /**
  * <p>
