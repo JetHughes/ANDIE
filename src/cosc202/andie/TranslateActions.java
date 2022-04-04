@@ -83,6 +83,7 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e){
+            
             target.getImage().apply(new RotateImage(degrees));
             target.repaint();
             target.getParent().revalidate();
