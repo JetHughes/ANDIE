@@ -48,7 +48,7 @@ pages: # publish Javadoc website
   tags:
     - docker
   stage: build
-  image: openjdk
+  image: eclipse-temurin:17
   script:
     - javadoc -d docs src/cosc202/andie/*.java
     - mkdir public
