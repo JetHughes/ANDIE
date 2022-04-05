@@ -18,20 +18,11 @@ stages:          # List of stages for jobs, and their order of execution
   - test
   - deploy
 
-pages:       # publish javadov website
-  tags: 
-    - docker
+build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-    - javadov -d docs src/cosc202/andie/*.java
-    - mkdir public
-    - echo test >public/test.txt
-    - mv docs public/
-  artifacts:
-    paths:
-      - public
-  only:
-    - main
+    - echo "Compiling the code..."
+    - echo "Compile complete."
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
@@ -52,3 +43,18 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
+
+pages:       # publish javadov website
+  tags: 
+    - docker
+  stage: build
+  script:
+    - javadov -d docs src/cosc202/andie/*.java
+    - mkdir public
+    - echo test >public/test.txt
+    - mv docs public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
