@@ -50,7 +50,7 @@ pages: # publish Javadoc website
   stage: build
   image: openjdk
   script:
-    - javadoc -d docs -private src/cosc202/andie/*.java
+    - javadoc -d docs src/cosc202/andie/*.java
     - mkdir public
     - echo 'test' >public/test.txt
     - mv docs public/
