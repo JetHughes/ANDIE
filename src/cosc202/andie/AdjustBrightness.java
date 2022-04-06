@@ -2,6 +2,7 @@ package cosc202.andie;
 
 import java.awt.image.*;
 import java.awt.Color;
+
 /** 
  * <p>
  * ImageOperation to adjust the brightness of an image
@@ -40,6 +41,7 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
     public AdjustBrightness(){
         this(10);
     }
+
     //For Testing
     public double returnBrightness(){
         return brightness;
@@ -75,8 +77,7 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
                 g = (int)getAdjustedValue(brightness, g);
                 b = (int)getAdjustedValue(brightness, b);
 
-                output.setRGB(x, y, new Color(r,g,b).getRGB());           
-        
+                output.setRGB(x, y, new Color(r,g,b).getRGB());
             }
         }
 
