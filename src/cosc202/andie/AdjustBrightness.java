@@ -2,16 +2,41 @@ package cosc202.andie;
 
 import java.awt.image.*;
 import java.awt.Color;
-
+/** 
+ * <p>
+ * ImageOperation to adjust the brightness of an image
+ * </p>
+ * 
+*/
 public class AdjustBrightness implements ImageOperation, java.io.Serializable{
 
+    /** 
+     * The percentage to increase or decrease the brightness
+    */
     private double brightness;
 
+    /**
+     * <p>
+     * Construct an AdjustBrightness with the given brightness
+     * </p>
+     * 
+     * @param brightness The percentage to increase or decrease the brightness
+     */
     public AdjustBrightness(double brightness){
-
         this.brightness = brightness;
     }
 
+    /**
+     * <p>
+     * Construct an AdjustBrightness with the default brightness
+     * </p>
+     * 
+     * <p>
+     * BY default, the percentage is 10
+     * </p>
+     * 
+     * @see AdjustBrightness(int)
+     */
     public AdjustBrightness(){
         this(10);
     }
@@ -20,6 +45,20 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
         return brightness;
     }
 
+    /**
+     * <p>
+     * Apply brightness adjustment to an image
+     * </p>
+     * 
+     * <p>
+     * The brightness adjustment is applied using the equation 2.5 of the 202 lab book.
+     * Where b = brightness and c = 0;
+     * The lab book is here: https://cosc202.cspages.otago.ac.nz/lab-book/COSC202LabBook.pdf
+     * </p>
+     * 
+     * @param input the image to apply the brightness adjustment to
+     * @return The resulting adjusted image
+     */
     public BufferedImage apply(BufferedImage input) {
 
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);  
@@ -44,6 +83,12 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
         return output;
     }
 
+    /**
+     * Method to apply a brightness adjusted to a color channel of a pixel
+     * @param b the value to adjust the brightness by
+     * @param v the value to adjust
+     * @return The adjusted value
+     */
     public double getAdjustedValue(double b, double v){      
         double result = (v - 127.5) + 127.5 * (1+(b/100));
 
