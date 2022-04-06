@@ -29,7 +29,7 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
 
     /**
      * <p>
-     * Construct an AdjustBrightness with the default brightness
+     * Construct a new AdjustBrightness operation with the default brightness
      * </p>
      * 
      * <p>

@@ -29,7 +29,7 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
 
     /**
      * <p>
-     * Construct an AdjustContrast with the default Contrast
+     * Construct a new AdjustContrast operation with the default Contrast
      * </p>
      * 
      * <p>
