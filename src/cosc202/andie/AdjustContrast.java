@@ -86,7 +86,7 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
     
     /**
      * Method to apply a Contrast adjusted to a color channel of a pixel
-     * @param b the value to adjust the Contrast by
+     * @param c the value to adjust the Contrast by
      * @param v the value to adjust
      * @return The adjusted value
      */
