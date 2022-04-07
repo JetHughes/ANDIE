@@ -47,8 +47,8 @@ deploy-job:      # This job runs in the deploy stage.
 pages: # publish Javadoc website
   tags:
     - docker
-  stage: build
   image: eclipse-temurin:17
+  stage: build
   script:
     - javadoc -d docs src/cosc202/andie/*.java
     - mkdir public
