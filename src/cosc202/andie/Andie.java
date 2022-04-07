@@ -96,7 +96,7 @@ public class Andie {
         menuBar.add(translateActions.createMenu());
 
         HelpActions helpactions = new HelpActions();
-        menuBar.add(HelpActions.createMenu());
+        menuBar.add(helpactions.createMenu());
 
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, scrollPane);
