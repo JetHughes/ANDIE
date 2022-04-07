@@ -38,8 +38,8 @@ public class ViewActions {
         actions = new ArrayList<Action>();
         actions.add(new ZoomInAction("Zoom In", null, "Zoom In", Integer.valueOf(KeyEvent.VK_EQUALS)));
         actions.add(new ZoomOutAction("Zoom Out", null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFitAction("Zoom Fit", null, "Zoom Fit", Integer.valueOf(KeyEvent.VK_1)));
-        actions.add(new ZoomFullAction("Zoom Full", null, "Zoom Full", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new ZoomFitAction("Zoom Fit", null, "Zoom Fit", Integer.valueOf(KeyEvent.VK_BACK_SLASH)));
+        actions.add(new ZoomFullAction("Zoom Full", null, "Zoom Full", Integer.valueOf(KeyEvent.VK_BACK_SLASH)));
     }
 
     /**
@@ -84,7 +84,7 @@ public class ViewActions {
             super(name, icon, desc, mnemonic);
             putValue(Action.MNEMONIC_KEY, mnemonic);
             
-		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed PLUS"));
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed EQUALS"));
         }
 
         /**
@@ -177,6 +177,8 @@ public class ViewActions {
          */
         ZoomFitAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -227,6 +229,7 @@ public class ViewActions {
          */
         ZoomFullAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("shift ctrl pressed BACK_SLASH"));
         }
 
         /**

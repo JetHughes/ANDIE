@@ -95,6 +95,8 @@ public class Andie {
         TranslateActions translateActions = new TranslateActions();
         menuBar.add(translateActions.createMenu());
 
+        HelpActions helpactions = new HelpActions();
+        menuBar.add(HelpActions.createMenu());
 
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, scrollPane);
@@ -111,6 +113,7 @@ public class Andie {
         splitPane.setEnabled( false );
         frame.setJMenuBar(menuBar);
         frame.add(splitPane);
+        
 
         frame.pack();
         frame.setVisible(true);

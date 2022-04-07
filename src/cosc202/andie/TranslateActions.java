@@ -15,13 +15,13 @@ public class TranslateActions {
      */
     public TranslateActions() {
         actions = new ArrayList<Action>();
-        actions.add(new RotateImageAction("Rotate 180°", null, "Rotate 180°", null, 180));
-        actions.add(new RotateImageAction("Rotate Left 90°", null, "Rotate 180°", null, -90));
-        actions.add(new RotateImageAction("Rotate Right 90°", null, "Rotate 180°", null, 90));
-        actions.add(new FlipImageAction("Flip Horizontal", null, "Flip Horizontal", null, true));
-        actions.add(new FlipImageAction("Flip Vertical", null, "Flip Vertical", null, false));
-        actions.add(new ScaleImageAction("Scale %150", null, "Scale %150", null, 1.5));
-        actions.add(new ScaleImageAction("Scale %50", null, "Scale 150", null, 0.5));
+        actions.add(new RotateImageAction("Rotate 180°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_F), 180));
+        actions.add(new RotateImageAction("Rotate Left 90°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_I), -90));
+        actions.add(new RotateImageAction("Rotate Right 90°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_R), 90));
+        actions.add(new FlipImageAction("Flip Horizontal", null, "Flip Horizontal", Integer.valueOf(KeyEvent.VK_H), true));
+        actions.add(new FlipImageAction("Flip Vertical", null, "Flip Vertical", Integer.valueOf(KeyEvent.VK_V), false));
+        actions.add(new ScaleImageAction("Scale %150", null, "Scale %150", Integer.valueOf(KeyEvent.VK_BRACELEFT), 1.5));
+        actions.add(new ScaleImageAction("Scale %50", null, "Scale 150", Integer.valueOf(KeyEvent.VK_BRACERIGHT), 0.5));
 
     }
 

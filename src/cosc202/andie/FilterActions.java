@@ -37,9 +37,9 @@ public class FilterActions {
     public FilterActions() {
         actions = new ArrayList<Action>();
         actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter", Integer.valueOf(KeyEvent.VK_J)));
         actions.add(new GaussianFilterAction("Gaussian Filter", null, "Apply a gaussian filter", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_D)));
 
     }
 
@@ -81,6 +81,8 @@ public class FilterActions {
          */
         MeanFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -127,6 +129,8 @@ public class FilterActions {
 
         SharpenFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         public void actionPerformed(ActionEvent e){
@@ -141,6 +145,8 @@ public class FilterActions {
 
         GaussianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         public void actionPerformed(ActionEvent e){
@@ -171,6 +177,8 @@ public class FilterActions {
 
         MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         public void actionPerformed(ActionEvent e){
