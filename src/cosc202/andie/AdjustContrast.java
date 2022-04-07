@@ -8,6 +8,11 @@ import java.awt.Color;
  * ImageOperation to adjust the contrast of an image
  * </p>
  * 
+ * <p>
+ * Adjusts the contrast of an image using equation 2.50
+ * from the cosc202 lab book
+ * </p>
+ * 
 */
 public class AdjustContrast implements ImageOperation, java.io.Serializable{
 
@@ -42,7 +47,10 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
         this(10);
     }
 
-    //for testing
+    /**
+     * Mehod for testing
+     * @return
+     */
     public double returnContrast(){
         return contrast;
     }
