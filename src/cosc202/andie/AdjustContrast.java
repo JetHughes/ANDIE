@@ -13,6 +13,7 @@ import java.awt.Color;
  * from the cosc202 lab book
  * </p>
  * 
+ * @author Jet Hughes
 */
 public class AdjustContrast implements ImageOperation, java.io.Serializable{
 
