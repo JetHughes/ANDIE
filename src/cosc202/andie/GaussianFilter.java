@@ -18,11 +18,17 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
     GaussianFilter(int radius){
         this.radius = radius;
     }
-    GaussianFilter(){
+    public GaussianFilter(){
         this(1);
     }
 
-    /**
+     // For testing
+    public double getGaussian(int x, int y, float sigma){
+        return (1 / (2 * Math.PI * Math.pow(sigma, 2)) 
+        * Math.exp(-(Math.pow(x, 2) + Math.pow(y, 2)) / (2 * Math.pow(sigma, 2))));
+    }
+
+        /**
      * <p>
      * Apply a Gaussian filter to an image.
      * </p>
@@ -30,7 +36,6 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
      * @param input The image to apply the Gaussian filter to.
      * @return The resulting (blurred) image.
      */
-
     public BufferedImage apply(BufferedImage input){
         int size = (2*radius+1);
         float [][] array = new float[size][size];
@@ -38,9 +43,8 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         double sum = 0;
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {                
-                double answer = (1 / (2 * Math.PI * Math.pow(sigma, 2)) 
-                    * Math.exp(-(Math.pow(x, 2) + Math.pow(y, 2)) / (2 * Math.pow(sigma, 2)))); 
-                array[x+radius][y+radius] = (float)answer;
+                double result = getGaussian(x, y, sigma);
+                array[x+radius][y+radius] = (float)result;
                 sum += array[x+radius][y+radius];
             }
         }
