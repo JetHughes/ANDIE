@@ -4,8 +4,19 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * <p>
+ * Actions provided by the Translate menu
+ * </p>
+ * 
+ * <p>
+ * The Translate menu contains actions that affects the rotation and scale
+ * of the image.
+ * </p>
+ */
 public class TranslateActions {
 
+    /** A List of actions for the translate menu */
     protected ArrayList<Action> actions;
 
     /**
@@ -55,6 +66,7 @@ public class TranslateActions {
         * differentiate between left and right rotation
         */
         private int degrees;
+
         /**
          * <p>
          * Create a new rotate action.
@@ -90,13 +102,22 @@ public class TranslateActions {
         }
     }
 
+    /**
+     * Action to flip an image
+     */
     public class FlipImageAction extends ImageAction{
+
+        /**
+         * Whether to flip horizontally or vertically
+         */
         boolean isX;
+        
         /**
          * <p>
          * Create a new rotate action.
          * </p>
          * 
+         * @param isX 
          * @param name The name of the action (ignored if null).
          * @param icon An icon to use to represent the action (ignored if null).
          * @param desc A brief description of the action  (ignored if null).
@@ -109,12 +130,12 @@ public class TranslateActions {
 
         /**
          * <p>
-         * Callback for when the rotate action is triggered.
+         * Callback for when the flip action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the RotateImageAction is triggered.
-         * It rotates the image by the specified number of degrees
+         * This method is called whenever the FlipImageAction is triggered.
+         * It flip the image vertically or horizontally
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -127,12 +148,16 @@ public class TranslateActions {
     }
 
     public class ScaleImageAction extends ImageAction{
+
+        /** How much to scale the image */
         double scale;
+
         /**
          * <p>
          * Create a new rotate action.
          * </p>
          * 
+         * @param scale How much to scale the image
          * @param name The name of the action (ignored if null).
          * @param icon An icon to use to represent the action (ignored if null).
          * @param desc A brief description of the action  (ignored if null).
