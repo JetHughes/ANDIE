@@ -270,9 +270,11 @@ public class FileActions {
 
     }
 
-
-
-
+    /**
+     * <p>
+     * Action to export an image to a file
+     * </p>
+     */
     public class Export extends ImageAction {
 
         /**
