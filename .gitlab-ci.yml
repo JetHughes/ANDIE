@@ -50,10 +50,10 @@ pages: # publish Javadoc website
   stage: build
   image: eclipse-temurin:17
   script:
-    - javadoc -d docs src/cosc202/andie/*.java
+    - javadoc -d documentation src/cosc202/andie/*.java
     - mkdir public
     - echo 'test' >public/test.txt
-    - mv docs public/
+    - mv documentation public/
     - ls -R public | head
     - echo 'first ten public/ files listed'
   artifacts:
