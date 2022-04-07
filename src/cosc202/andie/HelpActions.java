@@ -97,7 +97,9 @@ public class HelpActions {
             l2.addElement("|                  CTRL + ["); 
             l2.addElement("|                  CTRL + ]");    
             JList<String> list = new JList<>(l1);
-            JList<String> list2 = new JList<>(l2);  
+            JList<String> list2 = new JList<>(l2);
+            list.setSelectionModel(new NoSelectionModel());
+            list2.setSelectionModel(new NoSelectionModel());
             JPanel panel = new JPanel(new BorderLayout());
             JPanel panel1 = new JPanel();
             panel1.add(list);
@@ -106,6 +108,7 @@ public class HelpActions {
             JScrollPane scrollPane = new JScrollPane();
             
             list.setLayoutOrientation(JList.VERTICAL);
+            list2.setLayoutOrientation(JList.VERTICAL);
             JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panel1, panel2);
             panel1.setBackground(Color.white);
             panel2.setBackground(Color.white);
@@ -133,6 +136,23 @@ public class HelpActions {
 
         }
 
+        
+
     }
+
+    private static class NoSelectionModel extends DefaultListSelectionModel {
+
+        @Override
+        public void setAnchorSelectionIndex(final int anchorIndex) {}
+     
+        @Override
+        public void setLeadAnchorNotificationEnabled(final boolean flag) {}
+     
+        @Override
+        public void setLeadSelectionIndex(final int leadIndex) {}
+     
+        @Override
+        public void setSelectionInterval(final int index0, final int index1) { }
+      }
 
 }
