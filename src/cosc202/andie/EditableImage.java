@@ -157,7 +157,7 @@ class EditableImage {
             fileIn.close();
         } catch (FileNotFoundException ex){
             System.out.println(ex);
-            PopUp.showMessageDialog("no .obs file found");
+            //PopUp.showMessageDialog("no .obs file found");
             //when a new image is opened that doesn't have a .obs file.
         }catch (Exception ex){
             System.out.println(ex);
