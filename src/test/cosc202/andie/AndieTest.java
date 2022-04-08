@@ -117,7 +117,7 @@ public class AndieTest {
     @Test
     void GaussianFilterCalculation(){
         GaussianFilter test = new GaussianFilter();
-        Assertions.assertEquals(0.9570022454180889, (test.getGaussian(0, 0, 1/3.0f))/1.496751349652186);
+        Assertions.assertEquals("0.957", String.format("%.3f", (test.getGaussian(0, 0, 1/3.0f))/1.496751349652186));
     }
 
 }
