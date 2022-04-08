@@ -40,8 +40,8 @@ public class FileActions {
         actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new Export("Export", null, "Export file", Integer.valueOf(KeyEvent.VK_P)));
-        actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
+        actions.add(new Export("Export", null, "Export file", Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(KeyEvent.VK_W)));
         
 
 
@@ -85,6 +85,8 @@ public class FileActions {
          */
         FileOpenAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -249,7 +251,7 @@ public class FileActions {
         FileExitAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon);
             putValue(SHORT_DESCRIPTION, desc);
-            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
          /**
@@ -270,9 +272,11 @@ public class FileActions {
 
     }
 
-
-
-
+    /**
+     * <p>
+     * Action to export an image to a file
+     * </p>
+     */
     public class Export extends ImageAction {
 
         /**
@@ -287,6 +291,8 @@ public class FileActions {
          */
         Export(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
             
         }
 

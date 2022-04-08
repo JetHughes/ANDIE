@@ -34,9 +34,9 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_A)));
         actions.add(new AdjustBrightnessAction("Brightness", null, "Adjust Brightness", Integer.valueOf(KeyEvent.VK_B)));
-        actions.add(new AdjustContrastAction("Contast", null, "Adjust Contrast", Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new AdjustContrastAction("Contast", null, "Adjust Contrast", Integer.valueOf(KeyEvent.VK_C)));
     }
 
     /**
@@ -77,6 +77,8 @@ public class ColourActions {
          */
         ConvertToGreyAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
@@ -112,6 +114,8 @@ public class ColourActions {
          */
         AdjustBrightnessAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
     
         /**
@@ -164,6 +168,8 @@ public class ColourActions {
          */
         AdjustContrastAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
     
         /**

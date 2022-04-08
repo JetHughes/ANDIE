@@ -8,6 +8,10 @@ import java.awt.Color;
  * ImageOperation to adjust the brightness of an image
  * </p>
  * 
+ * <p>
+ * Changes the brightness of an image using 
+ * equation 2.5 from the cosc202 lab book.
+ * </p> 
 */
 public class AdjustBrightness implements ImageOperation, java.io.Serializable{
 
@@ -42,7 +46,10 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
         this(10);
     }
 
-    //For Testing
+    /**
+     * Method for testing
+     * @return
+     */
     public double returnBrightness(){
         return brightness;
     }
