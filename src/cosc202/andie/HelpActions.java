@@ -94,8 +94,8 @@ public class HelpActions {
             l2.addElement("|                  CTRL + R"); 
             l2.addElement("|                  CTRL + H"); 
             l2.addElement("|                  CTRL + V"); 
-            l2.addElement("|                  CTRL + ["); 
-            l2.addElement("|                  CTRL + ]");    
+            l2.addElement("|                  CTRL + ,"); 
+            l2.addElement("|                  CTRL + .");    
             JList<String> list = new JList<>(l1);
             JList<String> list2 = new JList<>(l2);
             list.setSelectionModel(new NoSelectionModel());

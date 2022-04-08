@@ -109,7 +109,7 @@ public class Andie {
 
         menuBar.setMinimumSize(minimumSize);
         splitPane.setDividerLocation(50);
-
+        
         splitPane.setEnabled( false );
         frame.setJMenuBar(menuBar);
         frame.add(splitPane);
