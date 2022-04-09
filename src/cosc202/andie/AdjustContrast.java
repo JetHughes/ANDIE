@@ -17,7 +17,9 @@ import java.awt.Color;
 public class AdjustContrast implements ImageOperation, java.io.Serializable{
 
     /** 
+     * <p>
      * The percentage to increase or decrease the contrast
+     * </p>
     */
     private double contrast;
 
@@ -48,8 +50,11 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
     }
 
     /**
-     * Mehod for testing
-     * @return
+     * <p>
+     * Method for testing
+     * </p>
+     * 
+     * @return returns the contrast value
      */
     public double returnContrast(){
         return contrast;
@@ -93,7 +98,10 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
     }
     
     /**
+     * <p>
      * Method to apply a Contrast adjusted to a color channel of a pixel
+     * </p>
+     * 
      * @param c the value to adjust the Contrast by
      * @param v the value to adjust
      * @return The adjusted value

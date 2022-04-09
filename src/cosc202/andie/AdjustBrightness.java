@@ -16,7 +16,9 @@ import java.awt.Color;
 public class AdjustBrightness implements ImageOperation, java.io.Serializable{
 
     /** 
+     * <p>
      * The percentage to increase or decrease the brightness
+     * </p>
     */
     private double brightness;
 
@@ -47,8 +49,11 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
     }
 
     /**
+     * <p>
      * Method for testing
-     * @return
+     * </p>
+     * 
+     * @return returns the brightness value
      */
     public double returnBrightness(){
         return brightness;
@@ -92,7 +97,10 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
     }
 
     /**
+     * <p>
      * Method to apply a brightness adjusted to a color channel of a pixel
+     * </p>
+     * 
      * @param b the value to adjust the brightness by
      * @param v the value to adjust
      * @return The adjusted value

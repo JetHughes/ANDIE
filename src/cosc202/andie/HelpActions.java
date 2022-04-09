@@ -17,10 +17,6 @@ public class HelpActions {
     public HelpActions() {
         actions = new ArrayList<Action>();
         actions.add(new ShortcutsAction("Shortcuts", null, "Lists all shortcuts", Integer.valueOf(KeyEvent.VK_O)));
-
-        
-
-
     }
 
     public JMenu createMenu() {
