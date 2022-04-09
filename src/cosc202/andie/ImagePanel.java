@@ -3,9 +3,6 @@ package cosc202.andie;
 import java.awt.*;
 import javax.swing.*;
 
-
-
-//STINKYYYYYYYYYYYYY YOU'RE SO STINKYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 /**
  * <p>
  * UI display element for {@link EditableImage}s.
