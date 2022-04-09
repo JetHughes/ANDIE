@@ -30,7 +30,7 @@ import javax.imageio.*;
  * @author Steven Mills
  * @version 1.0
  */
-class EditableImage {
+public class EditableImage {
 
     /** The original image. This should never be altered by ANDIE. */
     private BufferedImage original;
@@ -129,7 +129,7 @@ class EditableImage {
      * </p>
      * 
      * @param filePath The file to open the image from.
-     * @throws Exception If something goes wrong.
+     * @throws IOException If something goes wrong.
      */
     public void open(String filePath) throws IOException{
         imageFilename = filePath;
@@ -179,7 +179,7 @@ class EditableImage {
      * the current operations to <code>some/path/to/image.png.ops</code>.
      * </p>
      * 
-     * @throws Exception If something goes wrong.
+     * @throws IOException If something goes wrong.
      */
     public void save() throws IOException{
         try{
@@ -225,7 +225,7 @@ class EditableImage {
      * </p>
      * 
      * @param imageFilename The file location to save the image to.
-     * @throws Exception If something goes wrong.
+     * @throws FileNotFoundException If something goes wrong.
      */
     public void saveAs(String imageFilename) throws FileNotFoundException {
         try{

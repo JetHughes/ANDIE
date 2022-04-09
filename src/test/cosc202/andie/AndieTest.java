@@ -10,6 +10,7 @@ import cosc202.andie.GaussianFilter;
 import cosc202.andie.ImagePanel;
 import cosc202.andie.MedianFilter;
 import cosc202.andie.FlipImage;
+import cosc202.andie.EditableImage;
 
 public class AndieTest {
 
@@ -122,10 +123,10 @@ public class AndieTest {
     }
 
     // Editable Image Tests
-    // @Test void editableImagePresenceCheck(){
-    //     EditableImage test = new EditableImage();
-    //     Assertions.assertFalse(test.hasImage());
-    // }
+    @Test void editableImagePresenceCheck(){
+        EditableImage test = new EditableImage();
+        Assertions.assertFalse(test.hasImage());
+    }
 
     // Flip Image Tests
     @Test void flipImageHorixontally(){
