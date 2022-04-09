@@ -25,8 +25,13 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
      * 
      * @param isX The axis for the image to be flipped on
      */
-    FlipImage(boolean isX){
+    public FlipImage(boolean isX){
         this.isX = isX;
+    }
+
+    // For testing
+    public boolean returnIsX(){
+        return isX;
     }
 
     /**
@@ -35,7 +40,7 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
      * </p>
      * 
      * <p>
-     * The flip is done by taking the pixels of the origonal image
+     * The flip is done by taking the pixels of the original image
      * and placing them in their 'flipped' positions in a new image
      * and then returning the new image
      * </p>

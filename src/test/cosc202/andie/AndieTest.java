@@ -1,3 +1,4 @@
+//CROCS
 package test.cosc202.andie;
 
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +9,8 @@ import cosc202.andie.AdjustContrast;
 import cosc202.andie.GaussianFilter;
 import cosc202.andie.ImagePanel;
 import cosc202.andie.MedianFilter;
+import cosc202.andie.EditableImage;
+import cosc202.andie.FlipImage;
 
 public class AndieTest {
 
@@ -104,9 +107,7 @@ public class AndieTest {
         Assertions.assertEquals( 255, test.getAdjustedValue(500, 500));
     }
 
-    //Image Operation
-
-    //Median Filter
+    //Median Filter Tests
     @Test
     void medianFilterMedianCalculation(){
         MedianFilter test = new MedianFilter();
@@ -114,10 +115,29 @@ public class AndieTest {
         Assertions.assertEquals(5, test.getMedian(testArray));
     }
 
+    // Gaussian Filter Tests
     @Test
     void GaussianFilterCalculation(){
         GaussianFilter test = new GaussianFilter();
         Assertions.assertEquals("0.957", String.format("%.3f", (test.getGaussian(0, 0, 1/3.0f))/1.496751349652186));
     }
 
+    // Editable Image Tests
+    @Test void editableImagePresenceCheck(){
+        EditableImage test = new EditableImage();
+        Assertions.assertFalse(test.hasImage());
+    }
+
+    // Flip Image Tests
+    @Test void flipImageHorixontally(){
+        FlipImage test = new FlipImage(true);
+        Assertions.assertTrue(test.returnIsX());
+    }
+
+    @Test void flipImageVertically(){
+        FlipImage test = new FlipImage(false);
+        Assertions.assertFalse(test.returnIsX());
+    }
+
+    
 }
