@@ -8,21 +8,38 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * <p>
+ * Actions provided by the help menu
+ * </p>
+ * 
+ * <p>
+ * Provides information about the shortcuts
+ * </p>
+ */
 public class HelpActions {
     
-
+    /** A List of actions for the help menu*/
     protected static ArrayList<Action> actions;
 
 
+    /** 
+     * <p>
+     * Create a set of help menu actions
+     * </p>
+    */
     public HelpActions() {
         actions = new ArrayList<Action>();
         actions.add(new ShortcutsAction("Shortcuts", null, "Lists all shortcuts", Integer.valueOf(KeyEvent.VK_O)));
-
-        
-
-
     }
 
+    /**
+     * <p>
+     * Create a menu containing the list of Menu actions
+     * </p>
+     * 
+     * @return The fileMenu UI element
+     */
     public JMenu createMenu() {
         JMenu fileMenu = new JMenu("Help");
 
@@ -33,13 +50,40 @@ public class HelpActions {
         return fileMenu;
     }
 
+    /**
+     * <p>
+     * Action to show the shortcuts
+     * </p>
+     */
     public class ShortcutsAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new shortcuts actions
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represen the action (ignored if null).
+         * @param desc A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         ShortcutsAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
             putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("shift ctrl pressed H"));
         }
-
+        
+        /**
+         * <p>
+         * Callback for when the shortcuts action if performed
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ShortcutsAction is triggered
+         * It shows all the shortcuts in a pop up menu
+         * </p>
+         * 
+         * @param e The event triggering this callback
+         */
         public void actionPerformed(ActionEvent e) {
             DefaultListModel<String> l1 = new DefaultListModel<>();
             DefaultListModel<String> l2 = new DefaultListModel<>();
@@ -139,7 +183,7 @@ public class HelpActions {
         
 
     }
-
+        
     private static class NoSelectionModel extends DefaultListSelectionModel {
 
         @Override
