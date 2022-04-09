@@ -32,14 +32,10 @@ public class TranslateActions {
     public TranslateActions() {
         actions = new ArrayList<Action>();
         actions.add(new RotateImageAction180("Rotate 180°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_F), 180));
-        actions.add(
-                new RotateImageAction90L("Rotate Left 90°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_I), -90));
-        actions.add(
-                new RotateImageAction90R("Rotate Right 90°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_R), 90));
-        actions.add(new FlipImageActionhorizontally("Flip Horizontal", null, "Flip Horizontal",
-                Integer.valueOf(KeyEvent.VK_H), true));
-        actions.add(new FlipImageActionvertically150("Flip Vertical", null, "Flip Vertical",
-                Integer.valueOf(KeyEvent.VK_V), false));
+        actions.add(new RotateImageAction90L("Rotate Left 90°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_I), -90));
+        actions.add(new RotateImageAction90R("Rotate Right 90°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_R), 90));
+        actions.add(new FlipImageActionhorizontally("Flip Horizontal", null, "Flip Horizontal", Integer.valueOf(KeyEvent.VK_H), true));
+        actions.add(new FlipImageActionvertically("Flip Vertical", null, "Flip Vertical", Integer.valueOf(KeyEvent.VK_V), false));
         actions.add(new ScaleImageAction("Scale %150", null, "Scale %150", Integer.valueOf(KeyEvent.VK_COMMA), 1.5));
         actions.add(new ScaleImageAction("Scale %50", null, "Scale 150", Integer.valueOf(KeyEvent.VK_PERIOD), 0.5));
 
@@ -275,7 +271,7 @@ public class TranslateActions {
      * Action to flip an image vertically
      * </p>
      */
-    public class FlipImageActionvertically150 extends ImageAction {
+    public class FlipImageActionvertically extends ImageAction {
 
         /**
          * <p>
@@ -296,7 +292,7 @@ public class TranslateActions {
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          * @param isX      determines what axis the image is flipped about.
          */
-        FlipImageActionvertically150(String name, ImageIcon icon, String desc, Integer mnemonic, Boolean isX) {
+        FlipImageActionvertically(String name, ImageIcon icon, String desc, Integer mnemonic, Boolean isX) {
             super(name, icon, desc, mnemonic);
             this.isX = isX;
             putValue(Action.MNEMONIC_KEY, mnemonic);

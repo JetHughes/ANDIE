@@ -134,9 +134,14 @@ public class EditableImage {
     public void open(String filePath) throws IOException{
         imageFilename = filePath;
         opsFilename = imageFilename + ".ops";
-        File imageFile = new File(imageFilename);
-        original = ImageIO.read(imageFile);
-        current = deepCopy(original);
+        try {
+            File imageFile = new File(imageFilename);
+            original = ImageIO.read(imageFile);
+            current = deepCopy(original);
+        } catch (FileNotFoundException ex){
+            System.out.println(ex);
+            PopUp.showMessageDialog("Could not create copy due to invalid file name");
+        } 
         
         try {
             FileInputStream fileIn = new FileInputStream(this.opsFilename);
@@ -196,9 +201,8 @@ public class EditableImage {
             objOut.close();
             fileOut.close();
         } catch (FileNotFoundException ex) {
+            System.out.println(ex);
             PopUp.showMessageDialog("FileNotFoundException : Check file name and/or type");
-            
-            
         }catch (IllegalArgumentException ex){
             System.out.println(ex);
             PopUp.showMessageDialog("Error: There is no image to save!");
@@ -249,12 +253,11 @@ public class EditableImage {
     public void export(String imageFilename) throws FileNotFoundException {
         try{
             this.imageFilename = imageFilename;
-        
             String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
             ImageIO.write(current, extension, new File(imageFilename));
-        } catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
-            PopUp.showMessageDialog("An Error has occured");
+            PopUp.showMessageDialog("Unknown error");
         }
     }
 
