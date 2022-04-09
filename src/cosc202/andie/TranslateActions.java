@@ -238,7 +238,6 @@ public class TranslateActions {
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-         * @param isX      determines what axis the image is flipped about.
          */
         FlipImageActionhorizontally(String name, ImageIcon icon, String desc, Integer mnemonic, Boolean isX) {
             super(name, icon, desc, mnemonic);
@@ -290,7 +289,6 @@ public class TranslateActions {
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-         * @param isX      determines what axis the image is flipped about.
          */
         FlipImageActionvertically(String name, ImageIcon icon, String desc, Integer mnemonic, Boolean isX) {
             super(name, icon, desc, mnemonic);

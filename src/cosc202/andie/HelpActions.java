@@ -196,7 +196,7 @@ public class HelpActions {
          * leadAnchorNotificationEnabled is true, send a notification covering the old
          * and new anchor cells.
          * </p>
-         * @param anchorIndex
+         * @param anchorIndex New anchor selection index.
          */
         @Override
         public void setAnchorSelectionIndex(final int anchorIndex) {
@@ -206,7 +206,7 @@ public class HelpActions {
          * <p>
          * Sets the value of the leadAnchorNotificationEnabled flag.
          * </p>
-         * @param flag
+         * @param flag The value of the new leadAnchorNotification flag.
          */
         @Override
         public void setLeadAnchorNotificationEnabled(final boolean flag) {
@@ -216,7 +216,7 @@ public class HelpActions {
          * <p>
          * Sets the lead selection index
          * </p>
-         * @param leadIndex
+         * @param leadIndex Lead index value.
          */
         @Override
         public void setLeadSelectionIndex(final int leadIndex) {
@@ -226,8 +226,8 @@ public class HelpActions {
          * <p>
          * Changes the selection to be between index0 and index1 inclusive.
          * </p>
-         * @param index0
-         * @param index1
+         * @param index0 New primary index value.
+         * @param index1 New secondary index value.
          */
         @Override
         public void setSelectionInterval(final int index0, final int index1) {
