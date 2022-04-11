@@ -66,7 +66,7 @@ public class ScaleImage implements ImageOperation, java.io.Serializable {
             return input;
         } catch (NullPointerException e) {
             System.out.println(e);
-            PopUp.showMessageDialog("No Image to Scale!");
+            PopUp.showMessageDialog("No Image to scale!");
             return input;
         } catch (Exception e) {
             System.out.println(e);

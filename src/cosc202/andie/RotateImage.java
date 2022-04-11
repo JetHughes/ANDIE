@@ -89,7 +89,7 @@ public class RotateImage implements ImageOperation, java.io.Serializable {
             return input;
         } catch (NullPointerException e) {
             System.out.println(e);
-            PopUp.showMessageDialog("No Image to Rotate!");
+            PopUp.showMessageDialog("No Image to rotate!");
             return input;
         } catch (Exception e) {
             System.out.println(e);
