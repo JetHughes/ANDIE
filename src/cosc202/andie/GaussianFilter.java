@@ -90,9 +90,9 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         }
 
         // print array (for debugging)
-        for (float f : normflatArr) {
-            System.out.println(f + ", ");
-        }
+        // for (float f : normflatArr) {
+        //     System.out.println(f + ", ");
+        // }
 
         Kernel kernel = new Kernel(2 * radius + 1, 2 * radius + 1, normflatArr);
         ConvolveOp convOp = new ConvolveOp(kernel);
