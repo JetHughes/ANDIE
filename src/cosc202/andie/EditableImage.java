@@ -32,17 +32,17 @@ import javax.imageio.*;
  */
 public class EditableImage {
 
-    /** The original image. This should never be altered by ANDIE. */
+    /** <p> The original image. This should never be altered by ANDIE. </p> */
     private BufferedImage original;
-    /** The current image, the result of applying {@link ops} to {@link original}. */
+    /** <p> The current image, the result of applying {@link ops} to {@link original}. </p> */
     private BufferedImage current;
-    /** The sequence of operations currently applied to the image. */
+    /** <p> The sequence of operations currently applied to the image. </p> */
     private Stack<ImageOperation> ops;
-    /** A memory of 'undone' operations to support 'redo'. */
+    /** <p> A memory of 'undone' operations to support 'redo'. </p> */
     private Stack<ImageOperation> redoOps;
-    /** The file where the original image is stored/ */
+    /** <p> The file where the original image is stored/ </p> */
     private String imageFilename;
-    /** The file where the operation sequence is stored. */
+    /** <p> The file where the operation sequence is stored. </p> */
     private String opsFilename;
 
     /**
@@ -218,7 +218,7 @@ public class EditableImage {
 
     /**
      * <p>
-     * Save an image to a speficied file.
+     * Save an image to a specified file.
      * </p>
      * 
      * <p>
@@ -242,15 +242,19 @@ public class EditableImage {
         }
     }
 
-    public void export(String imageFilename) throws Exception {
-        this.imageFilename = imageFilename;
-        
-        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-        try {
+     /**
+     * <p>
+     * Export an image to a specified file.
+     * </p>
+     * 
+     * @param imageFilename The file location to save the image to.
+     * @throws FileNotFoundException If something goes wrong.
+     */
+    public void export(String imageFilename) throws FileNotFoundException {
+        try{
+            this.imageFilename = imageFilename;
+            String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
             ImageIO.write(current, extension, new File(imageFilename));
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
-            PopUp.showMessageDialog("Could not write export image due to invalid file name");
         } catch (Exception ex) {
             System.out.println(ex);
             PopUp.showMessageDialog("Unknown error");

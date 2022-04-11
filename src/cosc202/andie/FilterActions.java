@@ -99,108 +99,204 @@ public class FilterActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply filter to!");
 
-            // Determine the radius - ask the user.
-            int radius = 1;
+            } else {
+                // Determine the radius - ask the user.
+                int radius = 1;
 
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (option == JOptionPane.OK_OPTION) {
-                radius = radiusModel.getNumber().intValue();
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    radius = radiusModel.getNumber().intValue();
+                }
+
+                // Create and apply the filter
+                target.getImage().apply(new MeanFilter(radius));
+                target.repaint();
+                target.getParent().revalidate();
             }
-
-            // Create and apply the filter
-            target.getImage().apply(new MeanFilter(radius));
-            target.repaint();
-            target.getParent().revalidate();
         }
 
     }
 
-    
+    /**
+     * <p>
+     * Action to sharpen an image with a sharpen filter.
+     * </p>
+     * 
+     * @see SharpenFilter
+     */
     public class SharpenFilterAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new sharpen-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         SharpenFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
             putValue(Action.MNEMONIC_KEY, mnemonic);
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
+        /**
+         * <p>
+         * This method is called whenever the SharpenFilterAction is triggered.
+         * It prompts the user for a filter radius, then applys an appropriately sized
+         * {@link SharpenFilter}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e){
-            target.getImage().apply(new SharpenFilter());
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply filter to!");
+
+            } else {
+                target.getImage().apply(new SharpenFilter());
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
-
+    /**
+     * <p>
+     * Action to blur an image with a gaussian filter.
+     * </p>
+     * 
+     * @see GaussianFilter
+     */
     public class GaussianFilterAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new gaussian-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         GaussianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
             putValue(Action.MNEMONIC_KEY, mnemonic);
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
+        /**
+         * <p>
+         * This method is called whenever the GaussianFilterAction is triggered.
+         * It prompts the user for a filter radius, then applys an appropriately sized
+         * {@link GaussianFilter}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e){
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply filter to!");
 
-            int radius = 1;
+            } else {
+                int radius = 1;
 
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;            
-            } else if (option == JOptionPane.OK_OPTION) {
-                radius = radiusModel.getNumber().intValue();
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;            
+                } else if (option == JOptionPane.OK_OPTION) {
+                    radius = radiusModel.getNumber().intValue();
+                }
+
+                target.getImage().apply(new GaussianFilter(radius));
+                target.repaint();
+                target.getParent().revalidate();
             }
-
-            target.getImage().apply(new GaussianFilter(radius));
-            target.repaint();
-            target.getParent().revalidate();
         }
     }
 
-
+    /**
+     * <p>
+     * Action to blur an image with a median filter.
+     * </p>
+     * 
+     * @see MedianFilter
+     */
     public class MedianFilterAction extends ImageAction {
 
+        /**
+         * <p>
+         * Create a new median-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
             putValue(Action.MNEMONIC_KEY, mnemonic);
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
+        /** 
+         * <p>
+         * This method is called whenever the MedianFilterAction is triggered.
+         * It prompts the user for a filter radius, then applys an appropriately sized
+         * {@link MedianFilter}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e){
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply filter to!");
 
-            int radius = 1;
+            } else {
+                int radius = 1;
 
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;            
-            } else if (option == JOptionPane.OK_OPTION) {
-                radius = radiusModel.getNumber().intValue();
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;            
+                } else if (option == JOptionPane.OK_OPTION) {
+                    radius = radiusModel.getNumber().intValue();
+                }
+
+                target.getImage().apply(new MedianFilter(radius));
+                target.repaint();
+                target.getParent().revalidate();
             }
-
-            target.getImage().apply(new MedianFilter(radius));
-            target.repaint();
-            target.getParent().revalidate();
         }
     }
 }

@@ -13,7 +13,13 @@ import java.awt.image.BufferedImage;
  * </p>
  */
 public class ScaleImage implements ImageOperation, java.io.Serializable {
+    /**
+     * <p>
+     * The scale at which the image is to be adjusted
+     * </p>
+    */
     double scale;
+
     /**
      * <p>
      * Construct a Resize by given scale
@@ -26,7 +32,7 @@ public class ScaleImage implements ImageOperation, java.io.Serializable {
      * 
      * @param scale The scale for the image to be resized to
      */
-    ScaleImage(double scale){
+    ScaleImage(double scale) {
         this.scale = scale;
     }
 
@@ -38,14 +44,15 @@ public class ScaleImage implements ImageOperation, java.io.Serializable {
      * @param input The image to be flipped.
      * @return The resulting (scaled) image.
      */
-    public BufferedImage apply (BufferedImage input){       
-        
-        try{
-            int newWidth = (int) Math.round(input.getWidth()*scale);
-            int newHeight = (int) Math.round(input.getHeight()*scale);
-            BufferedImage output = new BufferedImage(newWidth, newHeight, input.getType()); 
-            
-            //BufferedImage resized = new BufferedImage(newWidth, newHeight, input.getType());
+    public BufferedImage apply(BufferedImage input) {
+
+        try {
+            int newWidth = (int) Math.round(input.getWidth() * scale);
+            int newHeight = (int) Math.round(input.getHeight() * scale);
+            BufferedImage output = new BufferedImage(newWidth, newHeight, input.getType());
+
+            // BufferedImage resized = new BufferedImage(newWidth, newHeight,
+            // input.getType());
             Graphics2D g = output.createGraphics();
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g.drawImage(input, 0, 0, newWidth, newHeight, 0, 0, input.getWidth(), input.getHeight(), null);
@@ -59,9 +66,9 @@ public class ScaleImage implements ImageOperation, java.io.Serializable {
             return input;
         } catch (NullPointerException e) {
             System.out.println(e);
-            PopUp.showMessageDialog("No Image to Scale!");
+            PopUp.showMessageDialog("No Image to scale!");
             return input;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             PopUp.showMessageDialog("An unknown error has occured. Returning input");
             return input;

@@ -9,7 +9,7 @@ import java.awt.image.*;
  * </p>
  * 
  * <p>
- * A Sharpen filter enhances the difference between neighbouring values, 
+ * A Sharpen filter enhances the difference between neighbouring values,
  * and can be implemented as a convoloution.
  * </p>
  * 
@@ -17,6 +17,11 @@ import java.awt.image.*;
 
 public class SharpenFilter implements ImageOperation, java.io.Serializable {
 
+    /**
+     * <p>
+     * Constructor for SharpenFilter class
+     * </p>
+    */
     SharpenFilter() {
     };
 
@@ -28,9 +33,9 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
      * @param input The image to apply the Sharpen filter to.
      * @return The resulting (sharpened) image.
      */
-
     public BufferedImage apply(BufferedImage input) {
-        float[] array = {0, -1/2.0f, 0, -1/2.0f, 3.0f, -1/2.0f, 0, -1/2.0f, 0};
+        
+        float[] array = { 0, -1 / 2.0f, 0, -1 / 2.0f, 3.0f, -1 / 2.0f, 0, -1 / 2.0f, 0 };
 
         Kernel kernel = new Kernel(3, 3, array);
         ConvolveOp convOp = new ConvolveOp(kernel);

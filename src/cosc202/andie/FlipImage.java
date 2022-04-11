@@ -12,7 +12,14 @@ import java.awt.image.BufferedImage;
  * </p>
  */
 public class FlipImage implements ImageOperation, java.io.Serializable {
-    boolean isX;
+
+    /**
+     * <p>
+     * Indicative of the axis to flip the image about
+     * </p>
+     */
+    private boolean isX;
+
     /**
      * <p>
      * Construct a Flip by given axis
@@ -25,12 +32,18 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
      * 
      * @param isX The axis for the image to be flipped on
      */
-    public FlipImage(boolean isX){
+    public FlipImage(boolean isX) {
         this.isX = isX;
     }
 
-    // For testing
-    public boolean returnIsX(){
+    /**
+     * <p>
+     * This method exists soley for testing purposes
+     * </p>
+     * 
+     * @return returns the representative of the axis to be flipped about
+     */
+    public boolean returnIsX() {
         return isX;
     }
 
@@ -48,17 +61,16 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
      * @param input The image to be flipped.
      * @return The resulting (flipped) image.
      */
-    public BufferedImage apply (BufferedImage input){       
-        try{
-            BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), input.getType()); 
-            if(!isX){
+    public BufferedImage apply(BufferedImage input) {
+        try {
+            BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), input.getType());
+            if (!isX) {
                 for (int y = 0; y < output.getHeight(); y++) {
                     for (int x = 0; x < output.getWidth(); x++) {
                         output.setRGB(x, y, input.getRGB(x, ((input.getHeight() - 1) - y)));
                     }
                 }
-            }
-            else{
+            } else {
                 for (int y = 0; y < output.getHeight(); y++) {
                     for (int x = 0; x < output.getWidth(); x++) {
                         output.setRGB(x, y, input.getRGB(((input.getWidth() - 1) - x), y));
@@ -75,7 +87,7 @@ public class FlipImage implements ImageOperation, java.io.Serializable {
             System.out.println(e);
             PopUp.showMessageDialog("No Image to Flip!");
             return input;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             PopUp.showMessageDialog("An unknown error has occured. Returning input");
             return input;
