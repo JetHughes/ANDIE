@@ -102,9 +102,15 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new ConvertToGrey());
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply change to!");
+
+            } else {
+                target.getImage().apply(new ConvertToGrey());
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
@@ -146,24 +152,29 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply change to!");
 
-            double brightness = 0;
+            } else {
+                double brightness = 0;
 
-            SpinnerNumberModel brightnessModel = new SpinnerNumberModel(0, -100, 100, 10);
-            JSpinner radiusSpinner = new JSpinner(brightnessModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Brightness Value",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                SpinnerNumberModel brightnessModel = new SpinnerNumberModel(0, -100, 100, 10);
+                JSpinner radiusSpinner = new JSpinner(brightnessModel);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Brightness Value",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (option == JOptionPane.OK_OPTION) {
-                brightness = brightnessModel.getNumber().intValue();
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    brightness = brightnessModel.getNumber().intValue();
+                }
+
+                target.getImage().apply(new AdjustBrightness(brightness));
+                target.repaint();
+                target.getParent().revalidate();
             }
-
-            target.getImage().apply(new AdjustBrightness(brightness));
-            target.repaint();
-            target.getParent().revalidate();
         }
     }
 
@@ -205,24 +216,29 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply change to!");
 
-            double contrast = 0;
+            } else {
+                double contrast = 0;
 
-            SpinnerNumberModel contrastModel = new SpinnerNumberModel(0, -1000, 1000, 10);
-            JSpinner radiusSpinner = new JSpinner(contrastModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Contrast Value",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                SpinnerNumberModel contrastModel = new SpinnerNumberModel(0, -1000, 1000, 10);
+                JSpinner radiusSpinner = new JSpinner(contrastModel);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Contrast Value",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (option == JOptionPane.OK_OPTION) {
-                contrast = contrastModel.getNumber().intValue();
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    contrast = contrastModel.getNumber().intValue();
+                }
+
+                target.getImage().apply(new AdjustContrast(contrast));
+                target.repaint();
+                target.getParent().revalidate();
             }
-
-            target.getImage().apply(new AdjustContrast(contrast));
-            target.repaint();
-            target.getParent().revalidate();
         }
     }
 
