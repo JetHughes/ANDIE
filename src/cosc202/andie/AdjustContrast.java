@@ -107,7 +107,7 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
      * @return The adjusted value
      */
     public double getAdjustedValue(double c, double v) {
-        double result = (1 + (c / 100)) * (v - 127.5);
+        double result = ((1 + (c / 100)) * (v - 127.5)) + 127.5;
 
         if(result > 255) {
             result = 255;
