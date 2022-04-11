@@ -104,9 +104,15 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new RotateImage(degrees));
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to rotate!");
+
+            } else {
+                target.getImage().apply(new RotateImage(degrees));
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
@@ -156,9 +162,15 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new RotateImage(degrees));
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to rotate!");
+
+            } else {
+                target.getImage().apply(new RotateImage(degrees));
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
@@ -208,9 +220,15 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new RotateImage(degrees));
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to rotate!");
+
+            } else {
+                target.getImage().apply(new RotateImage(degrees));
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
@@ -230,7 +248,7 @@ public class TranslateActions {
 
         /**
          * <p>
-         * Create a new rotate action.
+         * Create a new flip action.
          * </p>
          * 
          * @param isX      The axis about which the image is to be flipped.
@@ -259,9 +277,15 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new FlipImage(isX));
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to flip!");
+
+            } else {
+                target.getImage().apply(new FlipImage(isX));
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
@@ -281,7 +305,7 @@ public class TranslateActions {
 
         /**
          * <p>
-         * Create a new rotate action.
+         * Create a new flip action.
          * </p>
          * 
          * @param isX      The axis around which the image is to be flipped.
@@ -310,9 +334,15 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new FlipImage(isX));
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to flip!");
+
+            } else {
+                target.getImage().apply(new FlipImage(isX));
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
@@ -361,9 +391,15 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new ScaleImage(scale));
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to scale!");
+
+            } else {
+                target.getImage().apply(new ScaleImage(scale));
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 
@@ -412,9 +448,15 @@ public class TranslateActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new ScaleImage(scale));
-            target.repaint();
-            target.getParent().revalidate();
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to scale!");
+
+            } else {
+                target.getImage().apply(new ScaleImage(scale));
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
     }
 }
