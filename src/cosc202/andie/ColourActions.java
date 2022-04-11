@@ -159,7 +159,7 @@ public class ColourActions {
             } else {
                 double brightness = 0;
 
-                SpinnerNumberModel brightnessModel = new SpinnerNumberModel(0, -100, 100, 10);
+                SpinnerNumberModel brightnessModel = new SpinnerNumberModel(0, -1000, 1000, 10);
                 JSpinner radiusSpinner = new JSpinner(brightnessModel);
                 int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Brightness Value",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -169,6 +169,12 @@ public class ColourActions {
                     return;
                 } else if (option == JOptionPane.OK_OPTION) {
                     brightness = brightnessModel.getNumber().intValue();
+                }
+
+                // If they entered a value outside of the range, `brightness` will be zero so we should alert them and cancel the operation
+                if(brightness == 0) {
+                    PopUp.showMessageDialog("You chose a value outside of the range -1000 to 1000");
+                    return;
                 }
 
                 target.getImage().apply(new AdjustBrightness(brightness));
