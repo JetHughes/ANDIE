@@ -44,7 +44,7 @@ public class ColourActions {
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_A)));
         actions.add(
                 new AdjustBrightnessAction("Brightness", null, "Adjust Brightness", Integer.valueOf(KeyEvent.VK_B)));
-        actions.add(new AdjustContrastAction("Contast", null, "Adjust Contrast", Integer.valueOf(KeyEvent.VK_C)));
+        actions.add(new AdjustContrastAction("Contrast", null, "Adjust Contrast", Integer.valueOf(KeyEvent.VK_C)));
     }
 
     /**
@@ -210,7 +210,7 @@ public class ColourActions {
          * 
          * <p>
          * This method is called whenever the AdjustContrastAction is triggered.
-         * It changes the image's contast.
+         * It changes the image's contrast.
          * </p>
          * 
          * @param e The event triggering this callback.
