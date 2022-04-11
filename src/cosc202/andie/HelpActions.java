@@ -183,7 +183,7 @@ public class HelpActions {
         
 
     }
-        
+        //removes the ability to select parts of the list
     private static class NoSelectionModel extends DefaultListSelectionModel {
 
         @Override
