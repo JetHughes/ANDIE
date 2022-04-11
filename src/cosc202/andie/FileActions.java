@@ -110,11 +110,11 @@ public class FileActions {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().open(imageFilepath);
                 } catch (IOException ex) {
-                    PopUp.showMessageDialog("ImageIO read error: Check file name and/or type");
+                    PopUp.showMessageDialog("Error: Unable to find file. Check file name.");
                     return;
                 } catch (NullPointerException ex) {
                     System.out.println(ex);
-                    PopUp.showMessageDialog("Unable to open .ops files. Please open corresponding image file");
+                    PopUp.showMessageDialog("Error: Incorrect file type. Please choose a supported image type");
                     return;
                 }catch (Exception ex) {
                     System.out.println(ex);
