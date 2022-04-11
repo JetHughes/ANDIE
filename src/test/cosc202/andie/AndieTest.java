@@ -92,7 +92,7 @@ public class AndieTest {
     @Test 
     void contrastAdjustedValuesMidRange(){
         AdjustContrast test = new AdjustContrast(55);
-        Assertions.assertEquals( 217.5, test.getAdjustedValue(200, 200));
+        Assertions.assertEquals( 255, test.getAdjustedValue(200, 200));
     }
 
     @Test 
