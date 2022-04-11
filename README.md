@@ -1,21 +1,133 @@
-## Getting Started
+# Reqired Features
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+### Sharpen Filter
+**Contributors:** Riley, 
 
-## Folder Structure
+**Access:** Menu, Keyboard Shortcut (Ctrl-J)
 
-The workspace contains two folders by default, where:
+**Testing:**
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+**Known Issues:**
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+---
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+### Gaussian Blur Filter
+**Contributors:** Riley, Will, Jet
 
-## Dependency Management
+**Access:** Menu, Keyboard Shortcut (Ctrl-G)
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
-Test for webhook
+**Testing:**
 
-## just testing i can push and pull from my laptop
+**Known Issues:**
+
+---
+
+### Median Filter
+**Contributors:** Riley, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl-D)
+
+**Testing:**
+
+**Known Issues:**
+
+---
+
+### Brightness Adjustment
+**Contributors:** Jet, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl-B)
+
+**Testing:**
+
+**Known Issues:**
+
+---
+
+### Contrast Adjustment
+**Contributors:** Jet, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl-C)
+
+**Testing:**
+
+**Known Issues:**
+
+---
+
+### Image Resize
+**Contributors:** Bradley, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl-Comma, Ctrl-Period)
+
+**Testing:**
+
+**Known Issues:** Scaling out too much will result in being unable to zoom in to a reasonable size, Scaling out many times then attempting Scale up will result in a blurry image, 
+
+---
+
+### Image Rotations
+**Contributors:** Bradley, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl-L, Ctrl-R)
+
+**Testing:**
+
+**Known Issues:** No known issues
+
+---
+
+### Image Flip
+**Contributors:** Bradley
+
+**Access:** Menu, Keyboard Shortcut (Ctrl-H, Ctrl-V)
+
+**Testing:**
+
+**Known Issues:** No known issues
+
+---
+
+### Image Export
+**Contributors:** Arlo, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl-E)
+
+**Testing:**
+
+**Known Issues:**
+
+---
+
+### Toolbar
+**Contributors:** Arlo, 
+
+**Testing:**
+
+**Known Issues:**
+
+**Brief Discussion:** What features were made accessible and why?
+
+---
+
+### Keyboard Shortcuts
+**Contributors:** Arlo, 
+
+**Testing:**
+
+**Known Issues:**
+
+**Brief Discussion:** What features were made accessible and why?
+
+---
+
+### Exception Handling/Other Error Avoidance
+**Contributors:** 
+
+**Testing:**
+
+**General Errors Caught:**
+
+---
+
+# Other Features
