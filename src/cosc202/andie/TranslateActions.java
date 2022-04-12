@@ -36,8 +36,8 @@ public class TranslateActions {
         actions.add(new RotateImageAction90R("Rotate Right 90°", null, "Rotate 180°", Integer.valueOf(KeyEvent.VK_R), 90));
         actions.add(new FlipImageActionhorizontally("Flip Horizontal", null, "Flip Horizontal", Integer.valueOf(KeyEvent.VK_H), true));
         actions.add(new FlipImageActionvertically("Flip Vertical", null, "Flip Vertical", Integer.valueOf(KeyEvent.VK_V), false));
-        actions.add(new ScaleImageAction("Scale %150", null, "Scale %150", Integer.valueOf(KeyEvent.VK_COMMA), 1.5));
-        actions.add(new ScaleImageAction("Scale %50", null, "Scale 150", Integer.valueOf(KeyEvent.VK_PERIOD), 0.5));
+        actions.add(new ScaleImageAction("Scale 150%", null, "Scale 150%", Integer.valueOf(KeyEvent.VK_COMMA), 1.5));
+        actions.add(new ScaleImageAction("Scale 50%", null, "Scale 50%", Integer.valueOf(KeyEvent.VK_PERIOD), 0.5));
 
     }
 
