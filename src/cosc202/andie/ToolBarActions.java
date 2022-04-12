@@ -40,9 +40,39 @@ public class ToolBarActions {
     public ToolBarActions() throws Exception {
         ImageIcon zoomin = new ImageIcon(ImageIO.read(new File("./src/zoomPlus.png")));
         ImageIcon zoomout = new ImageIcon(ImageIO.read(new File("./src/zoomMinus.png")));
+        ImageIcon undoIcon = new ImageIcon(ImageIO.read(new File("./src/undoIcon.png")));
+        ImageIcon redoIcon = new ImageIcon(ImageIO.read(new File("./src/redoicon.png")));
+        ImageIcon fliphoriIcon = new ImageIcon(ImageIO.read(new File("./src/fliphorizontalicon.png")));
+        ImageIcon flipvIcon = new ImageIcon(ImageIO.read(new File("./src/flipverticalicon.png")));
+        ImageIcon rotateRIcon = new ImageIcon(ImageIO.read(new File("./src/Rotate90RIcon.png")));
+        ImageIcon rotateLIcon = new ImageIcon(ImageIO.read(new File("./src/Rotate90LIcon.png")));
         actions = new ArrayList<Action>();
-        actions.add(new ZoomInAction(null, zoomin, "Zoom In (Ctrl + =)", Integer.valueOf(KeyEvent.VK_EQUALS)));
-        actions.add(new ZoomOutAction(null, zoomout, "Zoom Out (Control + -)", Integer.valueOf(KeyEvent.VK_MINUS)));
+
+        EditActions editactions = new EditActions();
+        EditActions.UndoAction undobutton = editactions.new UndoAction(null, undoIcon, "Undo", Integer.valueOf(KeyEvent.VK_Z));
+        EditActions.RedoAction redobutton = editactions.new RedoAction(null, redoIcon, "Redo", Integer.valueOf(KeyEvent.VK_Y));
+
+        TranslateActions translateactions = new TranslateActions();
+        TranslateActions.RotateImageAction90L rotate90L = translateactions.new RotateImageAction90L(null, rotateLIcon, "Rotate 180°", Integer.valueOf(KeyEvent.VK_I), -90);
+        TranslateActions.RotateImageAction90R rotate90R = translateactions.new RotateImageAction90R(null, rotateRIcon, "Rotate 180°", Integer.valueOf(KeyEvent.VK_R), 90);
+        TranslateActions.FlipImageActionhorizontally fliphorizontally = translateactions.new FlipImageActionhorizontally(null, fliphoriIcon, "Flip Horizontal", Integer.valueOf(KeyEvent.VK_H), true);
+        TranslateActions.FlipImageActionvertically flipvertically = translateactions.new FlipImageActionvertically(null, flipvIcon, "Flip Vertical", Integer.valueOf(KeyEvent.VK_V), false);
+        
+        ViewActions viewactions = new ViewActions();
+        ViewActions.ZoomInAction zoominaction = viewactions.new ZoomInAction(null, zoomin, "Zoom In (Ctrl + =)", Integer.valueOf(KeyEvent.VK_EQUALS));
+        ViewActions.ZoomOutAction Zoomoutaction = viewactions.new ZoomOutAction(null, zoomout, "Zoom Out (Control + -)", Integer.valueOf(KeyEvent.VK_MINUS));
+        
+        actions.add(zoominaction);
+        actions.add(Zoomoutaction);
+
+        actions.add(rotate90L);
+        actions.add(rotate90R);
+        actions.add(fliphorizontally);
+        actions.add(flipvertically);
+
+        actions.add(undobutton);
+        actions.add(redobutton);
+        
     }
 
     /**
@@ -61,89 +91,6 @@ public class ToolBarActions {
         }
         editMenu.setFloatable(false);
         return editMenu;
-    }
-
-    /**
-     * <p>
-     * Operation to zoom out of the image
-     * </p>
-     */
-    public class ZoomOutAction extends ImageAction {
-
-        /**
-         * <p>
-         * Create a new zoom-out action.
-         * </p>
-         * 
-         * @param name     The name of the action (ignored if null).
-         * @param icon     An icon to use to represent the action (ignored if null).
-         * @param desc     A brief description of the action (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-         */
-        ZoomOutAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-
-        }
-
-        /**
-         * <p>
-         * Callback for when the zoom-iout action is triggered.
-         * </p>
-         * 
-         * <p>
-         * This method is called whenever the ZoomOutAction is triggered.
-         * It decreases the zoom level by 10%, to a minimum of 50%.
-         * </p>
-         * 
-         * @param e The event triggering this callback.
-         */
-        public void actionPerformed(ActionEvent e) {
-            target.setZoom(target.getZoom() - 10);
-            target.repaint();
-            target.getParent().revalidate();
-        }
-
-    }
-
-    /**
-     * <p>
-     * Operation to zoom in to the image
-     * </p>
-     */
-    public class ZoomInAction extends ImageAction {
-
-        /**
-         * <p>
-         * Create a new zoom-in action.
-         * </p>
-         * 
-         * @param name     The name of the action (ignored if null).
-         * @param icon     An icon to use to represent the action (ignored if null).
-         * @param desc     A brief description of the action (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-         */
-        ZoomInAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-        }
-
-        /**
-         * <p>
-         * Callback for when the zoom-in action is triggered.
-         * </p>
-         * 
-         * <p>
-         * This method is called whenever the ZoomInAction is triggered.
-         * It increases the zoom level by 10%, to a maximum of 200%.
-         * </p>
-         * 
-         * @param e The event triggering this callback.
-         */
-        public void actionPerformed(ActionEvent e) {
-            target.setZoom(target.getZoom() + 10);
-            target.repaint();
-            target.getParent().revalidate();
-        }
-
     }
 
 }
