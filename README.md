@@ -1,4 +1,4 @@
-# Reqired Features
+# Required Features
 
 ### Sharpen Filter
 **Contributors:** Riley, 
@@ -7,7 +7,7 @@
 
 **Testing:**
 
-**Known Issues:**
+**Known Issues:** No known issues
 
 ---
 
@@ -16,9 +16,9 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-G)
 
-**Testing:**
+**Testing:** Ensure 2d guassian filter calculations are correct.
 
-**Known Issues:**
+**Known Issues:** No known issues
 
 ---
 
@@ -27,9 +27,9 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-D)
 
-**Testing:**
+**Testing:** Ensure median calculations are done correctly.
 
-**Known Issues:**
+**Known Issues:** No known issues
 
 ---
 
@@ -131,3 +131,8 @@
 ---
 
 # Other Features
+
+### Continuous Integration Testing & Javadoc
+**Contributors:** Riley
+
+**Brief Discussion:** Created JUnit testing and added in depth Javadoc commenting to all code, and added JUnit testing and Javadoc documentation to be created to the on git push into the continuous Integration pipeline.
