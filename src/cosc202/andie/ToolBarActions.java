@@ -49,29 +49,32 @@ public class ToolBarActions {
         actions = new ArrayList<Action>();
 
         EditActions editactions = new EditActions();
-        EditActions.UndoAction undobutton = editactions.new UndoAction(null, undoIcon, "Undo", Integer.valueOf(KeyEvent.VK_Z));
-        EditActions.RedoAction redobutton = editactions.new RedoAction(null, redoIcon, "Redo", Integer.valueOf(KeyEvent.VK_Y));
+        EditActions.UndoAction undobutton = editactions.new UndoAction(null, undoIcon, "Undo (Ctrl + Z)", Integer.valueOf(KeyEvent.VK_Z));
+        EditActions.RedoAction redobutton = editactions.new RedoAction(null, redoIcon, "Redo (Ctrl + Y)", Integer.valueOf(KeyEvent.VK_Y));
 
         TranslateActions translateactions = new TranslateActions();
-        TranslateActions.RotateImageAction90L rotate90L = translateactions.new RotateImageAction90L(null, rotateLIcon, "Rotate 180°", Integer.valueOf(KeyEvent.VK_I), -90);
-        TranslateActions.RotateImageAction90R rotate90R = translateactions.new RotateImageAction90R(null, rotateRIcon, "Rotate 180°", Integer.valueOf(KeyEvent.VK_R), 90);
-        TranslateActions.FlipImageActionhorizontally fliphorizontally = translateactions.new FlipImageActionhorizontally(null, fliphoriIcon, "Flip Horizontal", Integer.valueOf(KeyEvent.VK_H), true);
-        TranslateActions.FlipImageActionvertically flipvertically = translateactions.new FlipImageActionvertically(null, flipvIcon, "Flip Vertical", Integer.valueOf(KeyEvent.VK_V), false);
+        TranslateActions.RotateImageAction90L rotate90L = translateactions.new RotateImageAction90L(null, rotateLIcon, "Rotate 90° to the left (Ctrl + I)", Integer.valueOf(KeyEvent.VK_I), -90);
+        TranslateActions.RotateImageAction90R rotate90R = translateactions.new RotateImageAction90R(null, rotateRIcon, "Rotate 90° to the right (Ctrl + R)", Integer.valueOf(KeyEvent.VK_R), 90);
+        TranslateActions.FlipImageActionhorizontally fliphorizontally = translateactions.new FlipImageActionhorizontally(null, fliphoriIcon, "Flip Horizontally (Ctrl + H)", Integer.valueOf(KeyEvent.VK_H), true);
+        TranslateActions.FlipImageActionvertically flipvertically = translateactions.new FlipImageActionvertically(null, flipvIcon, "Flip Vertically (Ctrl + V)", Integer.valueOf(KeyEvent.VK_V), false);
         
         ViewActions viewactions = new ViewActions();
         ViewActions.ZoomInAction zoominaction = viewactions.new ZoomInAction(null, zoomin, "Zoom In (Ctrl + =)", Integer.valueOf(KeyEvent.VK_EQUALS));
-        ViewActions.ZoomOutAction Zoomoutaction = viewactions.new ZoomOutAction(null, zoomout, "Zoom Out (Control + -)", Integer.valueOf(KeyEvent.VK_MINUS));
+        ViewActions.ZoomOutAction Zoomoutaction = viewactions.new ZoomOutAction(null, zoomout, "Zoom Out (Ctrl + -)", Integer.valueOf(KeyEvent.VK_MINUS));
         
         actions.add(zoominaction);
         actions.add(Zoomoutaction);
 
+        actions.add(undobutton);
+        actions.add(redobutton);
+
         actions.add(rotate90L);
         actions.add(rotate90R);
+        
         actions.add(fliphorizontally);
         actions.add(flipvertically);
 
-        actions.add(undobutton);
-        actions.add(redobutton);
+        
         
     }
 
