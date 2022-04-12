@@ -188,17 +188,31 @@ public class ViewActions {
          * 
          * <p>
          * This method is called whenever the ZoomFitAction is triggered.
-         * It resets the Zoom level to 100%.
+         * Makes the image maximally fit intot he panel
          * </p>
          * 
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
             if(target.getImage().hasImage()){
-                double panelWidth = (double)target.getParent().getWidth();
+                
                 double imageWidth= target.getImage().getCurrentImage().getWidth();
-                double zoom = (panelWidth/imageWidth)*100;
-                target.setZoom(zoom);
+                double imageHeight= target.getImage().getCurrentImage().getHeight();
+                double panelWidth = (double)target.getParent().getWidth();
+                double panelHeight = (double)target.getParent().getHeight();          
+
+                double zoomFitWidth = panelWidth/imageWidth;
+                double zoomFitHeight = panelHeight/imageHeight;
+
+                if (imageHeight * zoomFitWidth < panelHeight){
+                    target.setZoom(zoomFitWidth*100);
+                    //System.out.println("Zoom fit width to: " + zoomFitWidth);
+                } else {
+                    target.setZoom(zoomFitHeight*100);
+                    //System.out.println("Zoom fit height to: " + zoomFitHeight);
+                }
+                //System.out.println("p.h: " + panelHeight + "\tp.w: " + panelWidth + "\ti.h: " + imageHeight + "\ti.w: " + imageWidth);
+                
                 target.revalidate();
                 target.getParent().revalidate();    
             }
