@@ -60,20 +60,20 @@ public class AndieTest {
     
     @Test 
     void brightnessAdjustedValuesMidRange(){
-        AdjustBrightness test = new AdjustBrightness(55);    
-        Assertions.assertEquals( 22.75, test.getAdjustedValue(10, 10));
+        AdjustBrightness test = new AdjustBrightness(50);    
+        Assertions.assertEquals( 163.75, test.testAdjustment(100));
     }
 
     @Test 
     void brightnessAdjustedValuesLowRange(){
-        AdjustBrightness test = new AdjustBrightness(55);
-        Assertions.assertEquals( 0, test.getAdjustedValue(-50, 10));
+        AdjustBrightness test = new AdjustBrightness(-50);
+        Assertions.assertEquals( 0, test.testAdjustment(1));
     }
 
     @Test 
     void brightnessAdjustedValuesHighRange(){
-        AdjustBrightness test = new AdjustBrightness(55);
-        Assertions.assertEquals( 255, test.getAdjustedValue(500, 500));
+        AdjustBrightness test = new AdjustBrightness(100);
+        Assertions.assertEquals( 255, test.testAdjustment(254));
     }
 
     //AdjustContrast Tests
@@ -91,20 +91,20 @@ public class AndieTest {
 
     @Test 
     void contrastAdjustedValuesMidRange(){
-        AdjustContrast test = new AdjustContrast(55);
-        Assertions.assertEquals( 255, test.getAdjustedValue(200, 200));
+        AdjustContrast test = new AdjustContrast(50);
+        Assertions.assertEquals(116.25 , test.testAdjustment(120));
     }
 
     @Test 
     void contrastAdjustedValuesLowRange(){
-        AdjustContrast test = new AdjustContrast(55);
-        Assertions.assertEquals( 0, test.getAdjustedValue(50, -50));
+        AdjustContrast test = new AdjustContrast(-50);
+        Assertions.assertEquals( 64.25, test.testAdjustment(1));
     }
 
     @Test 
     void contrastAdjustedValuesHighRange(){
-        AdjustContrast test = new AdjustContrast(55);
-        Assertions.assertEquals( 255, test.getAdjustedValue(500, 500));
+        AdjustContrast test = new AdjustContrast(100);
+        Assertions.assertEquals( 255, test.testAdjustment(254));
     }
 
     //Median Filter Tests

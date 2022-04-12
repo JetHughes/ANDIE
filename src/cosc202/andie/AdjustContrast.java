@@ -96,6 +96,15 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
 
         return output;
     }
+
+    /**
+     * Method for testing the getAdjustedValue method
+     * @param v The value to adjust. Assumed to be between 0 and 255
+     * @return The value with the adjustment applied
+     */
+    public double testAdjustment(double v){
+        return getAdjustedValue(contrast, v);
+    }
     
     /**
      * <p>
@@ -106,7 +115,7 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
      * @param v the value to adjust
      * @return The adjusted value
      */
-    public double getAdjustedValue(double c, double v) {
+    private double getAdjustedValue(double c, double v) {
         double result = ((1 + (c / 100)) * (v - 127.5)) + 127.5;
 
         if(result > 255) {

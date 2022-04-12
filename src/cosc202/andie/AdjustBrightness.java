@@ -97,6 +97,15 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
     }
 
     /**
+     * Method for testing the getAdjustedVale method
+     * @param v The value to adjust. Assumed to be between 0 and 255
+     * @return The value with the adjustment applied
+     */
+    public double testAdjustment(double v){
+        return getAdjustedValue(brightness, v);
+    }
+
+    /**
      * <p>
      * Method to apply a brightness adjusted to a color channel of a pixel
      * </p>
@@ -105,7 +114,7 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
      * @param v the value to adjust
      * @return The adjusted value
      */
-    public double getAdjustedValue(double b, double v){      
+    private double getAdjustedValue(double b, double v){      
         double result = (v - 127.5) + 127.5 * (1+(b/100));
 
         if(result > 255){
