@@ -34,7 +34,7 @@
 ---
 
 ### Brightness Adjustment
-**Contributors:** Jet, 
+**Contributors:** Jet, Arlo
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-B)
 
@@ -45,7 +45,7 @@
 ---
 
 ### Contrast Adjustment
-**Contributors:** Jet, 
+**Contributors:** Jet, Arlo
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-C)
 
@@ -106,7 +106,7 @@
 
 **Known Issues:**
 
-**Brief Discussion:** What features were made accessible and why?
+**Brief Discussion:** What features were made accessible and why? Zoom in and out, rotate 90 degrees, flip vertically and horizontally, undo and redo. These features were deemed the most useful and needed to be more propmenant within Andie
 
 ---
 
@@ -117,7 +117,7 @@
 
 **Known Issues:**
 
-**Brief Discussion:** What features were made accessible and why?
+**Brief Discussion:** Every feature ended up having a shortcut. A help menu was added to show the list of shortcuts to help the user find them.
 
 ---
 
