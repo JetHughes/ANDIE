@@ -129,7 +129,7 @@ public class AndieTest {
     }
 
     // Flip Image Tests
-    @Test void flipImageHorixontally(){
+    @Test void flipImageHorizontally(){
         FlipImage test = new FlipImage(true);
         Assertions.assertTrue(test.returnIsX());
     }

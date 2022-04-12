@@ -9,7 +9,7 @@ import java.awt.image.*;
  * 
  * <p>
  * A Gaussian filter blurs an image based on a 2-Dimensional Gaussian Equation,
- * and can be implemented by a convoloution.
+ * and can be implemented by a convolution.
  * </p>
  * 
  **/
