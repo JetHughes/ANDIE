@@ -101,7 +101,7 @@ public class AdjustBrightness implements ImageOperation, java.io.Serializable{
      * Method to apply a brightness adjusted to a color channel of a pixel
      * </p>
      * 
-     * @param b the value to adjust the brightness by
+     * @param b the percentage change in brightness
      * @param v the value to adjust
      * @return The adjusted value
      */
