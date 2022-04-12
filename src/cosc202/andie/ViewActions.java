@@ -201,20 +201,45 @@ public class ViewActions {
                 double panelWidth = (double)target.getParent().getWidth();
                 double panelHeight = (double)target.getParent().getHeight();          
 
-                double zoomFitWidth = panelWidth/imageWidth;
-                double zoomFitHeight = panelHeight/imageHeight;
-
-                if (imageHeight * zoomFitWidth < panelHeight){
-                    target.setZoom(zoomFitWidth*100);
-                    //System.out.println("Zoom fit width to: " + zoomFitWidth);
-                } else {
-                    target.setZoom(zoomFitHeight*100);
-                    //System.out.println("Zoom fit height to: " + zoomFitHeight);
-                }
-                //System.out.println("p.h: " + panelHeight + "\tp.w: " + panelWidth + "\ti.h: " + imageHeight + "\ti.w: " + imageWidth);
+                double zoomFitScale = getFitScale(panelWidth, panelHeight, imageWidth, imageHeight);
                 
+                target.setZoom(zoomFitScale*100);
                 target.revalidate();
                 target.getParent().revalidate();    
+            }
+        }
+
+        /**
+         * Method to test the getFitScale method
+         * @param pW panel width
+         * @param pH panel height
+         * @param iW image width
+         * @param iH image height
+         * @return The appropriate scale
+         */
+        public double testGetFitScale(double pW, double pH, double iW, double iH) {
+            return getFitScale(pW, pH, iW, iH);
+        }
+
+        /**
+         * Method to calculate the appropraite scale so that the image 
+         * fits completely and maximally within a panel
+         * @param pW panel width
+         * @param pH panel height
+         * @param iW image width
+         * @param iH image height
+         * @return The appropriate scale
+         */
+        private double getFitScale(double pW, double pH, double iW, double iH){
+            double zoomFitWidth = pW/iW;
+            double zoomFitHeight = pH/iH;
+
+            if (iH * zoomFitWidth < pH){
+                return zoomFitWidth;
+                //System.out.println("Zoom fit width to: " + zoomFitWidth);
+            } else {
+                return zoomFitHeight;
+                //System.out.println("Zoom fit height to: " + zoomFitHeight);
             }
         }
 
