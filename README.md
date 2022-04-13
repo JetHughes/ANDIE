@@ -121,9 +121,9 @@ and flips in a row does not ruin the image or cause unexpected reults.
 ### Exception Handling/Other Error Avoidance
 **Contributors:** Will
 
-**Testing:** On going testing attempting to break the program, no JUnit testing however due do difficulty automating the process
+**Testing:** On going testing attempting to break the program, find and resolve issues
 
-**General Errors Caught:**
+**General Errors Caught:** Added error handling to all functions that require an image if being used without an image loaded.  Added error handling for save, open and export cases (no file, incorrect file name or type). Added error handling for empty stacks in undo and redo.  Replaced System.exit in exception handling to a less aggressive forms of handling (method exiting and/or error messages).
 
 ---
 
