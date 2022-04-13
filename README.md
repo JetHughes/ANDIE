@@ -135,11 +135,6 @@ and flips in a row does not ruin the image or cause unexpected reults.
 
 ---
 
-### JUnit testing
-**Contributors:** Riley, 
-
----
-
 # Other Features
 
 ### Continuous Integration Testing & Javadoc
