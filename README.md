@@ -60,7 +60,8 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-Comma, Ctrl-Period)
 
-**Testing:**
+**Testing:**Ensured that images dont lose edges when downsizing, and dont have black
+borders when caling up. Tested with images with different width/height ratios
 
 **Known Issues:** Scaling out too much will result in being unable to zoom in to a reasonable size, Scaling out many times then attempting Scale up will result in a blurry image, 
 
@@ -71,7 +72,9 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-L, Ctrl-R)
 
-**Testing:**
+**Testing:** Ensured that images with different width/height ratios dont get 
+cropped or muddled up during the rotations. Ensured that doing multiple rotations
+and flips in a row does not ruin the image or cause unexpected reults.
 
 **Known Issues:** No known issues
 
@@ -82,7 +85,9 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-H, Ctrl-V)
 
-**Testing:**
+**Testing:** Ensured that images with different width/height ratios dont get 
+cropped or muddled up during the flip. Ensured that doing multiple rotations
+and flips in a row does not ruin the image or cause unexpected reults.
 
 **Known Issues:** No known issues
 
