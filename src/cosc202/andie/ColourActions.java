@@ -173,7 +173,7 @@ public class ColourActions {
 
                 // If they entered a value outside of the range, `brightness` will be zero so we should alert them and cancel the operation
                 if(brightness == 0) {
-                    PopUp.showMessageDialog("You chose a value outside of the range -1000 to 1000");
+                    PopUp.showMessageDialog("Please choose a value within range -1000 to 1000");
                     return;
                 }
 
@@ -231,7 +231,7 @@ public class ColourActions {
 
                 SpinnerNumberModel contrastModel = new SpinnerNumberModel(0, -1000, 1000, 10);
                 JSpinner radiusSpinner = new JSpinner(contrastModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Contrast Value\nMust be between -1000 and 1000",
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Contrast Value",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
@@ -243,7 +243,7 @@ public class ColourActions {
 
                 // If they entered a value outside of the range `contrast` will be zero so we should alert them and cancel the operation
                 if(contrast == 0) {
-                    PopUp.showMessageDialog("You chose a value outside of the range -1000 to 1000");
+                    PopUp.showMessageDialog("Please choose a value within range -1000 to 1000");
                     return;
                 }
 
