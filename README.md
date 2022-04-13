@@ -16,7 +16,7 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-G)
 
-**Testing:** Ensure 2d guassian filter calculations are correct.
+**Testing:** JUnit testing to ensure 2d guassian filter calculations are correct.
 
 **Known Issues:** No known issues
 
@@ -27,7 +27,7 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-D)
 
-**Testing:** Ensure median calculations are done correctly.
+**Testing:** JUnit testing to ensure median calculations are done correctly.
 
 **Known Issues:** No known issues
 
@@ -106,7 +106,7 @@
 
 **Known Issues:**
 
-**Brief Discussion:** What features were made accessible and why? Zoom in and out, rotate 90 degrees, flip vertically and horizontally, undo and redo. These features were deemed the most useful and needed to be more propmenant within Andie
+**Brief Discussion:** Zoom in and out, rotate 90 degrees, flip vertically and horizontally, undo and redo. These features were deemed the most useful and needed to be more promenant within Andie
 
 ---
 
@@ -122,11 +122,16 @@
 ---
 
 ### Exception Handling/Other Error Avoidance
-**Contributors:** 
+**Contributors:** Will
 
-**Testing:**
+**Testing:** On going testing attempting to break the program, no JUnit testing however due do difficulty automating the process
 
 **General Errors Caught:**
+
+---
+
+### JUnit testing
+**Contributors:** Riley, 
 
 ---
 
