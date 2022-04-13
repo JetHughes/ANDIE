@@ -5,7 +5,7 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-J)
 
-**Testing:**
+**Testing:** 
 
 **Known Issues:** No known issues
 
@@ -38,7 +38,7 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-B)
 
-**Testing:**
+**Testing:** JUnit testing with various pixel and adjustment values
 
 **Known Issues:**
 
@@ -49,7 +49,7 @@
 
 **Access:** Menu, Keyboard Shortcut (Ctrl-C)
 
-**Testing:**
+**Testing:** JUnit testing with various pixel and adjustment values
 
 **Known Issues:**
 
@@ -129,7 +129,16 @@ and flips in a row does not ruin the image or cause unexpected reults.
 
 # Other Features
 
-### Continuous Integration Testing & Javadoc
+### Continuous Integration, Testing & Javadoc
 **Contributors:** Riley
 
 **Brief Discussion:** Created JUnit testing and added in depth Javadoc commenting to all code, and added JUnit testing and Javadoc documentation to be created to the on git push into the continuous Integration pipeline.
+
+### Zoom Fit
+**Contributors:** Jet
+
+**Brief Discussion:** Add another zoom option to 'fit' the image width or height (depending on which is appropriate) to the window. 
+
+**Testing:** Testing with portrait and landscape images fitting to a varitey of windows shapes and sizes.
+
+**Known Issues:** Sometimes after fitting it wont refresh
