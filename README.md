@@ -107,20 +107,12 @@ and flips in a row does not ruin the image or cause unexpected reults.
 ### Toolbar
 **Contributors:** Arlo, 
 
-**Testing:**
-
-**Known Issues:**
-
 **Brief Discussion:** What features were made accessible and why? Zoom in and out, rotate 90 degrees, flip vertically and horizontally, undo and redo. These features were deemed the most useful and needed to be more propmenant within Andie
 
 ---
 
 ### Keyboard Shortcuts
 **Contributors:** Arlo, 
-
-**Testing:**
-
-**Known Issues:**
 
 **Brief Discussion:** Every feature ended up having a shortcut. A help menu was added to show the list of shortcuts to help the user find them.
 
