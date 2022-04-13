@@ -118,10 +118,6 @@ and flips in a row does not ruin the image or cause unexpected reults.
 ### Keyboard Shortcuts
 **Contributors:** Arlo, 
 
-**Testing:**
-
-**Known Issues:**
-
 **Brief Discussion:** Every feature ended up having a shortcut. A help menu was added to show the list of shortcuts to help the user find them.
 
 ---
