@@ -9,8 +9,11 @@ import cosc202.andie.AdjustContrast;
 import cosc202.andie.GaussianFilter;
 import cosc202.andie.ImagePanel;
 import cosc202.andie.MedianFilter;
+import cosc202.andie.PosteriseFilter;
 import cosc202.andie.FlipImage;
 import cosc202.andie.EditableImage;
+
+import java.awt.Color;
 
 public class AndieTest {
 
@@ -146,5 +149,13 @@ public class AndieTest {
     }
     //#endregion
 
-    
+    //#region Posterise Tests
+    @Test
+    void testGetDistance(){
+        Color a = new Color(31, 78, 240);
+        Color b = new Color(228, 190, 10);
+        PosteriseFilter p = new PosteriseFilter();
+        Assertions.assertEquals(323, (int)Math.ceil(p.getDistance(a, b)));
+    }
+    //#endregion
 }

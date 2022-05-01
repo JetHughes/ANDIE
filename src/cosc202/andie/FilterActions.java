@@ -40,6 +40,7 @@ public class FilterActions {
         actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter", Integer.valueOf(KeyEvent.VK_J)));
         actions.add(new GaussianFilterAction("Gaussian Filter", null, "Apply a gaussian filter", Integer.valueOf(KeyEvent.VK_G)));
         actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_D)));
+        actions.add(new PosteriseFilterAction("Posterise Filter", null, "Apply a Posterise filter", Integer.valueOf(KeyEvent.VK_P)));
 
     }
 
@@ -294,6 +295,68 @@ public class FilterActions {
                 }
 
                 target.getImage().apply(new MedianFilter(radius));
+                target.repaint();
+                target.getParent().revalidate();
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Action to posterise an image.
+     * </p>
+     * 
+     * @see MedianFilter
+     */
+    public class PosteriseFilterAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new median-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        PosteriseFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+        }
+
+        /** 
+         * <p>
+         * This method is called whenever the PosteriseFilterAction is triggered.
+         * It prompts the user for a k value, then applys an appropriate 
+         * {@link PosteriseFilter}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e){
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to apply filter to!");
+
+            } else {
+                int k = 1;
+
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter k value",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;            
+                } else if (option == JOptionPane.OK_OPTION) {
+                    k = radiusModel.getNumber().intValue();
+                }
+
+                target.getImage().apply(new PosteriseFilter(k));
                 target.repaint();
                 target.getParent().revalidate();
             }
