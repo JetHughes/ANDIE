@@ -17,7 +17,7 @@ public class AndieTest {
     @Test 
     void dumbyTest(){
     }
-    //Image Panel Tests
+    //#region Image Panel Tests
     @Test
     void getZoomInitialValue(){
         ImagePanel testPanel = new ImagePanel();
@@ -44,8 +44,9 @@ public class AndieTest {
         testPanel.setZoom(400);
         Assertions.assertEquals( 200, testPanel.getZoom());
     }
+    //#endregion
 
-    //AdjustBrightnessTests
+    //#region brightness tests
     @Test 
     void brightnessDefault(){
         AdjustBrightness test = new AdjustBrightness();
@@ -75,8 +76,9 @@ public class AndieTest {
         AdjustBrightness test = new AdjustBrightness(100);
         Assertions.assertEquals( 255, test.testAdjustment(254));
     }
+    //#endregion
 
-    //AdjustContrast Tests
+    //#region AdjustContrast Tests
     @Test 
     void contrastDefault(){
         AdjustContrast test = new AdjustContrast();
@@ -106,29 +108,33 @@ public class AndieTest {
         AdjustContrast test = new AdjustContrast(100);
         Assertions.assertEquals( 255, test.testAdjustment(254));
     }
+    //#endregion
 
-    //Median Filter Tests
+    //#region Median Filter Tests
     @Test
     void medianFilterMedianCalculation(){
         MedianFilter test = new MedianFilter();
         int[] testArray = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
         Assertions.assertEquals(5, test.getMedian(testArray));
     }
+    //#endregion
 
-    // Gaussian Filter Tests
+    //#region Gaussian Filter Tests
     @Test
     void GaussianFilterCalculation(){
         GaussianFilter test = new GaussianFilter();
         Assertions.assertEquals("0.957", String.format("%.3f", (test.getGaussian(0, 0, 1/3.0f))/1.496751349652186));
     }
+    //#endregion
 
-    // Editable Image Tests
+    //#region Editable Image Tests
     @Test void editableImagePresenceCheck(){
         EditableImage test = new EditableImage();
         Assertions.assertFalse(test.hasImage());
     }
+    //#endregion
 
-    // Flip Image Tests
+    //#region Flip Image Tests
     @Test void flipImageHorizontally(){
         FlipImage test = new FlipImage(true);
         Assertions.assertTrue(test.returnIsX());
@@ -138,6 +144,7 @@ public class AndieTest {
         FlipImage test = new FlipImage(false);
         Assertions.assertFalse(test.returnIsX());
     }
+    //#endregion
 
     
 }
