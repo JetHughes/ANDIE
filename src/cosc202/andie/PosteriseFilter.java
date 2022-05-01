@@ -68,16 +68,11 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     private ArrayList<Point> calculateCentroids(ArrayList<Point> points){
         Color[] centroids = distrubuteInitalCentroids(points);
         assignPixels(points, centroids);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             assignPixels(points, centroids);
             updateCentroids(points, centroids);   
-            System.out.println("\n" + i + "th centroids: ");
-            printCentroids(centroids, points); 
         }
         
-        System.out.println("final centroids: ");
-        printCentroids(centroids, points);
-
         return points;
     }
 
@@ -99,7 +94,6 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     }
 
     private void assignPixels(ArrayList<Point> points, Color[] centroids){
-        //TODO make it a void method?
         for (Point point : points) {
             double minDist = Double.MAX_VALUE;
             for (Color centroid : centroids) {
