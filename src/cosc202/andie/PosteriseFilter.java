@@ -37,7 +37,12 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     public PosteriseFilter (){
         this.k = 10;
     }
-    
+
+    /**
+     * Applies a posterise filter to an image using the supplied k value
+     * @param input the image to apply the filter to
+     * @return the resulting posterised image
+     */
     public BufferedImage apply(BufferedImage input) {
         ArrayList<Point> points = getPoints(input);
         points = calculateCentroids(points);
@@ -51,6 +56,11 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         return output;
     }
 
+    /**
+     * Splits a BufferedImage into a list of points. Each with an x, y coordinate, a color, and a representative centroid
+     * @param input
+     * @return
+     */
     private ArrayList<Point> getPoints(BufferedImage input){
         ArrayList<Point> points = new ArrayList<>();
         for (int x = 0; x < input.getWidth(); x++) {
@@ -62,37 +72,44 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Method to find the k colours that best represent the image
-     * @return
+     * Method to find the k colours (centroids) that best represent the image
+     * @param points The set of points that represents your image
+     * @return An arraylist of the representative colors
      */
     private ArrayList<Point> calculateCentroids(ArrayList<Point> points){
-        Color[] centroids = distrubuteInitalCentroids(points);
+        Color[] centroids = new Color[k];
+        distrubuteInitalCentroids(points, centroids);
         assignPixels(points, centroids);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 50; i++) {
             assignPixels(points, centroids);
             updateCentroids(points, centroids);   
         }
         
         return points;
     }
-
-    private Color[] distrubuteInitalCentroids(ArrayList<Point> points){
+    
+    /**
+     * A method to place the centroids in random locations
+     * @param points The complete set of points in the image
+     */
+    private void distrubuteInitalCentroids(ArrayList<Point> points, Color[] centroids){
         Random r = new Random();
-        Color[] centroids = new Color[k];
         
+        boolean[] used = new boolean[points.size()];
         for (int i = 0; i < centroids.length; i++) {
-            //TODO avoid duplicates
-            int val = r.nextInt(points.size());;
-            if(points.get(val) != null){
-                centroids[i] = points.get(val).value;
-            } else {
-                System.out.println("point " + val +" is null");
-            }            
+            int val;
+            do{
+                val = r.nextInt(points.size());
+            } while(used[val]);
+            centroids[i] = points.get(val).value;
         }
-
-        return centroids;
     }
 
+    /**
+     * Method to assign pixels to thier nearest centroid
+     * @param points The complete set of points
+     * @param centroids The list of centroids
+     */
     private void assignPixels(ArrayList<Point> points, Color[] centroids){
         for (Point point : points) {
             double minDist = Double.MAX_VALUE;
@@ -106,12 +123,23 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         }
     }
 
+    /**
+     * Method which moves each centroid to the center of its cluster
+     * @param points The complete set of points
+     * @param centroids The current list of centroids
+     */
     private void updateCentroids(ArrayList<Point> points, Color[] centroids){
         for (Color centroid : centroids) {
             centroid = meanOfCluster(points, centroid);
         }
     }
 
+    /**
+     * Method to find the mean of a cluster of colors
+     * @param points The complete set of points
+     * @param centroid The cluster you want to find the mean of
+     * @return
+     */
     private Color meanOfCluster(ArrayList<Point> points, Color centroid){
         double rSum = 0;
         double gSum = 0;
@@ -130,9 +158,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         gSum = gSum/numPixels;
         bSum = bSum/numPixels;
 
-        Color newCenter = new Color((int)rSum, (int)gSum, (int)bSum);
-
-        return newCenter;
+        return new Color((int)rSum, (int)gSum, (int)bSum);
     }
 
     /**
@@ -149,6 +175,11 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
     
+    /**
+     * Method to output the current list of centroids, and the number of points assign to each centroid
+     * @param centroids The list of centroids
+     * @param points The set of points that represents your image
+     */
     private void printCentroids(Color[] centroids, ArrayList<Point> points){
         for (Color color : centroids) {
             System.out.print(color + ": ");
@@ -160,12 +191,27 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         }
     }
 
+    /**
+     * A helper class for the posterise filter.
+     * 
+     * <p>
+     * Each point represents a pixel on the image. 
+     * Its color, it's representative centroid, and it position
+     * </p>
+     */
     class Point {
         Color value;
         Color centroid;
         int x;
         int y;
 
+        /**
+         * Constructs a point with a position and a color, 
+         * and an initial centroid that matches its color
+         * @param value
+         * @param x
+         * @param y
+         */
         Point(Color value, int x, int y) {
             this.value = value;
             this.centroid = value;
