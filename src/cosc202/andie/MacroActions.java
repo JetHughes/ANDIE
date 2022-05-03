@@ -3,6 +3,9 @@ package cosc202.andie;
 import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
 
 /**
  * <p>
@@ -181,6 +184,39 @@ public class MacroActions {
                 PopUp.showMessageDialog("Error: There is no image loaded to apply changes to!");
 
             } else {
+                System.out.println("here");
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showOpenDialog(target);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        String filename = imageFilepath.substring(imageFilepath.length() - 3, imageFilepath.length());
+                        System.out.println(filename);
+                        if(!filename.equals("ops")){
+                            PopUp.showMessageDialog("Error: Not an .obs file!");
+                            return;
+                        } 
+                    } catch (IOException ex) {
+                        PopUp.showMessageDialog("Error: Unable to find file. Check file name.");
+                        return;
+                    } catch (NullPointerException ex) {
+                        System.out.println(ex);
+                        PopUp.showMessageDialog("Error: Incorrect file type. Please choose a supported image type");
+                        return;
+                    }catch (Exception ex) {
+                        System.out.println(ex);
+                        return;
+                        //System.exit(1);
+                    }
+                }
+                // try {
+                //     File imageFile = new File(imageFilename);
+                //     original = ImageIO.read(imageFile);
+                //     current = deepCopy(original);
+                // } catch (FileNotFoundException ex){
+                //     System.out.println(ex);
+                //     PopUp.showMessageDialog("Could not create copy due to invalid file name");
+                // } 
 
 
                  
