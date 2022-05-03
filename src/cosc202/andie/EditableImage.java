@@ -317,7 +317,6 @@ public class EditableImage {
      * Replaces the current .ops file.
      * </p>
      * 
-     * @return The result of applying all of the current operations to the {@link original} image.
      */
     public void setOps(String opsFilePath) {
         try {
