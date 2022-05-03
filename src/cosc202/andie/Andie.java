@@ -96,8 +96,8 @@ public class Andie {
         menuBar.add(translateActions.createMenu());
 
         // Actions that affect the representation of colour in the image
-        // MacroActions macroActions = new MacroActions();
-        // menuBar.add(macroActions.createMenu());
+        MacroActions macroActions = new MacroActions();
+        menuBar.add(macroActions.createMenu());
 
         //Help documentation
         HelpActions helpactions = new HelpActions();

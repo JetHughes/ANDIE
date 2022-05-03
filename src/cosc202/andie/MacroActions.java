@@ -26,7 +26,12 @@ public class MacroActions {
      * </p>
      */
     public MacroActions(){
-
+        
+        actions = new ArrayList<Action>();
+        actions.add(new StartRecordMacro("Start Recording", null, "Starts to record macro", null));
+        actions.add(new StopRecordMacro("Stop Recording", null, "Stops recording macro", null));
+        actions.add(new ApplyMacro("Apply Macro", null, "Applies macro to image", null));
+        
     }
 
     /**
@@ -37,7 +42,8 @@ public class MacroActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
-        JMenu translateMenu = new JMenu("Translate");
+        
+        JMenu translateMenu = new JMenu("Macros");
 
         for (Action action : actions) {
             translateMenu.add(new JMenuItem(action));
@@ -64,8 +70,8 @@ public class MacroActions {
          */
         StartRecordMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(Action.MNEMONIC_KEY, mnemonic);
-            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            //putValue(Action.MNEMONIC_KEY, mnemonic);
+            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
         /**
          * <p>
@@ -83,6 +89,96 @@ public class MacroActions {
             if(!target.getImage().hasImage()){
                 //System.out.println("Export error handling");
                 PopUp.showMessageDialog("Error: Load an image before starting to record!");
+
+            } else {
+
+
+                 
+            }
+        }
+    }
+    /**
+     * <p>
+     * Action to stop recording macro
+     * </p>
+     */
+    public class StopRecordMacro extends ImageAction{
+        /**
+         * <p>
+         * Create a new macro action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        StopRecordMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            //putValue(Action.MNEMONIC_KEY, mnemonic);
+            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+        }
+        /**
+         * <p>
+         * Callback for when the StopMacroRecord action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the StopMacroRecord is triggered.
+         * It stops recording events and saves a new .obs file.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e){
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: There is no image present!");
+
+            } else {
+
+
+                 
+            }
+        }
+    }
+    /**
+     * <p>
+     * Action to apply macro
+     * </p>
+     */
+    public class ApplyMacro extends ImageAction{
+        /**
+         * <p>
+         * Create a new macro action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ApplyMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            //putValue(Action.MNEMONIC_KEY, mnemonic);
+            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+        }
+        /**
+         * <p>
+         * Callback for when the ApplyRecord action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ApplyRecord is triggered.
+         * It applys the effect of an .obs file to an image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e){
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: There is no image loaded to apply changes to!");
 
             } else {
 
