@@ -312,6 +312,32 @@ public class EditableImage {
     public BufferedImage getCurrentImage() {
         return current;
     }
+    /**
+     * <p>
+     * Replaces the current .ops file.
+     * </p>
+     * 
+     */
+    public void setOps(String opsFilePath) {
+        try {
+            
+            FileInputStream fileIn = new FileInputStream(opsFilePath);
+            ObjectInputStream objIn = new ObjectInputStream(fileIn);
+            @SuppressWarnings("unchecked")
+            Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objIn.readObject();
+            ops = opsFromFile;
+            objIn.close();
+            fileIn.close();
+
+        } catch (Exception e){
+            System.out.println(e);
+            PopUp.showMessageDialog("Unknown error");
+            //Unknown Error
+        }
+        this.refresh();
+
+    }
+    
 
     /**
      * <p>
