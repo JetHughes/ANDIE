@@ -170,31 +170,40 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
             }
         }
 
-        // normalise array and flatten array
-        float[] normflatArr = new float[size * size];
-        int count = 0;
+        // normalise array
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length; j++) {
-                normflatArr[count] = array[i][j] / (float) sum;
-                count++;
+                array[i][j] = array[i][j] / (float) sum;
             }
         }
+
+        //flatten array
+        // float[] normflatArr = new float[size * size];
+        // count = 0;
+        // for (int i = 0; i < array.length; i++) {
+        //     for (int j = 0; j < array.length; j++) {
+        //         normflatArr[count] = array[i][j];
+        //         count++;
+        //     }
+        // }
 
         // print array (for debugging)
         // for (float f : normflatArr) {
         // System.out.println(f + ", ");
         // }
 
-        Kernel kernel = new Kernel(2 * radius + 1, 2 * radius + 1, normflatArr);
-        ConvolveOp convOp = new ConvolveOp(kernel);
+        //Kernel kernel = new Kernel(2 * radius + 1, 2 * radius + 1, normflatArr);
+        //ConvolveOp convOp = new ConvolveOp(kernel);
 
-        BufferedImage tempImage = ImgExtend.extend(input, radius);
+        // BufferedImage tempImage = ImgExtend.extend(input, radius);
 
-        BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),
-                tempImage.isAlphaPremultiplied(), null);
-        convOp.filter(tempImage, output);
+        // BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),
+        //         tempImage.isAlphaPremultiplied(), null);
+        // convOp.filter(tempImage, output);
 
-        output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
+        // output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
+
+        BufferedImage output = Convoluter.applyConvolution(input, array, 0);
 
         return output;
     }
