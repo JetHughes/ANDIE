@@ -2,6 +2,7 @@ package cosc202.andie;
 
 import java.util.*;
 import javax.swing.*;
+import javax.swing.filechooser.*;
 import java.awt.event.*;
 import java.io.*;
 import java.awt.image.*;
@@ -22,7 +23,6 @@ public class MacroActions {
      * A list of actions for the macro menu
      */
     protected ArrayList<Action> actions;
-
     /**
      * <p>
      * Create a set of macro menu actions
@@ -93,10 +93,12 @@ public class MacroActions {
                 //System.out.println("Export error handling");
                 PopUp.showMessageDialog("Error: Load an image before starting to record!");
 
+            }
+            else if(target.getImage().getRecording()){
+                PopUp.showMessageDialog("Error: Already recording!");
+
             } else {
-
-
-                 
+                target.getImage().setRecording(true);
             }
         }
     }
@@ -138,10 +140,37 @@ public class MacroActions {
                 //System.out.println("Export error handling");
                 PopUp.showMessageDialog("Error: There is no image present!");
 
+            } else if(!target.getImage().getRecording()){
+                PopUp.showMessageDialog("Error: No recording to stop!");
+
             } else {
+                target.getImage().setRecording(false);
 
+                System.out.println("Recording stopped!");
 
-                 
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                 ".ops files", "ops");
+                fileChooser.setFileFilter(filter);
+                int result = fileChooser.showOpenDialog(target);
+                
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String macroFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                       if(macroFilepath.substring(1+ macroFilepath.lastIndexOf(".")).toLowerCase().equals("ops")){
+                            System.out.println("ops file type already added");
+                            target.getImage().saveRecording(macroFilepath);
+                       } else {
+                        target.getImage().saveRecording(macroFilepath + ".ops");
+                       }
+                    } catch (Exception ex) {
+                        System.exit(1);
+                    }
+                }
+                
+                
+               
+
             }
         }
     }
@@ -163,8 +192,6 @@ public class MacroActions {
          */
         ApplyMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            //putValue(Action.MNEMONIC_KEY, mnemonic);
-            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
         /**
          * <p>
@@ -195,10 +222,10 @@ public class MacroActions {
                         System.out.println(filename);
                         
                         if(!filename.equals("ops")){
-                            PopUp.showMessageDialog("Error: Not an .obs file!");
+                            PopUp.showMessageDialog("Error: Not an .ops file!");
                             return;
                         } 
-                        target.getImage().setOps(opsFilepath);
+                        target.getImage().addOps(opsFilepath);
                     } catch (IOException ex) {
                         PopUp.showMessageDialog("Error: Unable to find file. Check file name.");
                         return;
@@ -209,17 +236,10 @@ public class MacroActions {
                     }catch (Exception ex) {
                         System.out.println(ex);
                         return;
-                        //System.exit(1);
+                        
                     }
                 }
-                // try {
-                //     File imageFile = new File(imageFilename);
-                //     original = ImageIO.read(imageFile);
-                //     current = deepCopy(original);
-                // } catch (FileNotFoundException ex){
-                //     System.out.println(ex);
-                //     PopUp.showMessageDialog("Could not create copy due to invalid file name");
-                // } 
+                
 
 
                  

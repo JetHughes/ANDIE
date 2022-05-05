@@ -44,6 +44,11 @@ public class EditableImage {
     private String imageFilename;
     /** <p> The file where the operation sequence is stored. </p> */
     private String opsFilename;
+    /** <p> The sequence of operations being recorded. </p> */
+    private Stack<ImageOperation> macroOps = new Stack<ImageOperation>();
+    /** <p> The sequence of operations being recorded. </p> */
+    private boolean recording = false;
+
 
     /**
      * <p>
@@ -271,6 +276,7 @@ public class EditableImage {
     public void apply(ImageOperation op) {
         current = op.apply(current);
         ops.add(op);
+        if(recording) macroOps.add(op);
     }
 
     /**
@@ -336,6 +342,80 @@ public class EditableImage {
         }
         this.refresh();
 
+    }
+    
+    /**
+     * <p>
+     * adds operations from a .ops file to the current .ops file.
+     * </p>
+     * 
+     */
+    public void addOps(String opsFilePath) {
+        try {
+            
+            FileInputStream fileIn = new FileInputStream(opsFilePath);
+            ObjectInputStream objIn = new ObjectInputStream(fileIn);
+            @SuppressWarnings("unchecked")
+            Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objIn.readObject();
+            while(!opsFromFile.empty()){
+                ops.add(opsFromFile.pop());
+                this.refresh();
+            }
+            
+            objIn.close();
+            fileIn.close();
+            
+
+        } catch (Exception e){
+            System.out.println(e);
+            PopUp.showMessageDialog("Unknown error");
+            //Unknown Error
+        }
+        
+
+    }
+
+    /**
+     * <p>
+     * adds operations from a .ops file to the current .ops file.
+     * </p>
+     * 
+     */
+    public void setRecording(boolean recording) {
+        this.recording = recording;
+    }
+    /**
+     * <p>
+     * Returns recording status as boolean.
+     * 
+     * @return boolean of recording status
+     * </p>
+     * 
+     */
+    public boolean getRecording() {
+        return recording;
+    }
+    /**
+     * <p>
+     * Saves macro ops file.
+     * </p>
+     * 
+     */
+    public void saveRecording(String macroFilePath) {
+        
+        //String macroOpsFilename = PopUp.showInputDialog("Please enter file name for macro");
+        //String fileExtension = "ops";
+        
+        try{
+            FileOutputStream fileOut = new FileOutputStream(macroFilePath);
+            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+            objOut.writeObject(this.macroOps);
+            objOut.close();
+            fileOut.close();
+        } catch (Exception ex) {
+            System.out.println(ex);
+            PopUp.showMessageDialog("Unkown Error has occured");
+        }
     }
     
 
