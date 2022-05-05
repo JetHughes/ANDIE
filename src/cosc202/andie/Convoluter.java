@@ -37,7 +37,7 @@ public class Convoluter {
                 int green = convolvePixel(image[1], x, y, kernel, offset);
                 int blue = convolvePixel(image[2], x, y, kernel, offset);
 
-                Color c = new Color(red, green, blue, image[3][x][y]);
+                Color c = new Color(red, green, blue, (int)image[3][x][y]);
                 output.setRGB(x, y, c.getRGB());
             }
         }
@@ -53,8 +53,7 @@ public class Convoluter {
                 out += (kernel[i][j] * input[constrainX(x+i-radius, input.length)][constrainY(y+j-radius, input[i].length)]);
             }
         }
-        out += offset;
-        return safePixelValue(out);
+        return safePixelValue(out + offset);
     }
 
     private static int safePixelValue(float p){        
