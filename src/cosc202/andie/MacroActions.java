@@ -2,7 +2,11 @@ package cosc202.andie;
 
 import java.util.*;
 import javax.swing.*;
+import javax.swing.filechooser.*;
 import java.awt.event.*;
+import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
 
 /**
  * <p>
@@ -19,14 +23,18 @@ public class MacroActions {
      * A list of actions for the macro menu
      */
     protected ArrayList<Action> actions;
-
     /**
      * <p>
      * Create a set of macro menu actions
      * </p>
      */
     public MacroActions(){
-
+        
+        actions = new ArrayList<Action>();
+        actions.add(new StartRecordMacro("Start Recording", null, "Starts to record macro", null));
+        actions.add(new StopRecordMacro("Stop Recording", null, "Stops recording macro", null));
+        actions.add(new ApplyMacro("Apply Macro", null, "Applies macro to image", null));
+        
     }
 
     /**
@@ -37,7 +45,8 @@ public class MacroActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
-        JMenu translateMenu = new JMenu("Translate");
+        
+        JMenu translateMenu = new JMenu("Macros");
 
         for (Action action : actions) {
             translateMenu.add(new JMenuItem(action));
@@ -64,8 +73,8 @@ public class MacroActions {
          */
         StartRecordMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            putValue(Action.MNEMONIC_KEY, mnemonic);
-            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            //putValue(Action.MNEMONIC_KEY, mnemonic);
+            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
         /**
          * <p>
@@ -84,7 +93,153 @@ public class MacroActions {
                 //System.out.println("Export error handling");
                 PopUp.showMessageDialog("Error: Load an image before starting to record!");
 
+            }
+            else if(target.getImage().getRecording()){
+                PopUp.showMessageDialog("Error: Already recording!");
+
             } else {
+                target.getImage().setRecording(true);
+            }
+        }
+    }
+    /**
+     * <p>
+     * Action to stop recording macro
+     * </p>
+     */
+    public class StopRecordMacro extends ImageAction{
+        /**
+         * <p>
+         * Create a new macro action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        StopRecordMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            //putValue(Action.MNEMONIC_KEY, mnemonic);
+            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+        }
+        /**
+         * <p>
+         * Callback for when the StopMacroRecord action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the StopMacroRecord is triggered.
+         * It stops recording events and saves a new .obs file.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e){
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: There is no image present!");
+
+            } else if(!target.getImage().getRecording()){
+                PopUp.showMessageDialog("Error: No recording to stop!");
+
+            } else {
+                target.getImage().setRecording(false);
+
+                System.out.println("Recording stopped!");
+
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                 ".ops files", "ops");
+                fileChooser.setFileFilter(filter);
+                int result = fileChooser.showOpenDialog(target);
+                
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String macroFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                       if(macroFilepath.substring(1+ macroFilepath.lastIndexOf(".")).toLowerCase().equals("ops")){
+                            System.out.println("ops file type already added");
+                            target.getImage().saveRecording(macroFilepath);
+                       } else {
+                        target.getImage().saveRecording(macroFilepath + ".ops");
+                       }
+                    } catch (Exception ex) {
+                        System.exit(1);
+                    }
+                }
+                
+                
+               
+
+            }
+        }
+    }
+    /**
+     * <p>
+     * Action to apply macro
+     * </p>
+     */
+    public class ApplyMacro extends ImageAction{
+        /**
+         * <p>
+         * Create a new macro action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ApplyMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+        /**
+         * <p>
+         * Callback for when the ApplyRecord action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ApplyRecord is triggered.
+         * It applys the effect of an .obs file to an image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e){
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: There is no image loaded to apply changes to!");
+
+            } else {
+                
+                System.out.println("here");
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showOpenDialog(target);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String opsFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        String filename = opsFilepath.substring(opsFilepath.length() - 3, opsFilepath.length());
+                        System.out.println(filename);
+                        
+                        if(!filename.equals("ops")){
+                            PopUp.showMessageDialog("Error: Not an .ops file!");
+                            return;
+                        } 
+                        target.getImage().addOps(opsFilepath);
+                    } catch (IOException ex) {
+                        PopUp.showMessageDialog("Error: Unable to find file. Check file name.");
+                        return;
+                    } catch (NullPointerException ex) {
+                        System.out.println(ex);
+                        PopUp.showMessageDialog("Error: Incorrect file type. Please choose a supported image type");
+                        return;
+                    }catch (Exception ex) {
+                        System.out.println(ex);
+                        return;
+                        
+                    }
+                }
+                
 
 
                  

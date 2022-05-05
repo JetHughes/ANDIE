@@ -21,7 +21,7 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
      * <p>
      * Constructor for SharpenFilter class
      * </p>
-    */
+     */
     SharpenFilter() {
     };
 
@@ -34,14 +34,19 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable {
      * @return The resulting (sharpened) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        
+
         float[] array = { 0, -1 / 2.0f, 0, -1 / 2.0f, 3.0f, -1 / 2.0f, 0, -1 / 2.0f, 0 };
 
         Kernel kernel = new Kernel(3, 3, array);
         ConvolveOp convOp = new ConvolveOp(kernel);
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),
-                input.isAlphaPremultiplied(), null);
-        convOp.filter(input, output);
+
+        BufferedImage tempImage = ImgExtend.extend(input, 1);
+
+        BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),
+                tempImage.isAlphaPremultiplied(), null);
+        convOp.filter(tempImage, output);
+
+        output = output.getSubimage(1, 1, input.getWidth(), input.getHeight());
 
         return output;
     }

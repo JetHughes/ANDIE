@@ -14,4 +14,9 @@ public class PopUp {
     public static void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
+
+    public static String showInputDialog(String message){
+        String inputValue = JOptionPane.showInputDialog(message);
+        return inputValue;
+    }
 }
