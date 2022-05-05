@@ -2,21 +2,51 @@ package cosc202.andie;
 
 import java.awt.image.*;
 
+/**
+ * <p>
+ * ImageOperation to apply an Emboss filter.
+ * </p>
+ * 
+ * <p>
+ * An Emboss filter create the effect of the image being 
+ * pressed into or raised out of a sheet of paper.
+ * There are eight basic filters depending on the direction of embossing they simulate
+ * </p>
+ * 
+ **/
 public class EmbossFilter implements ImageOperation {
-    int type = 1;
+    
+    /**
+     * <p>
+     * The direction of the embossing effect
+     * </p>
+     */
+    int direction = 1;
+
     /**
      * <p>
      * Constructor method for the EmbossFilter class
-     * </p>     *      
+     * </p>
      */
     public EmbossFilter(int type) {
-        this.type = type;
+        this.direction = type;
     }
 
     /**
      * Default Constructor for EmbossFilter
      */
     public EmbossFilter() {}
+
+    private float[][][] kernels = {
+        {{0, 0, 0},{1, 0, -1},{0, 0, 0}},
+        {{0, 0, 0},{-1, 0, 1},{0, 0, 0}},
+        {{0, 0, 1},{0, 0, 0},{-1, 0, 0}},
+        {{0, 0, -1},{0, 0, 0},{1, 0, 0}},
+        {{0, 1, 0},{0, 0, 0},{0, -1, 0}},
+        {{0, -1, 0},{0, 0, 0},{0, 1, 0}},
+        {{1, 0, 0},{0, 0, 0},{0, 0, -1}},
+        {{-1, 0, 0},{0, 0, 0},{0, 0, 1}},
+    };
 
     /**
      * <p>
@@ -27,40 +57,8 @@ public class EmbossFilter implements ImageOperation {
      * @return The resulting (embossed) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        float[][] kernel;
-        switch (type) {
-            case 1:
-                kernel = new float[][]{{0, 0, 0},{1, 0, -1},{0, 0, 0}};
-                break;
-            case 2:
-                kernel = new float[][]{{1, 0, 0},{0, 0, 0},{0, 0, -1}};
-                break;
-            case 3:
-                kernel = new float[][]{{0, 1, 0},{0, 0, 0},{0, -1, 0}};
-                break;
-            case 4:
-                kernel = new float[][]{{0, 0, 1},{0, 0, 0},{-1, 0, 0}};
-                break;
-            case 5:
-                kernel = new float[][]{{0, 0, 0},{-1, 0, 1},{0, 0, 0}};
-                break;
-            case 6:
-                kernel = new float[][]{{-1, 0, 0},{0, 0, 0},{0, 0, 1}};
-                break;
-            case 7:
-                kernel = new float[][]{{0, -1, 0},{0, 0, 0},{0, 1, 0}};
-                break;
-            case 8:
-                kernel = new float[][]{{0, 0, -1},{0, 0, 0},{1, 0, 0}};
-                break;
-        
-            default:
-                kernel = new float[][]{{0, 0, 0},{1, 0, -1},{0, 0, 0}};
-                break;
-        }
 
-
-        BufferedImage output = Convoluter.applyConvolution(input, kernel, 127);
+        BufferedImage output = Convoluter.applyConvolution(input, kernels[direction-1], 127);
 
         return output;
     }

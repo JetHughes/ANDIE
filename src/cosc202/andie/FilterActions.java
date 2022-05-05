@@ -403,7 +403,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int type = 1;
+                int direction = 1;
 
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 8, 1);
@@ -415,10 +415,10 @@ public class FilterActions {
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;            
                 } else if (option == JOptionPane.OK_OPTION) {
-                    type = radiusModel.getNumber().intValue();
+                    direction = radiusModel.getNumber().intValue();
                 }
 
-                target.getImage().apply(new EmbossFilter(type));
+                target.getImage().apply(new EmbossFilter(direction));
                 target.repaint();
                 target.getParent().revalidate();
             }
