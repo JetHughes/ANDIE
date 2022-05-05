@@ -387,9 +387,9 @@ public class EditableImage {
     /**
      * <p>
      * Returns recording status as boolean.
-     * 
-     * @return boolean of recording status
      * </p>
+     * @return boolean of recording status
+     * 
      * 
      */
     public boolean getRecording() {
