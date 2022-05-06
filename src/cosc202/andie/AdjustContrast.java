@@ -85,12 +85,13 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
                 int r = c.getRed();
                 int b = c.getBlue();
                 int g = c.getGreen();
+                int a = c.getAlpha();
 
                 r = (int) getAdjustedValue(contrast, r);
                 g = (int) getAdjustedValue(contrast, g);
                 b = (int) getAdjustedValue(contrast, b);
 
-                output.setRGB(x, y, new Color(r,g,b).getRGB());
+                output.setRGB(x, y, new Color(r,g,b,a).getRGB());
             }
         }
 
