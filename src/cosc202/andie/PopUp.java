@@ -25,13 +25,13 @@ public class PopUp {
     /**
      * Method to get an integer value from a JSpinner prompt
      * @param prompt Message to show the user
-     * @param max The fist number in the sequence
-     * @param min The last numbe in the sequence
      * @param defaultValue The inital value
+     * @param min The last numbe in the sequence
+     * @param max The fist number in the sequence
      * @param stepSize The difference between numbers in the sequence
      * @return
      */
-    public static int getSpinnerInt(String prompt, int max, int min, int defaultValue, int stepSize){
+    public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
         SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
         JSpinner radiusSpinner = new JSpinner(radiusModel);
         int option = JOptionPane.showOptionDialog(null, radiusSpinner, prompt,
