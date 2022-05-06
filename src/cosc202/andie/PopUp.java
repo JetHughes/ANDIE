@@ -34,7 +34,7 @@ public class PopUp {
     public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
         SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
         JSpinner radiusSpinner = new JSpinner(radiusModel);
-        int option = JOptionPane.showOptionDialog(null, radiusSpinner, prompt,
+        int option = JOptionPane.showOptionDialog(null, radiusSpinner, prompt + "\tMin: " + min + "\tMax: " + max,
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
         // Check the return value from the dialog box.
