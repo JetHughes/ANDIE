@@ -57,32 +57,20 @@ public class Convoluter {
                 //We subtract the radius from the x, y values so that the kernel is "centered" on the pixel
                 //This means some pixels will be "outside" of the image
                 //So we constrain these pixels to the nearest valid pixel
-                int constrainedX = constrainX(x-radius+i, input.length);
-                int constrainedY = constrainY(y-radius+i, input.length);
+                int constrainedX = constrain(x+i-radius, input.length);
+                int constrainedY = constrain(y+i-radius, input[i].length);
                 out += (kernel[i][j] * input[constrainedX][constrainedY]);
             }
         }
         //We also need to ensure the pixel does not go outside the range 0-255
         //Some filters are designed to produce negative values
         //to account for these we can make zero become the midpoint by applying an offset
-        return safePixelValue(out + offset);
+        return constrain((int)(out + offset), 256);
     }
 
-    private static int safePixelValue(float p){        
-        if(p < 0) return 0;
-        if(p > 255) return 255;
-        return (int)p;
-    }
-
-    private static int constrainY(int y, int height){
-        if(y < 0) return 0; //if its above the image return zero
-        if(y >= height) return height - 1; //if its below the image return the height - 1
+    private static int constrain(int y, int range){
+        if(y < 0) return 0; //if its below zero return zero
+        if(y >= range) return range - 1; //if its bigger than the range return the range - 1
         return y; //otherwise do nothing
-    }
-
-    private static int constrainX(int x, int width){
-        if(x < 0) return 0; //if its to the left of the image return 0
-        if(x >= width) return width - 1; //it its to the right of the image return the width - 1
-        return x; //otherwise do nothing
     }
 }
