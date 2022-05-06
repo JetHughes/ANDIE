@@ -174,22 +174,6 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         double dz = a.getBlue() - b.getBlue();
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
-    
-    /**
-     * Method to output the current list of centroids, and the number of points assign to each centroid
-     * @param centroids The list of centroids
-     * @param points The set of points that represents your image
-     */
-    private void printCentroids(Color[] centroids, ArrayList<Point> points){
-        for (Color color : centroids) {
-            System.out.print(color + ": ");
-            int sum = 0;
-            for (Point point : points) {
-                if(point.centroid.equals(color)) sum++;
-            }
-            System.out.println(sum);
-        }
-    }
 
     /**
      * A helper class for the posterise filter.
