@@ -14,6 +14,7 @@ public class Convoluter {
      * Applys a border aware convolution to a buffered image
      * @param input Image to convolve
      * @param kernel kernel used for convolution
+     * @param offset Offset used if you expect the convolution to produce negative values
      * @return A new BufferedImage with the covolution applied
      */
     public static BufferedImage applyConvolution(BufferedImage input, float[][] kernel, int offset) {
