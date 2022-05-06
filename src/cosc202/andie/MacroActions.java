@@ -5,8 +5,6 @@ import javax.swing.*;
 import javax.swing.filechooser.*;
 import java.awt.event.*;
 import java.io.*;
-import java.awt.image.*;
-import javax.imageio.*;
 
 /**
  * <p>
