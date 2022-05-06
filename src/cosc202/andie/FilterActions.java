@@ -62,6 +62,8 @@ public class FilterActions {
         return fileMenu;
     }
 
+    
+
     /**
      * <p>
      * Action to blur an image with a mean filter.
@@ -107,20 +109,7 @@ public class FilterActions {
 
             } else {
                 // Determine the radius - ask the user.
-                int radius = 1;
-
-                // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
+                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
 
                 // Create and apply the filter
                 target.getImage().apply(new MeanFilter(radius));
@@ -159,7 +148,7 @@ public class FilterActions {
         /**
          * <p>
          * This method is called whenever the SharpenFilterAction is triggered.
-         * It prompts the user for a filter radius, then applys an appropriately sized
+         * It applies a Sharpen filter to the image
          * {@link SharpenFilter}.
          * </p>
          * 
@@ -218,20 +207,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int radius = 1;
-
-                // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;            
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
+                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
 
                 target.getImage().apply(new GaussianFilter(radius));
                 target.repaint();
@@ -280,20 +256,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int radius = 1;
-
-                // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;            
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
+                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
 
                 target.getImage().apply(new MedianFilter(radius));
                 target.repaint();
@@ -342,20 +305,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int k = 1;
-
-                // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 50, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter k value",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;            
-                } else if (option == JOptionPane.OK_OPTION) {
-                    k = radiusModel.getNumber().intValue();
-                }
+                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 50, 1);
 
                 target.getImage().apply(new PosteriseFilter(k));
                 target.repaint();
@@ -403,20 +353,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int direction = 1;
-
-                // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 8, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter type 1-8",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;            
-                } else if (option == JOptionPane.OK_OPTION) {
-                    direction = radiusModel.getNumber().intValue();
-                }
+                int direction = PopUp.getSpinnerInt("Entry type 1-8", 1, 1, 8, 1);
 
                 target.getImage().apply(new EmbossFilter(direction));
                 target.repaint();

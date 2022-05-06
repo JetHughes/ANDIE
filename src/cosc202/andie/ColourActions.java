@@ -42,8 +42,7 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(
-                new AdjustBrightnessAction("Brightness", null, "Adjust Brightness", Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new AdjustBrightnessAction("Brightness", null, "Adjust Brightness", Integer.valueOf(KeyEvent.VK_B)));
         actions.add(new AdjustContrastAction("Contrast", null, "Adjust Contrast", Integer.valueOf(KeyEvent.VK_C)));
     }
 
@@ -157,25 +156,7 @@ public class ColourActions {
                 PopUp.showMessageDialog("Error: No image to apply change to!");
 
             } else {
-                double brightness = 0;
-
-                SpinnerNumberModel brightnessModel = new SpinnerNumberModel(0, -1000, 1000, 10);
-                JSpinner radiusSpinner = new JSpinner(brightnessModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Brightness Value",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    brightness = brightnessModel.getNumber().intValue();
-                }
-
-                // If they entered a value outside of the range, `brightness` will be zero so we should alert them and cancel the operation
-                if(brightness == 0) {
-                    PopUp.showMessageDialog("Please choose a value within range -1000 to 1000");
-                    return;
-                }
+                double brightness = PopUp.getSpinnerInt("Enter Brightness Value", 0, -1000, 1000, 10);
 
                 target.getImage().apply(new AdjustBrightness(brightness));
                 target.repaint();
@@ -227,19 +208,7 @@ public class ColourActions {
                 PopUp.showMessageDialog("Error: No image to apply change to!");
 
             } else {
-                double contrast = 0;
-
-                SpinnerNumberModel contrastModel = new SpinnerNumberModel(0, -1000, 1000, 10);
-                JSpinner radiusSpinner = new JSpinner(contrastModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter Contrast Value",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    contrast = contrastModel.getNumber().intValue();
-                }
+                double contrast = PopUp.getSpinnerInt("Enter Contast Value", 0, -1000, 1000, 10);
 
                 // If they entered a value outside of the range `contrast` will be zero so we should alert them and cancel the operation
                 if(contrast == 0) {
