@@ -16,7 +16,11 @@ public class PopUp {
         JOptionPane.showMessageDialog(null, message);
     }
 
-    // TODO add javadoc here
+    /**
+     * Method to show a input box
+     * @param message text to be presented to user
+     * @return inputValue the value of the string that was entered
+     */
     public static String showInputDialog(String message){
         String inputValue = JOptionPane.showInputDialog(message);
         return inputValue;

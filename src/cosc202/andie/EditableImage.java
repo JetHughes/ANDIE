@@ -401,7 +401,7 @@ public class EditableImage {
      * </p>
      * 
      */
-    public void saveRecording(String macroFilePath) {
+    public void saveRecording(String macroFilePath) throws FileNotFoundException {
         
         //String macroOpsFilename = PopUp.showInputDialog("Please enter file name for macro");
         //String fileExtension = "ops";
@@ -412,6 +412,10 @@ public class EditableImage {
             objOut.writeObject(this.macroOps);
             objOut.close();
             fileOut.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+            PopUp.showMessageDialog("Error: Incorrect File name!");
+            
         } catch (Exception ex) {
             System.out.println(ex);
             PopUp.showMessageDialog("Unkown Error has occured");

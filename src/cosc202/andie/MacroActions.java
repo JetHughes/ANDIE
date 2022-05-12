@@ -157,12 +157,14 @@ public class MacroActions {
                         String macroFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                        if(macroFilepath.substring(1+ macroFilepath.lastIndexOf(".")).toLowerCase().equals("ops")){
                             System.out.println("ops file type already added");
-                            target.getImage().saveRecording(macroFilepath);
+                           
+                                target.getImage().saveRecording(macroFilepath);
+                            
                        } else {
                         target.getImage().saveRecording(macroFilepath + ".ops");
                        }
                     } catch (Exception ex) {
-                        System.exit(1);
+                        System.out.println(ex);
                     }
                 }
                 
@@ -209,15 +211,13 @@ public class MacroActions {
                 PopUp.showMessageDialog("Error: There is no image loaded to apply changes to!");
 
             } else {
-                
-                System.out.println("here");
                 JFileChooser fileChooser = new JFileChooser();
                 int result = fileChooser.showOpenDialog(target);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     try {
                         String opsFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                         String filename = opsFilepath.substring(opsFilepath.length() - 3, opsFilepath.length());
-                        System.out.println(filename);
+                        
                         
                         if(!filename.equals("ops")){
                             PopUp.showMessageDialog("Error: Not an .ops file!");
