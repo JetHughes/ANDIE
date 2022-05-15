@@ -10,7 +10,7 @@ public class ImgExtend {
     public static BufferedImage alternateExtend(BufferedImage input, int radius){
         BufferedImage tempImage = new BufferedImage(input.getWidth() + radius * 2, input.getHeight() + radius * 2, input.getType());
         for(int x = 0; x < tempImage.getWidth(); x++){
-            for(int y = 0; y < tempImage.getHeight(); y++) {
+            for(int y = 0; y < tempImage.getHeight(); y++) {                
                 tempImage.setRGB(x, y, input.getRGB(constrainX(x - radius, input.getWidth()), constrainY(y - radius, input.getHeight())));
             }
         }

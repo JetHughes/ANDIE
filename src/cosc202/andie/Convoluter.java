@@ -30,7 +30,9 @@ public class Convoluter {
                 image[3][x][y] = c.getAlpha();
             }
         }
-        
+
+        System.out.print("Starting convolution:");
+
         //convolve and write image
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         for (int x = 0; x < input.getWidth(); x++) {
@@ -45,6 +47,8 @@ public class Convoluter {
                 output.setRGB(x, y, c.getRGB());
             }
         }
+
+        System.out.println("Convolution Done");
 
         return output;
     }
