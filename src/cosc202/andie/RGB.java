@@ -85,7 +85,7 @@ public class RGB {
      * @param a the alpha value of the desired pixel
      */
     public void setRGB(int x, int y, int r, int g, int b, int a) {
-        raster.setPixel(x, y, new int[] { r, g, b, a });
+        raster.setPixel(x, y, new int[] {b, g, r, a});
     }
 
     /**
