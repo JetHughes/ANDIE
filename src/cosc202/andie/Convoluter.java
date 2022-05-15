@@ -1,7 +1,6 @@
 package cosc202.andie;
 
 import java.awt.image.*;
-import java.awt.Color;
 
 /**
  * This class convolutes an image
@@ -21,20 +20,20 @@ public class Convoluter {
 
         //read image to 3d array
         float[][][] image = new float[4][input.getWidth()][input.getHeight()];
+        // Faster (but more memory intensive) method of retrieving and setting an images colour values
+        RGB argbClass = new RGB(input);
         for (int x = 0; x < input.getWidth(); x++) {
             for (int y = 0; y < input.getHeight(); y++) {
-                Color c = new Color(input.getRGB(x, y));
-                image[0][x][y] = c.getRed();
-                image[1][x][y] = c.getGreen();
-                image[2][x][y] = c.getBlue();
-                image[3][x][y] = c.getAlpha();
+                int rgb = argbClass.getRGB(x, y);
+                image[0][x][y] = (float)((rgb & 0x00FF0000) >> 16);
+                image[1][x][y] = (float)((rgb & 0x0000FF00) >> 8);
+                image[2][x][y] = (float)(rgb & 0x000000FF);
+                image[3][x][y] = (float)((rgb & 0xFF000000) >> 24);
             }
         }
 
-        System.out.print("Starting convolution:");
-
+        
         //convolve and write image
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         for (int x = 0; x < input.getWidth(); x++) {
             for (int y = 0; y < input.getHeight(); y++) {
                 //convolve each of the color channels of each pixel separately using the given kernel
@@ -43,13 +42,11 @@ public class Convoluter {
                 int blue = convolvePixel(image[2], x, y, kernel, offset);
 
                 //Write new pixel to output image, alpha is not changed
-                Color c = new Color(red, green, blue, (int)image[3][x][y]);
-                output.setRGB(x, y, c.getRGB());
+                argbClass.setRGB(x, y, red, green, blue, (int)(image[3][x][y]) << 24);
             }
         }
-
-        System.out.println("Convolution Done");
-
+        // Create a new image based off of the updated Raster
+        BufferedImage output = new BufferedImage(input.getColorModel(), argbClass.getRaster(), input.isAlphaPremultiplied(), null);
         return output;
     }
 

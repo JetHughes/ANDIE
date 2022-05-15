@@ -7,28 +7,6 @@ import java.awt.image.*;
  */
 public class ImgExtend {
 
-    public static BufferedImage alternateExtend(BufferedImage input, int radius){
-        BufferedImage tempImage = new BufferedImage(input.getWidth() + radius * 2, input.getHeight() + radius * 2, input.getType());
-        for(int x = 0; x < tempImage.getWidth(); x++){
-            for(int y = 0; y < tempImage.getHeight(); y++) {                
-                tempImage.setRGB(x, y, input.getRGB(constrainX(x - radius, input.getWidth()), constrainY(y - radius, input.getHeight())));
-            }
-        }
-        return tempImage;
-    }
-
-    private static int constrainY(int y, int height){
-        if (y < 0) return 0; //above image
-        if (y >= height) return height - 1;//below image
-        return y;
-    }
-
-    private static int constrainX(int x, int width){
-        if (x < 0) return 0; //left of image
-        if(x >= width) return width - 1; //right of image
-        return x;
-    }
-
     /**
      * <p>
      * Create a buffered image object with a border of size radius and pixels along
