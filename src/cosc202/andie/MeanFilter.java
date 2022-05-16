@@ -87,6 +87,7 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
             Kernel kernel = new Kernel(2 * radius + 1, 2 * radius + 1, array);
             ConvolveOp convOp = new ConvolveOp(kernel);
 
+            // Apply image extension
             BufferedImage tempImage = ImgExtend.extend(input, radius);
 
             BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),

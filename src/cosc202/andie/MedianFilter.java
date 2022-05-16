@@ -78,6 +78,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         try {
             int size = (2 * radius + 1) * (2 * radius + 1);
 
+            // Apply image extender
             BufferedImage tempImage = ImgExtend.extend(input, radius);
 
             BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),
@@ -129,6 +130,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 }
             }
 
+            // Remove extended images border
             output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
             return output;
