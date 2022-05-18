@@ -36,7 +36,7 @@ public class EditActions {
         actions = new ArrayList<Action>();
         actions.add(new UndoAction("Undo", null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new RedoAction("Redo", null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
-        actions.add(new DrawAction("Draw", null, "Draw Shape", null));
+        actions.add(new DrawAction("Draw", null, "Draw Shape", KeyEvent.VK_D));
     }
 
     /**
@@ -155,7 +155,7 @@ public class EditActions {
 
         /**
          * <p>
-         * Create a new undo action.
+         * Create a new draw action.
          * </p>
          * 
          * @param name The name of the action (ignored if null).
@@ -165,24 +165,26 @@ public class EditActions {
          */
         DrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            // putValue(Action.MNEMONIC_KEY, mnemonic);
-		    // putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
         /**
          * <p>
-         * Callback for when the undo action is triggered.
+         * Callback for when the draw action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the UndoAction is triggered.
-         * It undoes the most recently applied operation.
+         * This method is called whenever the DrawAction is triggered.
+         * It uses the DrawShapes + AreaSelect classes to draw a shape
          * </p>
          * 
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new DrawShapes(0, 0, 100, 100));
+            AreaSelect as = new AreaSelect(target);
+            
+            target.getImage().apply(new DrawShapes(as.getXOrigin(), as.getYOrigin(), as.getXEnd(), as.getYEnd()));
             target.repaint();
             target.getParent().revalidate();
         }
