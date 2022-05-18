@@ -16,6 +16,7 @@ public class AreaSelect implements MouseListener {
     int xOrigin, yOrigin, xEnd, yEnd;
     boolean selected = false;
     ImagePanel target;
+    String type;
 
     /**
      * <p>
@@ -29,8 +30,9 @@ public class AreaSelect implements MouseListener {
      * 
      * @param target The image/pane for the select to take place
      */
-    public AreaSelect(ImagePanel target){
+    public AreaSelect(ImagePanel target, String type){
         this.target = target;
+        this.type = type;
         target.addMouseListener(this);
     }
 
@@ -74,10 +76,21 @@ public class AreaSelect implements MouseListener {
             yOrigin = yEnd;
             yEnd = n;
         }
+        if(type == "draw"){
+            draw();
+        }else{
+            crop();
+        }
+    }
 
-        // target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
-        // target.repaint();
-        // target.getParent().revalidate();
+    public void draw(){
+        target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
+        target.repaint();
+        target.getParent().revalidate();
+    }
+
+    public void crop(){
+
     }
 
     /**

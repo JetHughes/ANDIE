@@ -182,11 +182,7 @@ public class EditActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            AreaSelect as = new AreaSelect(target);
-            
-            target.getImage().apply(new DrawShapes(as.getXOrigin(), as.getYOrigin(), as.getXEnd(), as.getYEnd()));
-            target.repaint();
-            target.getParent().revalidate();
+            AreaSelect as = new AreaSelect(target, "draw");
         }
     }
 }
