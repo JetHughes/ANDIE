@@ -66,7 +66,7 @@ public class Andie {
         ImagePanel imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
-        
+        sideBar.add(imagePanel.zoomLabel);
         
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();

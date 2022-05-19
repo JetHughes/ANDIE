@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 /**
@@ -28,6 +29,11 @@ public class ImagePanel extends JPanel {
     private EditableImage image;
 
     /**
+     * {@link JPanel} to show to current zoom level
+     */
+    public ZoomLabel zoomLabel;
+
+    /**
      * <p>
      * The zoom-level of the current view.
      * A scale of 1.0 represents actual size; 0.5 is zoomed out to half size; 1.5 is zoomed in to one-and-a-half size; and so forth.
@@ -51,6 +57,8 @@ public class ImagePanel extends JPanel {
     public ImagePanel() {
         image = new EditableImage();
         scale = 1.0;
+        zoomLabel = new ZoomLabel();
+        zoomLabel.setZoom(this.getZoom());
     }
 
     /**
@@ -80,7 +88,7 @@ public class ImagePanel extends JPanel {
 
     /**
      * <p>
-     * Set the current zoom level as a percentage.
+     * Set the current zoom level as a percentage. And update the zoomLabel
      * </p>
      * 
      * <p>
@@ -97,6 +105,8 @@ public class ImagePanel extends JPanel {
             zoomPercent = 200;
         }
         scale = zoomPercent / 100;
+        revalidate();
+        zoomLabel.setZoom(this.getZoom());
     }
 
 

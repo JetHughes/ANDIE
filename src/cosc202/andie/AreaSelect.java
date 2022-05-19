@@ -14,8 +14,9 @@ import java.awt.event.*;
 public class AreaSelect implements MouseListener {
     
     int xOrigin, yOrigin, xEnd, yEnd;
-    boolean selected = false;
+    double zoomLevel;
     ImagePanel target;
+    String type;
 
     /**
      * <p>
@@ -29,8 +30,10 @@ public class AreaSelect implements MouseListener {
      * 
      * @param target The image/pane for the select to take place
      */
-    public AreaSelect(ImagePanel target){
+    public AreaSelect(ImagePanel target, String type){
         this.target = target;
+        this.type = type;
+        zoomLevel = target.getZoom()/100;
         target.addMouseListener(this);
     }
 
@@ -43,11 +46,8 @@ public class AreaSelect implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        xOrigin = e.getX();
-        yOrigin = e.getY();
-        
-        // //for testing purposes to see that the location is being read properly
-        // System.out.println(xOrigin + "    " + yOrigin);
+        xOrigin = (int) (e.getX()/zoomLevel);
+        yOrigin = (int) (e.getY()/zoomLevel);
     }
 
     /**
@@ -59,8 +59,8 @@ public class AreaSelect implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        xEnd = e.getX();
-        yEnd = e.getY();
+        xEnd = (int) (e.getX()/zoomLevel);
+        yEnd = (int) (e.getY()/zoomLevel);
         target.removeMouseListener(this);
 
         //makes it so that all mouse movements work
@@ -75,9 +75,16 @@ public class AreaSelect implements MouseListener {
             yEnd = n;
         }
 
-        // target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
-        // target.repaint();
-        // target.getParent().revalidate();
+        if(type == "draw"){
+            target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+        else if (type == "crop"){
+            target.getImage().apply(new Crop(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
+            target.repaint();
+            target.getParent().revalidate();
+        }
     }
 
     /**

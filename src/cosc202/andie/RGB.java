@@ -9,7 +9,7 @@ import java.awt.image.*;
  * default getRGB() and setRGB() methods as said methods are inefficient as they
  * conduct many checks not required for ANDIE
  * </p>
- * Influenced heavily by the following articles:
+ * Influenced by the following articles:
  * https://stackoverflow.com/questions/6319465/fast-loading-and-drawing-of-rgb-data-in-bufferedimage/12062505#12062505
  * https://stackoverflow.com/questions/6524196/java-get-pixel-array-from-image
  * https://www.tabnine.com/web/assistant/code/rs/5c76ac53e70f8700017dc8ed#L206
@@ -85,7 +85,7 @@ public class RGB {
      * @param a the alpha value of the desired pixel
      */
     public void setRGB(int x, int y, int r, int g, int b, int a) {
-        raster.setPixel(x, y, new int[] { r, g, b, a });
+        raster.setPixel(x, y, new int[] {b, g, r, a});
     }
 
     /**

@@ -110,11 +110,12 @@ public class FilterActions {
             } else {
                 // Determine the radius - ask the user.
                 int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
-
-                // Create and apply the filter
-                target.getImage().apply(new MeanFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
+                if(radius != -1){
+                    // Create and apply the filter
+                    target.getImage().apply(new MeanFilter(radius));
+                    target.repaint();
+                    target.getParent().revalidate();
+                }
             }
         }
 
@@ -208,10 +209,11 @@ public class FilterActions {
 
             } else {
                 int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
-
-                target.getImage().apply(new GaussianFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
+                if(radius != -1){
+                    target.getImage().apply(new GaussianFilter(radius));
+                    target.repaint();
+                    target.getParent().revalidate();
+                }
             }
         }
     }
@@ -256,11 +258,14 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
+                
                 int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
-
-                target.getImage().apply(new MedianFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
+                
+                if(radius != -1){
+                    target.getImage().apply(new MedianFilter(radius));
+                    target.repaint();
+                    target.getParent().revalidate();
+                }
             }
         }
     }
@@ -306,10 +311,11 @@ public class FilterActions {
 
             } else {
                 int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 50, 1);
-
-                target.getImage().apply(new PosteriseFilter(k));
-                target.repaint();
-                target.getParent().revalidate();
+                if(k != -1){
+                    target.getImage().apply(new PosteriseFilter(k));
+                    target.repaint();
+                    target.getParent().revalidate();
+                }
             }
         }
     }
@@ -353,11 +359,12 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int direction = PopUp.getSpinnerInt("Entry type 1-8", 1, 1, 8, 1);
-
-                target.getImage().apply(new EmbossFilter(direction));
-                target.repaint();
-                target.getParent().revalidate();
+                int direction = PopUp.getSpinnerInt("Entry type 1-10", 1, 1, 10, 1);
+                if(direction != -1){
+                    target.getImage().apply(new EmbossFilter(direction));
+                    target.repaint();
+                    target.getParent().revalidate();
+                }
             }
         }
     }

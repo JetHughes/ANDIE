@@ -2,6 +2,9 @@ package cosc202.andie;
 
 import java.awt.image.*;
 
+import javax.swing.JColorChooser;
+import javax.swing.JLabel;
+
 /**
  * <p>
  * ImageOperation to draw shapes onto an image
@@ -16,6 +19,8 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
     * The co-ordinate values for the shape to be drawn
     */
     int xOrigin, yOrigin, xEnd, yEnd;
+    JColorChooser tcc;
+    JLabel banner;
     
     /**
      * <p>
@@ -38,6 +43,10 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
         this.xEnd = xEnd;
         this.yEnd = yEnd;
     }
+
+    // public void colourChooser(){
+    //     tcc = new JColorChooser(banner.getForeground());
+    // }
 
     /**
      * <p>
