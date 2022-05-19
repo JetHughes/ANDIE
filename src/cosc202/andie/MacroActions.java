@@ -224,6 +224,9 @@ public class MacroActions {
                             return;
                         } 
                         target.getImage().addOps(opsFilepath);
+                        target.repaint();
+                        target.getParent().revalidate();
+                        
                     } catch (IOException ex) {
                         PopUp.showMessageDialog("Error: Unable to find file. Check file name.");
                         return;
