@@ -14,7 +14,7 @@ import java.awt.event.*;
 public class AreaSelect implements MouseListener {
     
     int xOrigin, yOrigin, xEnd, yEnd;
-    boolean selected = false;
+    double zoomLevel;
     ImagePanel target;
     String type;
 
@@ -33,6 +33,7 @@ public class AreaSelect implements MouseListener {
     public AreaSelect(ImagePanel target, String type){
         this.target = target;
         this.type = type;
+        zoomLevel = target.getZoom()/100;
         target.addMouseListener(this);
     }
 
@@ -45,8 +46,9 @@ public class AreaSelect implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        xOrigin = e.getX();
-        yOrigin = e.getY();
+        xOrigin = (int) (e.getX()/zoomLevel);
+        yOrigin = (int) (e.getY()/zoomLevel);
+        System.out.println(xOrigin + "  " + yOrigin);
     }
 
     /**
@@ -58,8 +60,9 @@ public class AreaSelect implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        xEnd = e.getX();
-        yEnd = e.getY();
+        xEnd = (int) (e.getX()/zoomLevel);
+        yEnd = (int) (e.getY()/zoomLevel);
+        System.out.println(xEnd + "  " + yEnd);
         target.removeMouseListener(this);
 
         //makes it so that all mouse movements work
