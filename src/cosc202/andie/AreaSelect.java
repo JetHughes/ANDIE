@@ -34,6 +34,7 @@ public class AreaSelect implements MouseListener {
         this.target = target;
         this.type = type;
         target.addMouseListener(this);
+        System.out.println(type);
     }
 
     /**
@@ -76,21 +77,20 @@ public class AreaSelect implements MouseListener {
             yOrigin = yEnd;
             yEnd = n;
         }
+
+        System.out.println(type);
+
         if(type == "draw"){
-            draw();
-        }else{
-            crop();
+            target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
+            target.repaint();
+            target.getParent().revalidate();
         }
-    }
-
-    public void draw(){
-        target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
-        target.repaint();
-        target.getParent().revalidate();
-    }
-
-    public void crop(){
-
+        else if (type == "crop"){
+            target.getImage().apply(new Crop(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
+            target.repaint();
+            target.getParent().revalidate();
+            System.out.println("leshgo");
+        }
     }
 
     /**

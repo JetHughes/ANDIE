@@ -37,6 +37,7 @@ public class EditActions {
         actions.add(new UndoAction("Undo", null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new RedoAction("Redo", null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
         actions.add(new DrawAction("Draw", null, "Draw Shape", KeyEvent.VK_D));
+        actions.add(new CropAction("Crop", null, "Crop image", KeyEvent.VK_Q));
     }
 
     /**
@@ -183,6 +184,47 @@ public class EditActions {
          */
         public void actionPerformed(ActionEvent e) {
             AreaSelect as = new AreaSelect(target, "draw");
+        }
+    }
+
+    /**
+     * <p>
+     * Action to crop an image to selection
+     * </p>
+     *
+     */
+    public class CropAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new crop action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        CropAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            putValue(Action.MNEMONIC_KEY, mnemonic);
+		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
+        }
+
+        /**
+         * <p>
+         * Callback for when the crop action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the CropAction is triggered.
+         * It uses the Crop + AreaSelect classes to crop to select
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            AreaSelect ac = new AreaSelect(target, "crop");
         }
     }
 }
