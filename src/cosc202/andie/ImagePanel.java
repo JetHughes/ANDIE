@@ -105,6 +105,7 @@ public class ImagePanel extends JPanel {
             zoomPercent = 200;
         }
         scale = zoomPercent / 100;
+        revalidate();
         zoomLabel.setZoom(this.getZoom());
     }
 
