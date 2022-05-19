@@ -42,9 +42,8 @@ public class PopUp {
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
         // Check the return value from the dialog box.
-        if (option == JOptionPane.CANCEL_OPTION) {
-            // TODO handle this better
-            return defaultValue;
+        if (option == JOptionPane.CANCEL_OPTION) {            
+            return -1;
         } else if (option == JOptionPane.OK_OPTION) {
             return  radiusModel.getNumber().intValue();
         }
