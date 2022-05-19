@@ -137,6 +137,8 @@ public class EditableImage {
      * @throws IOException If something goes wrong.
      */
     public void open(String filePath) throws IOException{
+        ops.clear();
+        redoOps.clear();
         imageFilename = filePath;
         opsFilename = imageFilename + ".ops";
         try {
@@ -162,12 +164,11 @@ public class EditableImage {
             @SuppressWarnings("unchecked")
             Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objIn.readObject();
             ops = opsFromFile;
-            redoOps.clear();
             objIn.close();
             fileIn.close();
         } catch (FileNotFoundException ex){
             System.out.println(ex);
-            //PopUp.showMessageDialog("no .obs file found");
+            //PopUp.showMessageDialog("no .ops file found");
             //when a new image is opened that doesn't have a .obs file.
         }catch (Exception ex){
             System.out.println(ex);
