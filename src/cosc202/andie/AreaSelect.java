@@ -48,7 +48,6 @@ public class AreaSelect implements MouseListener {
     public void mousePressed(MouseEvent e) {
         xOrigin = (int) (e.getX()/zoomLevel);
         yOrigin = (int) (e.getY()/zoomLevel);
-        System.out.println(xOrigin + "  " + yOrigin);
     }
 
     /**
@@ -62,7 +61,6 @@ public class AreaSelect implements MouseListener {
     public void mouseReleased(MouseEvent e) {
         xEnd = (int) (e.getX()/zoomLevel);
         yEnd = (int) (e.getY()/zoomLevel);
-        System.out.println(xEnd + "  " + yEnd);
         target.removeMouseListener(this);
 
         //makes it so that all mouse movements work
