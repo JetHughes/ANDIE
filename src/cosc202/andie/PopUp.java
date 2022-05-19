@@ -16,7 +16,11 @@ public class PopUp {
         JOptionPane.showMessageDialog(null, message);
     }
 
-    // TODO add javadoc here
+    /**
+     * Method to show a input box
+     * @param message text to be presented to user
+     * @return inputValue the value of the string that was entered
+     */
     public static String showInputDialog(String message){
         String inputValue = JOptionPane.showInputDialog(message);
         return inputValue;
@@ -38,9 +42,8 @@ public class PopUp {
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
         // Check the return value from the dialog box.
-        if (option == JOptionPane.CANCEL_OPTION) {
-            // TODO handle this better
-            return defaultValue;
+        if (option == JOptionPane.CANCEL_OPTION) {            
+            return -1;
         } else if (option == JOptionPane.OK_OPTION) {
             return  radiusModel.getNumber().intValue();
         }

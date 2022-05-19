@@ -137,12 +137,15 @@ public class EditableImage {
      * @throws IOException If something goes wrong.
      */
     public void open(String filePath) throws IOException{
+        ops.clear();
+        redoOps.clear();
         imageFilename = filePath;
-        opsFilename = imageFilename + ".ops";
+        opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops";
         try {
             File imageFile = new File(imageFilename);
             original = ImageIO.read(imageFile);
             current = deepCopy(original);
+            System.out.println("opened: " + imageFilename);
         } catch (FileNotFoundException ex){
             System.out.println(ex);
             PopUp.showMessageDialog("Could not create copy due to invalid file name");
@@ -162,12 +165,12 @@ public class EditableImage {
             @SuppressWarnings("unchecked")
             Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objIn.readObject();
             ops = opsFromFile;
-            redoOps.clear();
             objIn.close();
             fileIn.close();
+            System.out.println("opened " + opsFilename);
         } catch (FileNotFoundException ex){
             System.out.println(ex);
-            //PopUp.showMessageDialog("no .obs file found");
+            //PopUp.showMessageDialog("no .ops file found");
             //when a new image is opened that doesn't have a .obs file.
         }catch (Exception ex){
             System.out.println(ex);
@@ -205,6 +208,7 @@ public class EditableImage {
             objOut.writeObject(this.ops);
             objOut.close();
             fileOut.close();
+            System.out.println("saved " + this.imageFilename + " with " + this.opsFilename);
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
             PopUp.showMessageDialog("FileNotFoundException : Check file name and/or type");
@@ -233,17 +237,28 @@ public class EditableImage {
      * the current operations to <code>some/path/to/image.png.ops</code>.
      * </p>
      * 
-     * @param imageFilename The file location to save the image to.
+     * @param newName The file location to save the image to.
      * @throws FileNotFoundException If something goes wrong.
      */
-    public void saveAs(String imageFilename) throws FileNotFoundException {
+    public void saveAs(String newName) throws FileNotFoundException {
         try{
-            this.imageFilename = imageFilename;
-            this.opsFilename = imageFilename + ".ops";
-            save();
+            if(newName.contains(".")){ //if the user added thier own extension
+                this.imageFilename = newName;
+                this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
+            } else {    
+                this.imageFilename = newName + this.imageFilename.substring(imageFilename.length()-4);
+                this.opsFilename = newName + ".ops";
+            }
+
+            if(new File(this.imageFilename).exists()){
+                //PopUp.showMessageDialog("Error, this file already exists");
+                throw new Exception("File already exists");
+            } else {
+                save();
+            }
         } catch (Exception ex){
             System.out.println(ex);
-            PopUp.showMessageDialog("An Error has occured");
+            PopUp.showMessageDialog(ex.getMessage());
         }
     }
 
@@ -401,7 +416,7 @@ public class EditableImage {
      * </p>
      * 
      */
-    public void saveRecording(String macroFilePath) {
+    public void saveRecording(String macroFilePath) throws FileNotFoundException {
         
         //String macroOpsFilename = PopUp.showInputDialog("Please enter file name for macro");
         //String fileExtension = "ops";
@@ -412,6 +427,10 @@ public class EditableImage {
             objOut.writeObject(this.macroOps);
             objOut.close();
             fileOut.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+            PopUp.showMessageDialog("Error: Incorrect File name!");
+            
         } catch (Exception ex) {
             System.out.println(ex);
             PopUp.showMessageDialog("Unkown Error has occured");

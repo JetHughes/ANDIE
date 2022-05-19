@@ -31,7 +31,6 @@ public class Convoluter {
                 image[3][x][y] = (float)((rgb & 0xFF000000) >> 24);
             }
         }
-
         
         //convolve and write image
         for (int x = 0; x < input.getWidth(); x++) {
@@ -50,6 +49,32 @@ public class Convoluter {
         return output;
     }
 
+    /**
+     * Wrapper method for applyConcolution which allows the method to be used with either square or flat arrys
+     * @param input Image to convolve
+     * @param kernel kernel used for convolution
+     * @param offset Offset used if you expect the convolution to produce negative values
+     * @return A new BufferedImage with the covolution applied
+     */    
+    public static BufferedImage applyConvolution(BufferedImage input, float[] kernel, int offset){
+        try{
+            float[][] squareKernel = getSquareArray(kernel);
+            return applyConvolution(input, squareKernel, offset);
+        } catch(Exception e){
+            PopUp.showMessageDialog(e.getMessage());
+            return input;
+        }
+    }    
+
+    /**
+     * Multiplies a single color channel of a pixel with the given kernel
+     * @param input the input image
+     * @param x the x position of the pixel
+     * @param y the y position of the pixel
+     * @param kernel the kernel to be applied
+     * @param offset amount to shift the ouput colors
+     * @return the new value of that channel of that pixel
+     */
     private static int convolvePixel(float[][] input, int x, int y, float[][] kernel, int offset) {
         float out = 0;
         int radius = (kernel.length-1)/2;
@@ -70,9 +95,35 @@ public class Convoluter {
         return constrain((int)(out + offset), 256);
     }
 
-    private static int constrain(int y, int range){
-        if(y < 0) return 0; //if its below zero return zero
-        if(y >= range) return range - 1; //if its bigger than the range return the range - 1
-        return y; //otherwise do nothing
+    /**
+     * Constrains a value to a range. 
+     * Values below the range are set to zero
+     * Values above the reange are set to the maximum
+     * Values within the range are unchagned
+     * @param val the value to be constrained
+     * @param range the range to constrain the value to
+     * @return a value within the range
+     */
+    private static int constrain(int val, int range){
+        if(val < 0) return 0; //if its below zero return zero
+        if(val >= range) return range - 1; //if its bigger than the range return the range - 1
+        return val; //otherwise do nothing
+    }
+
+    private static float[][] getSquareArray(float[] flat) throws Exception{
+        int radius = (int)Math.sqrt(flat.length);
+
+        if(Math.pow(radius, 2) != flat.length) {
+            throw new Exception("Length of input array must be a square number");
+        }
+
+        float[][] square = new float[radius][radius];
+
+        for (int i = 0; i < radius; i++) {
+            for (int j = 0; j < radius; j++) {
+                square[i][j] = flat[(3*i) + j];
+            }
+        }
+        return square;
     }
 }
