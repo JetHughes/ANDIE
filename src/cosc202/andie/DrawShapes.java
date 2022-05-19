@@ -21,6 +21,7 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
     int xOrigin, yOrigin, xEnd, yEnd;
     JColorChooser tcc;
     JLabel banner;
+    java.awt.Color color;
     
     /**
      * <p>
@@ -37,16 +38,13 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      * @param xEnd The lower-right most co-ordinates
      * @param yEnd The lower-right most co-ordinates
      */
-    DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd){
+    DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd, java.awt.Color color){
         this.xOrigin = xOrigin;
         this.yOrigin = yOrigin;
         this.xEnd = xEnd;
         this.yEnd = yEnd;
+        this.color = color;
     }
-
-    // public void colourChooser(){
-    //     tcc = new JColorChooser(banner.getForeground());
-    // }
 
     /**
      * <p>
@@ -65,7 +63,7 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
     public BufferedImage apply(BufferedImage input) {
         for (int y = yOrigin; y < yEnd; y++) {
             for (int x = xOrigin; x < xEnd; x++) {
-                input.setRGB(x, y, 0);
+                input.setRGB(x, y, color.getRGB());
             }
         }
         return input;

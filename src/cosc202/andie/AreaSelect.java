@@ -17,6 +17,7 @@ public class AreaSelect implements MouseListener {
     double zoomLevel;
     ImagePanel target;
     String type;
+    ColorChooser cs;
 
     /**
      * <p>
@@ -33,8 +34,10 @@ public class AreaSelect implements MouseListener {
     public AreaSelect(ImagePanel target, String type){
         this.target = target;
         this.type = type;
-        zoomLevel = target.getZoom()/100;
         target.addMouseListener(this);
+        if(type == "draw"){
+            cs = new ColorChooser();
+        }
     }
 
     /**
@@ -46,6 +49,7 @@ public class AreaSelect implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
+        zoomLevel = target.getZoom()/100;
         xOrigin = (int) (e.getX()/zoomLevel);
         yOrigin = (int) (e.getY()/zoomLevel);
     }
@@ -76,59 +80,15 @@ public class AreaSelect implements MouseListener {
         }
 
         if(type == "draw"){
-            target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
+            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, cs.color));
             target.repaint();
             target.getParent().revalidate();
         }
         else if (type == "crop"){
-            target.getImage().apply(new Crop(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
+            target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
             target.repaint();
             target.getParent().revalidate();
         }
-    }
-
-    /**
-     * <p>
-     * Allows other classes to access the co-ordinates
-     * </p>
-     * 
-     * @return The origional x co-ordinate for the mouse
-     */
-    public int getXOrigin(){
-        return xOrigin;
-    }
-
-    /**
-     * <p>
-     * Allows other classes to access the co-ordinates
-     * </p>
-     * 
-     * @return The origional y co-ordinate for the mouse
-     */
-    public int getYOrigin(){
-        return yOrigin;
-    }
-    
-    /**
-     * <p>
-     * Allows other classes to access the co-ordinates
-     * </p>
-     * 
-     * @return The final x co-ordinate for the mouse
-     */
-    public int getXEnd(){
-        return xEnd;
-    }
-    
-    /**
-     * <p>
-     * Allows other classes to access the co-ordinates
-     * </p>
-     * 
-     * @return The final y co-ordinate for the mouse
-     */
-    public int getYEnd(){
-        return yEnd;
     }
 
     @Override
