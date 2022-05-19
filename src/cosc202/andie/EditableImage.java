@@ -2,9 +2,6 @@ package cosc202.andie;
 
 import java.util.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Paths;
 import java.awt.image.*;
 import javax.imageio.*;
 /**
