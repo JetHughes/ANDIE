@@ -34,7 +34,6 @@ public class AreaSelect implements MouseListener {
         this.target = target;
         this.type = type;
         target.addMouseListener(this);
-        System.out.println(type);
     }
 
     /**
@@ -48,9 +47,6 @@ public class AreaSelect implements MouseListener {
     public void mousePressed(MouseEvent e) {
         xOrigin = e.getX();
         yOrigin = e.getY();
-        
-        // //for testing purposes to see that the location is being read properly
-        // System.out.println(xOrigin + "    " + yOrigin);
     }
 
     /**
@@ -78,8 +74,6 @@ public class AreaSelect implements MouseListener {
             yEnd = n;
         }
 
-        System.out.println(type);
-
         if(type == "draw"){
             target.getImage().apply(new DrawShapes(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
             target.repaint();
@@ -89,7 +83,6 @@ public class AreaSelect implements MouseListener {
             target.getImage().apply(new Crop(getXOrigin(), getYOrigin(), getXEnd(), getYEnd()));
             target.repaint();
             target.getParent().revalidate();
-            System.out.println("leshgo");
         }
     }
 
