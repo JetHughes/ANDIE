@@ -28,6 +28,9 @@ public class ImagePanel extends JPanel {
      */
     private EditableImage image;
 
+    /**
+     * {@link JPanel} to show to current zoom level
+     */
     public ZoomLabel zoomLabel;
 
     /**
@@ -85,7 +88,7 @@ public class ImagePanel extends JPanel {
 
     /**
      * <p>
-     * Set the current zoom level as a percentage.
+     * Set the current zoom level as a percentage. And update the zoomLabel
      * </p>
      * 
      * <p>
