@@ -1,5 +1,4 @@
 package cosc202.andie;
-
 import java.awt.event.*;
 
 /**
@@ -17,7 +16,7 @@ public class AreaSelect implements MouseListener {
     double zoomLevel;
     ImagePanel target;
     String type;
-    ColorChooser cs;
+    ColorChooser cs = new ColorChooser();
 
     /**
      * <p>

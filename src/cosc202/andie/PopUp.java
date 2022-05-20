@@ -37,15 +37,25 @@ public class PopUp {
      */
     public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
         SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
-        JSpinner radiusSpinner = new JSpinner(radiusModel);
-        int option = JOptionPane.showOptionDialog(null, radiusSpinner, prompt + " | Min: " + min + "\t | Max: " + max,
+
+        JSlider Slider = new JSlider(JSlider.HORIZONTAL, -100, 100, 0);
+
+        Slider.setPaintTrack(true);
+        Slider.setPaintTicks(true);
+        Slider.setPaintLabels(true);
+        Slider.setMajorTickSpacing(50);
+        Slider.setMinorTickSpacing(5);
+
+
+        int option = JOptionPane.showOptionDialog(null, Slider, prompt + " | Min: " + min + "\t | Max: " + max,
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
         // Check the return value from the dialog box.
         if (option == JOptionPane.CANCEL_OPTION) {            
             return -1;
         } else if (option == JOptionPane.OK_OPTION) {
-            return  radiusModel.getNumber().intValue();
+            System.out.println(Slider.getValue());
+            return  Slider.getValue();
         }
         return defaultValue;
     } 
