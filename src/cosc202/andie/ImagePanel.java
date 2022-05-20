@@ -140,6 +140,28 @@ public class ImagePanel extends JPanel {
 
     /**
      * <p>
+     * Method to return current zoom minimum
+     * </p>
+     * 
+     * @return the current zoom minimum
+     */
+    public double getZoomMin(){
+        return zoomMin;
+    }
+
+    /**
+     * <p>
+     * Method to return current zoom maximum
+     * </p>
+     * 
+     * @return the current zoom maximum
+     */
+    public double getZoomMax(){
+        return zoomMax;
+    }
+
+    /**
+     * <p>
      * Gets the preferred size of this component for UI layout.
      * </p>
      * 
