@@ -397,14 +397,14 @@ public class TranslateActions {
 
             } else {
                 target.getImage().apply(new ScaleImage(scale));
-                if(scale == 0.5){
-                    System.out.println("0.5 here");
-                    target.setZoomMax(target.getZoomMax()+50);
-                    target.setZoomMin(target.getZoomMin()*1.5);
-                } else if (scale == 1.5){
-                    System.out.println("1.5 here");
-                    //target.setZoomMin(target.getZoomMin() - 50);
-                }
+                // if(scale == 0.5){
+                //     System.out.println("0.5 here");
+                //     target.setZoomMax(target.getZoomMax()+50);
+                //     target.setZoomMin(target.getZoomMin()*1.5);
+                // } else if (scale == 1.5){
+                //     System.out.println("1.5 here");
+                //     //target.setZoomMin(target.getZoomMin() - 50);
+                // }
                 
                 target.repaint();
                 target.getParent().revalidate();
