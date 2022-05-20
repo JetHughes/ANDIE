@@ -36,12 +36,7 @@ public class ImagePanel extends JPanel {
     /**
      * Minimum zoom level
      */
-    public double zoomMin = 50;
-
-    /**
-     * Maximum zoom level
-     */
-    public double zoomMax = 200;
+    public double zoomMin = 0;
 
     /**
      * <p>
@@ -108,58 +103,45 @@ public class ImagePanel extends JPanel {
      * @param zoomPercent The new zoom level as a percentage.
      */
     public void setZoom(double zoomPercent) {
+        double imageWidth = getImage().getCurrentImage().getWidth();
+        double imageHeight= getImage().getCurrentImage().getHeight();
+        double panelWidth = (double)getParent().getWidth();
+        double panelHeight = (double)getParent().getHeight();
+        double zoomFit = getFitScale(panelWidth, panelHeight, imageWidth, imageHeight);
+        zoomFit *= 100;
         if (zoomPercent < zoomMin) {
             zoomPercent = zoomMin;
         }
-        if (zoomPercent > zoomMax) {
-            zoomPercent = zoomMax;
+        if(zoomPercent < zoomFit){
+            zoomPercent = zoomFit;
         }
         scale = zoomPercent / 100;
         revalidate();
         zoomLabel.setZoom(this.getZoom());
     }
+   
     /**
-     * <p>
-     * Sets the current zoom minimum
-     * </p>
-     * @param zoomMin the new zoom minimum
+     * Method to calculate the appropraite scale so that the image 
+     * fits completely and maximally within a panel
+     * @param pW panel width
+     * @param pH panel height
+     * @param iW image width
+     * @param iH image height
+     * @return The appropriate scale
      */
-    public void setZoomMin(double zoomMin){
-        this.zoomMin = zoomMin;
-    }
+    private static double getFitScale(double pW, double pH, double iW, double iH){
+         double zoomFitWidth = pW/iW;
+         double zoomFitHeight = pH/iH;
 
-    /**
-     * <p>
-     * Sets the current zoom maximum
-     * </p>
-     * @param zoomMax the new zoom minimum
-     */
-    public void setZoomMax(double zoomMax){
-        this.zoomMax = zoomMax;
-    }
-
-    /**
-     * <p>
-     * Method to return current zoom minimum
-     * </p>
-     * 
-     * @return the current zoom minimum
-     */
-    public double getZoomMin(){
-        return zoomMin;
-    }
-
-    /**
-     * <p>
-     * Method to return current zoom maximum
-     * </p>
-     * 
-     * @return the current zoom maximum
-     */
-    public double getZoomMax(){
-        return zoomMax;
-    }
-
+         if (iH * zoomFitWidth < pH){
+             return zoomFitWidth;
+              //System.out.println("Zoom fit width to: " + zoomFitWidth);
+         } else {
+              return zoomFitHeight;
+             //System.out.println("Zoom fit height to: " + zoomFitHeight);
+          }
+     }
+    
     /**
      * <p>
      * Gets the preferred size of this component for UI layout.
