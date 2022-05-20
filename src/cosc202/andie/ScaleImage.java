@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  * <p>
- * resize either by %150 or %50
+ * resize either by 150% or 50%
  * </p>
  */
 public class ScaleImage implements ImageOperation, java.io.Serializable {
