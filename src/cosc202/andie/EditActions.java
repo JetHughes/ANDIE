@@ -26,6 +26,7 @@ public class EditActions {
     
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;
+    protected ArrayList<Action> shapes;
 
     /**
      * <p>
@@ -34,10 +35,15 @@ public class EditActions {
      */
     public EditActions() {
         actions = new ArrayList<Action>();
+        shapes = new ArrayList<Action>();
         actions.add(new UndoAction("Undo", null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new RedoAction("Redo", null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
-        actions.add(new DrawAction("Draw", null, "Draw Shape", KeyEvent.VK_D));
+        //actions.add(new DrawAction("Draw", null, "Draw Shape", KeyEvent.VK_D));
         actions.add(new CropAction("Crop", null, "Crop image", KeyEvent.VK_Q));
+
+        shapes.add(new DrawAction("Rectangle", null, "Draw Rectangle", KeyEvent.VK_1));
+        shapes.add(new DrawAction("Circle", null, "Draw Cirlce", KeyEvent.VK_2));
+        shapes.add(new DrawAction("Line", null, "Draw Line", KeyEvent.VK_3));
     }
 
     /**
@@ -49,9 +55,14 @@ public class EditActions {
      */
     public JMenu createMenu() {
         JMenu editMenu = new JMenu("Edit");
+        JMenu drawMenu = new JMenu("Draw");
 
         for (Action action: actions) {
             editMenu.add(new JMenuItem(action));
+        }
+        editMenu.add(drawMenu);
+        for(Action shape: shapes){
+            drawMenu.add(shape);
         }
 
         return editMenu;
@@ -154,6 +165,7 @@ public class EditActions {
      */
     public class DrawAction extends ImageAction {
 
+        private String shape;
         /**
          * <p>
          * Create a new draw action.
@@ -166,6 +178,7 @@ public class EditActions {
          */
         DrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            this.shape = name;
             putValue(Action.MNEMONIC_KEY, mnemonic);
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
@@ -183,7 +196,7 @@ public class EditActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            AreaSelect as = new AreaSelect(target, "draw");
+            AreaSelect as = new AreaSelect(target, shape);
         }
     }
 

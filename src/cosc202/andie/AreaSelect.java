@@ -35,7 +35,7 @@ public class AreaSelect implements MouseListener {
         this.target = target;
         this.type = type;
         target.addMouseListener(this);
-        if(type == "draw"){
+        if(type != "crop"){
             cs = new ColorChooser();
         }
     }
@@ -79,13 +79,13 @@ public class AreaSelect implements MouseListener {
             yEnd = n;
         }
 
-        if(type == "draw"){
-            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, cs.color));
+        if(type == "crop"){
+            target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
             target.repaint();
             target.getParent().revalidate();
         }
-        else if (type == "crop"){
-            target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
+        else{
+            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, cs.color, type));
             target.repaint();
             target.getParent().revalidate();
         }

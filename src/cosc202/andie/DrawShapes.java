@@ -1,5 +1,6 @@
 package cosc202.andie;
 
+import java.awt.Graphics2D;
 import java.awt.image.*;
 
 import javax.swing.JColorChooser;
@@ -22,6 +23,7 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
     JColorChooser tcc;
     JLabel banner;
     java.awt.Color color;
+    String shape;
     
     /**
      * <p>
@@ -38,12 +40,13 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      * @param xEnd The lower-right most co-ordinates
      * @param yEnd The lower-right most co-ordinates
      */
-    DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd, java.awt.Color color){
+    DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd, java.awt.Color color, String shape){
         this.xOrigin = xOrigin;
         this.yOrigin = yOrigin;
         this.xEnd = xEnd;
         this.yEnd = yEnd;
         this.color = color;
+        this.shape = shape;
     }
 
     /**
@@ -61,10 +64,19 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      * @return The resulting image.
      */
     public BufferedImage apply(BufferedImage input) {
-        for (int y = yOrigin; y < yEnd; y++) {
-            for (int x = xOrigin; x < xEnd; x++) {
-                input.setRGB(x, y, color.getRGB());
-            }
+        Graphics2D g2d = input.createGraphics();
+        if(shape == "Rectangle"){
+            g2d.setColor(color);
+            g2d.fillRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            g2d.dispose();
+        }else if(shape == "Circle"){
+            g2d.setColor(color);
+            g2d.fillOval(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            g2d.dispose();
+        }else{
+            g2d.setColor(color);
+            g2d.drawLine(xOrigin, yOrigin, xEnd, yEnd);
+            g2d.dispose();
         }
         return input;
     }
