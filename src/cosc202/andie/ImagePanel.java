@@ -34,6 +34,16 @@ public class ImagePanel extends JPanel {
     public ZoomLabel zoomLabel;
 
     /**
+     * Minimum zoom level
+     */
+    public double zoomMin = 50;
+
+    /**
+     * Maximum zoom level
+     */
+    public double zoomMax = 200;
+
+    /**
      * <p>
      * The zoom-level of the current view.
      * A scale of 1.0 represents actual size; 0.5 is zoomed out to half size; 1.5 is zoomed in to one-and-a-half size; and so forth.
@@ -98,17 +108,35 @@ public class ImagePanel extends JPanel {
      * @param zoomPercent The new zoom level as a percentage.
      */
     public void setZoom(double zoomPercent) {
-        if (zoomPercent < 50) {
-            zoomPercent = 50;
+        if (zoomPercent < zoomMin) {
+            zoomPercent = zoomMin;
         }
-        if (zoomPercent > 200) {
-            zoomPercent = 200;
+        if (zoomPercent > zoomMax) {
+            zoomPercent = zoomMax;
         }
         scale = zoomPercent / 100;
         revalidate();
         zoomLabel.setZoom(this.getZoom());
     }
+    /**
+     * <p>
+     * Sets the current zoom minimum
+     * </p>
+     * @param zoomMin the new zoom minimum
+     */
+    public void setZoomMin(double zoomMin){
+        this.zoomMin = zoomMin;
+    }
 
+    /**
+     * <p>
+     * Sets the current zoom maximum
+     * </p>
+     * @param zoomMax the new zoom minimum
+     */
+    public void setZoomMax(double zoomMax){
+        this.zoomMax = zoomMax;
+    }
 
     /**
      * <p>
