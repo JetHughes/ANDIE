@@ -40,9 +40,8 @@ public class RGB {
             pixelLength = 4;
         }
 
-        DataBuffer buffer = new DataBufferByte(pixels, pixels.length);
-        raster = Raster.createInterleavedRaster(buffer, width, height, pixelLength * width, pixelLength,
-                new int[] { 0, 1, 2 }, null);
+        // Retrieve and copy image data and set to an editable format
+        raster = image.getRaster();
 
     }
 
