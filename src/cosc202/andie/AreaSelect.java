@@ -70,7 +70,7 @@ public class AreaSelect implements MouseListener {
         target.removeMouseListener(this);
 
         //makes it so that all mouse movements work
-        if(!type.toLowerCase().contains("line")){
+        if(type.toLowerCase() != "line"){
             if(xOrigin > xEnd){
                 int n = xOrigin;
                 xOrigin = xEnd;
