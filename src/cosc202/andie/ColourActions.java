@@ -156,7 +156,7 @@ public class ColourActions {
                 PopUp.showMessageDialog("Error: No image to apply change to!");
 
             } else {
-                double brightness = PopUp.getSpinnerInt("Enter Brightness Value", 0, -1000, 1000, 10);
+                double brightness = PopUp.getSpinnerInt("Enter Brightness Value", 0, -200, 200, 10);
 
                 target.getImage().apply(new AdjustBrightness(brightness));
                 target.repaint();
