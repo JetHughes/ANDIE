@@ -84,6 +84,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),
                     tempImage.isAlphaPremultiplied(), null);
 
+            RGB argbClass = new RGB(output);
             // Iterate over pixels within the image
             for (int y = radius; y < output.getHeight() - radius ; y++) {
                 for (int x = radius; x < output.getWidth() - radius; x++) {
@@ -100,7 +101,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                     int innPos = 0;
                     for (int e = y - radius; e <= y + radius; e++) {
                         for (int i = x - radius; i <= x + radius; i++) {
-                            int argb = tempImage.getRGB(i, e);
+                            int argb = argbClass.getRGB(i, e);
                             int a = (argb & 0xFF000000) >> 24;
                             int r = (argb & 0x00FF0000) >> 16;
                             int g = (argb & 0x0000FF00) >> 8;
@@ -125,14 +126,16 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                     // pixel,
                     // Create new colour and transparency value equal to the median of the values
                     // within the area determined,
-                    int argb = (medianA << 24) | (medianR << 16) | (medianG << 8) | medianB;
-                    output.setRGB(x, y, argb);
+                    //int argb = (medianA << 24) | (medianR << 16) | (medianG << 8) | medianB;
+                    argbClass.setRGB(x, y, medianR, medianG, medianB, medianA);
                 }
             }
 
             // Remove extended images border
+            output = new BufferedImage(output.getColorModel(), argbClass.getRaster(), output.isAlphaPremultiplied(), null);
             output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
+            System.out.println("applied median filter");
             return output;
 
         } catch (ArrayIndexOutOfBoundsException ex) {
