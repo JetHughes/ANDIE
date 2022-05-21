@@ -26,7 +26,6 @@ public class EditActions {
     
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;
-    protected ArrayList<Action> shapes;
 
     /**
      * <p>
@@ -35,17 +34,9 @@ public class EditActions {
      */
     public EditActions() {
         actions = new ArrayList<Action>();
-        shapes = new ArrayList<Action>();
         actions.add(new UndoAction("Undo", null, "Undo", Integer.valueOf(KeyEvent.VK_Z)));
         actions.add(new RedoAction("Redo", null, "Redo", Integer.valueOf(KeyEvent.VK_Y)));
-        //actions.add(new DrawAction("Draw", null, "Draw Shape", KeyEvent.VK_D));
         actions.add(new CropAction("Crop", null, "Crop image", KeyEvent.VK_Q));
-
-        shapes.add(new DrawAction("Rectangle", null, "Draw Rectangle", KeyEvent.VK_1));
-        shapes.add(new DrawAction("Circle", null, "Draw Cirlce", KeyEvent.VK_2));
-        shapes.add(new DrawAction("Line", null, "Draw Line", KeyEvent.VK_3));
-        shapes.add(new DrawAction("Rectangle Outline", null, "Draw Rectangle Outline", KeyEvent.VK_4));
-        shapes.add(new DrawAction("Circle Outline", null, "Draw Circle Outline", KeyEvent.VK_5));
     }
 
     /**
@@ -57,14 +48,9 @@ public class EditActions {
      */
     public JMenu createMenu() {
         JMenu editMenu = new JMenu("Edit");
-        JMenu drawMenu = new JMenu("Draw");
 
         for (Action action: actions) {
             editMenu.add(new JMenuItem(action));
-        }
-        editMenu.add(drawMenu);
-        for(Action shape: shapes){
-            drawMenu.add(shape);
         }
 
         return editMenu;
@@ -161,49 +147,6 @@ public class EditActions {
 
     /**
      * <p>
-     * Action to draw a shape on the image.
-     * </p>
-     *
-     */
-    public class DrawAction extends ImageAction {
-
-        private String shape;
-        /**
-         * <p>
-         * Create a new draw action.
-         * </p>
-         * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
-         */
-        DrawAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-            this.shape = name;
-            putValue(Action.MNEMONIC_KEY, mnemonic);
-		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
-        }
-
-        /**
-         * <p>
-         * Callback for when the draw action is triggered.
-         * </p>
-         * 
-         * <p>
-         * This method is called whenever the DrawAction is triggered.
-         * It uses the DrawShapes + AreaSelect classes to draw a shape
-         * </p>
-         * 
-         * @param e The event triggering this callback.
-         */
-        public void actionPerformed(ActionEvent e) {
-            AreaSelect as = new AreaSelect(target, shape);
-        }
-    }
-
-    /**
-     * <p>
      * Action to crop an image to selection
      * </p>
      *
@@ -239,7 +182,12 @@ public class EditActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            AreaSelect ac = new AreaSelect(target, "crop");
+            if(!target.getImage().hasImage()){
+                PopUp.showMessageDialog("Error: No image to crop!");
+
+            } else {
+                AreaSelect as = new AreaSelect(target, "crop");
+            }
         }
     }
 }
