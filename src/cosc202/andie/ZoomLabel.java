@@ -7,7 +7,7 @@ import javax.swing.JLabel;
  * Class that shows the current zoom level of an {@link ImagePanel}
  */
 public class ZoomLabel extends JLabel {
-    // A DecimalFormat object to format parsed number values
+    /** A DecimalFormat object to format parsed number values */
     DecimalFormat df = new DecimalFormat("##");
 
     /**

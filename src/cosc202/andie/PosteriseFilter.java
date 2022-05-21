@@ -189,10 +189,14 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * </p>
      */
     class Point {
-        Color value; // The color value of a pixel
-        Color centroid; // A pixel's representative
-        int x; // X co-ordinate
-        int y; // Y co-ordinate
+        /** The color value of a pixel */
+        Color value;
+        /** A pixel's representative */
+        Color centroid; 
+        /** X co-ordinate */
+        int x; 
+        /** Y co-ordinate */
+        int y; 
 
         /**
          * Constructs a point with a position and a color, 

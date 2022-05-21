@@ -13,13 +13,20 @@ import java.awt.event.*;
  */
 public class AreaSelect implements MouseListener, MouseMotionListener {
     
-    int xOrigin, yOrigin, xEnd, yEnd, weight; // Values depicting the co-ordinates and weight of the image
-    double zoomLevel; // The level of the zoom applied
-    ImagePanel target; // The ImagePanel the image is to be applied to
-    String type; // The action to be applied
-    ColorChooser cs; // Colour picker instance
-    boolean released, done = false; // Boolean values representing method article completion
-    java.awt.Color color = new Color(220, 220, 220); // New Color object
+    /** Values depicting the co-ordinates and weight of the image */
+    int xOrigin, yOrigin, xEnd, yEnd, weight;
+    /** The level of the zoom applied */
+    double zoomLevel;
+    /** The ImagePanel the image is to be applied to */
+    ImagePanel target;
+    /** The action to be applied */
+    String type;
+    /** Colour picker instance */
+    ColorChooser cs;
+    /** Boolean values representing method article completion */
+    boolean released, done = false;
+    /** New Color object */
+    java.awt.Color color = new Color(220, 220, 220);
 
     /**
      * <p>

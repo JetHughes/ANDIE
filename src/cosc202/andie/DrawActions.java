@@ -68,8 +68,8 @@ public class DrawActions {
      *
      */
     public class DrawAction extends ImageAction {
-
-        private String shape; // The shape to be drawn
+        /** The shape to be drawn */
+        private String shape;
         /**
          * <p>
          * Create a new draw action.

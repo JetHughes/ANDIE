@@ -415,6 +415,7 @@ public class EditableImage {
      * Saves macro ops file.
      * </p>
      * @param macroFilePath the file path of the macro
+     * @throws FileNotFoundException if file does not exist
      */
     public void saveRecording(String macroFilePath) throws FileNotFoundException {
         

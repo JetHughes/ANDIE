@@ -17,11 +17,16 @@ import java.awt.image.*;
  */
 public class RGB {
 
-    private int width; // The width of the image
-    private boolean hasAlpha; // Represents whether the image has an alpha value
-    private int pixelLength; // The number of colour bands in the image (3 or 4 dependent on hasAlpha)
-    private byte[] pixels; // An array representing the colour values of pixels in the image
-    private WritableRaster raster; // An editable raster representing the pixel colour values in the new image
+    /** The width of the image */
+    private int width; 
+    /** Represents whether the image has an alpha value */
+    private boolean hasAlpha;
+    /** The number of colour bands in the image (3 or 4 dependent on hasAlpha) */ 
+    private int pixelLength;
+    /** An array representing the colour values of pixels in the image */ 
+    private byte[] pixels; 
+    /** An editable raster representing the pixel colour values in the new image */
+    private WritableRaster raster; 
 
     /**
      * Constructor method for the class, generates all required data used later for

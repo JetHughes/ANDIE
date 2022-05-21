@@ -17,11 +17,16 @@ import java.awt.*;
  */
 public class DrawShapes implements ImageOperation, java.io.Serializable {
 
-    int xOrigin, yOrigin, xEnd, yEnd, weight; // Co-ordinate values
-    JColorChooser tcc; // Color chooser instance
-    JLabel banner; // Banner label object
-    java.awt.Color color; // Color object to be applied
-    String type; // The type of operation to be applied
+    /** Co-ordinate values */
+    int xOrigin, yOrigin, xEnd, yEnd, weight;
+    /** Color chooser instance */
+    JColorChooser tcc;
+    /** Banner label object */
+    JLabel banner;
+    /** Color object to be applied */
+    java.awt.Color color;
+    /** The type of operation to be applied */
+    String type;
     
     /**
      * <p>
