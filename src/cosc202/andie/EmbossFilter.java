@@ -21,7 +21,7 @@ public class EmbossFilter implements ImageOperation {
      * The direction of the embossing effect
      * </p>
      */
-    int direction = 1;
+    int direction = 0;
 
     /**
      * <p>
@@ -62,7 +62,7 @@ public class EmbossFilter implements ImageOperation {
      */
     public BufferedImage apply(BufferedImage input) {
 
-        BufferedImage output = Convoluter.applyConvolution(input, kernels[direction-1], 127);
+        BufferedImage output = Convoluter.applyConvolution(input, kernels[direction], 127);
 
         return output;
     }
