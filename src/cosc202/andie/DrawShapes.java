@@ -2,9 +2,9 @@ package cosc202.andie;
 
 import java.awt.Graphics2D;
 import java.awt.image.*;
-
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
+import java.awt.*;
 
 /**
  * <p>
@@ -19,11 +19,11 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
     /**
     * The co-ordinate values for the shape to be drawn
     */
-    int xOrigin, yOrigin, xEnd, yEnd;
+    int xOrigin, yOrigin, xEnd, yEnd, weight;
     JColorChooser tcc;
     JLabel banner;
     java.awt.Color color;
-    String shape;
+    String type;
     
     /**
      * <p>
@@ -40,13 +40,14 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      * @param xEnd The lower-right most co-ordinates
      * @param yEnd The lower-right most co-ordinates
      */
-    DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd, java.awt.Color color, String shape){
+    DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd, java.awt.Color color, String type, int weight){
         this.xOrigin = xOrigin;
         this.yOrigin = yOrigin;
         this.xEnd = xEnd;
         this.yEnd = yEnd;
         this.color = color;
-        this.shape = shape;
+        this.type = type;
+        this.weight = weight;
     }
 
     /**
@@ -65,17 +66,28 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      */
     public BufferedImage apply(BufferedImage input) {
         Graphics2D g2d = input.createGraphics();
-        if(shape == "Rectangle"){
+        if(type.toLowerCase().contains("rectangle")){
             g2d.setColor(color);
-            g2d.fillRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            if(type.toLowerCase().contains("line")){
+                g2d.setStroke(new BasicStroke(weight));
+                g2d.drawRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            }else{
+                g2d.fillRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            }
             g2d.dispose();
-        }else if(shape == "Circle"){
+        }else if(type.toLowerCase().contains("circle")){
             g2d.setColor(color);
-            g2d.fillOval(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            if(type.toLowerCase().contains("line")){
+                g2d.setStroke(new BasicStroke(weight));
+                g2d.drawOval(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            }else{
+                g2d.fillOval(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+            }
             g2d.dispose();
         }else{
             g2d.setColor(color);
-            g2d.drawLine(xOrigin, yOrigin, xEnd, yEnd);
+            g2d.setStroke(new BasicStroke(weight));
+            g2d.drawLine(xEnd, yEnd, xOrigin, yOrigin);
             g2d.dispose();
         }
         return input;

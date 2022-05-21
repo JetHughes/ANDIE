@@ -44,6 +44,8 @@ public class EditActions {
         shapes.add(new DrawAction("Rectangle", null, "Draw Rectangle", KeyEvent.VK_1));
         shapes.add(new DrawAction("Circle", null, "Draw Cirlce", KeyEvent.VK_2));
         shapes.add(new DrawAction("Line", null, "Draw Line", KeyEvent.VK_3));
+        shapes.add(new DrawAction("Rectangle Outline", null, "Draw Rectangle Outline", KeyEvent.VK_4));
+        shapes.add(new DrawAction("Circle Outline", null, "Draw Circle Outline", KeyEvent.VK_5));
     }
 
     /**

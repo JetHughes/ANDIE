@@ -12,11 +12,11 @@ import java.awt.event.*;
  */
 public class AreaSelect implements MouseListener {
     
-    int xOrigin, yOrigin, xEnd, yEnd;
+    int xOrigin, yOrigin, xEnd, yEnd, weight;
     double zoomLevel;
     ImagePanel target;
     String type;
-    ColorChooser cs = new ColorChooser();
+    ColorChooser cs;
 
     /**
      * <p>
@@ -36,6 +36,9 @@ public class AreaSelect implements MouseListener {
         target.addMouseListener(this);
         if(type != "crop"){
             cs = new ColorChooser();
+            if(type.toLowerCase().contains("line")){
+                weight = PopUp.getSpinnerInt("Enter Line Weight", 1, 1, 50, 1);
+            }
         }
     }
 
@@ -67,15 +70,17 @@ public class AreaSelect implements MouseListener {
         target.removeMouseListener(this);
 
         //makes it so that all mouse movements work
-        if(xOrigin > xEnd){
-            int n = xOrigin;
-            xOrigin = xEnd;
-            xEnd = n;
-        }
-        if(yOrigin > yEnd){
-            int n = yOrigin;
-            yOrigin = yEnd;
-            yEnd = n;
+        if(type != "Line"){
+            if(xOrigin > xEnd){
+                int n = xOrigin;
+                xOrigin = xEnd;
+                xEnd = n;
+            }
+            if(yOrigin > yEnd){
+                int n = yOrigin;
+                yOrigin = yEnd;
+                yEnd = n;
+            }
         }
 
         if(type == "crop"){
@@ -84,7 +89,7 @@ public class AreaSelect implements MouseListener {
             target.getParent().revalidate();
         }
         else{
-            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, cs.color, type));
+            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, cs.color, type, weight));
             target.repaint();
             target.getParent().revalidate();
         }
