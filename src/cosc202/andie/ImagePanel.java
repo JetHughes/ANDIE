@@ -36,7 +36,7 @@ public class ImagePanel extends JPanel {
     /**
      * Minimum zoom level
      */
-    public double zoomMin = 0;
+    public static double zoomMin = 0;
 
     /**
      * <p>
@@ -103,7 +103,6 @@ public class ImagePanel extends JPanel {
      * @param zoomPercent The new zoom level as a percentage.
      */
     public void setZoom(double zoomPercent) {
-        double zoomMax = 200;
         if(getImage().hasImage()){
             double imageWidth = getImage().getCurrentImage().getWidth();
             double imageHeight= getImage().getCurrentImage().getHeight();
@@ -111,13 +110,12 @@ public class ImagePanel extends JPanel {
             double panelHeight = (double)getParent().getHeight();
             double zoomFit = getFitScale(panelWidth, panelHeight, imageWidth, imageHeight);
             zoomFit *= 100;
-            zoomMax = zoomFit;
+            if(zoomPercent < zoomFit){
+                zoomPercent = zoomFit;
+            }
         }
         if (zoomPercent < zoomMin) {
             zoomPercent = zoomMin;
-        }
-        if(zoomPercent < zoomMax){
-            zoomPercent = zoomMax;
         }
         scale = zoomPercent / 100;
         revalidate();

@@ -37,15 +37,15 @@ public class AndieTest {
     @Test 
     void setZoomTestLowRange(){
         ImagePanel testPanel = new ImagePanel();
-        testPanel.setZoom(10);
-        Assertions.assertEquals( 50, testPanel.getZoom());
+        testPanel.setZoom(-10);
+        Assertions.assertEquals(ImagePanel.zoomMin , testPanel.getZoom());
     }
 
     @Test 
     void setZoomTestHighRange(){
         ImagePanel testPanel = new ImagePanel();
         testPanel.setZoom(400);
-        Assertions.assertEquals( 200, testPanel.getZoom());
+        Assertions.assertEquals( 400, testPanel.getZoom());
     }
     //#endregion
 
