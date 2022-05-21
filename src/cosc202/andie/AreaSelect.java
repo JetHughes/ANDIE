@@ -1,5 +1,8 @@
 package cosc202.andie;
+import java.awt.Color;
 import java.awt.event.*;
+
+import javafx.scene.shape.Rectangle;
 
 /**
  * <p>
@@ -10,13 +13,15 @@ import java.awt.event.*;
  * Selects and stores four ints representing x and y co-ordinates
  * </p>
  */
-public class AreaSelect implements MouseListener {
+public class AreaSelect implements MouseListener, MouseMotionListener {
     
     int xOrigin, yOrigin, xEnd, yEnd, weight;
     double zoomLevel;
     ImagePanel target;
     String type;
     ColorChooser cs;
+    boolean released, done = false;
+    java.awt.Color color = new Color(220, 220, 220);
 
     /**
      * <p>
@@ -34,6 +39,7 @@ public class AreaSelect implements MouseListener {
         this.target = target;
         this.type = type;
         target.addMouseListener(this);
+        target.addMouseMotionListener(this);
         if(type != "crop"){
             cs = new ColorChooser();
             if(type.toLowerCase().contains("line")){
@@ -65,9 +71,12 @@ public class AreaSelect implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        target.getImage().undo();
         xEnd = (int) (e.getX()/zoomLevel);
         yEnd = (int) (e.getY()/zoomLevel);
         target.removeMouseListener(this);
+        target.removeMouseMotionListener(this);
+        released = true;
 
         //makes it so that all mouse movements work
         if(type.toLowerCase() != "line"){
@@ -103,4 +112,19 @@ public class AreaSelect implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+        if(done){
+            target.getImage().undo();
+            done = false;
+        }
+		target.getImage().apply(new DrawShapes(xOrigin, yOrigin, e.getX(), e.getY(), color, "selecting", 1));
+        target.repaint();
+        target.getParent().revalidate();
+        done = true;
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {}
 }

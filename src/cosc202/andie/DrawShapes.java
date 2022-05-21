@@ -89,11 +89,14 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
             }
             g2d.dispose();
         }
-        else{
+        else if(type.toLowerCase().contains("line")){
             g2d.setColor(color);
             g2d.setStroke(new BasicStroke(weight));
             g2d.drawLine(xEnd, yEnd, xOrigin, yOrigin);
             g2d.dispose();
+        }else{
+            g2d.setStroke(new BasicStroke(weight));
+            g2d.drawRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
         }
         return input;
     }
