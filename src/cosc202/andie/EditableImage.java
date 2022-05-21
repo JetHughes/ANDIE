@@ -337,7 +337,7 @@ public class EditableImage {
      * <p>
      * Replaces the current .ops file.
      * </p>
-     * 
+     * @param opsFilePath file path of the .ops file
      */
     public void setOps(String opsFilePath) {
         try {
@@ -363,7 +363,7 @@ public class EditableImage {
      * <p>
      * adds operations from a .ops file to the current .ops file.
      * </p>
-     * 
+     * @param opsFilePath file path of the .ops file
      */
     public void addOps(String opsFilePath) {
         try {
@@ -394,7 +394,7 @@ public class EditableImage {
      * <p>
      * adds operations from a .ops file to the current .ops file.
      * </p>
-     * 
+     * @param recording sets status of recording variable
      */
     public void setRecording(boolean recording) {
         this.recording = recording;
@@ -414,7 +414,7 @@ public class EditableImage {
      * <p>
      * Saves macro ops file.
      * </p>
-     * 
+     * @param macroFilePath the file path of the macro
      */
     public void saveRecording(String macroFilePath) throws FileNotFoundException {
         

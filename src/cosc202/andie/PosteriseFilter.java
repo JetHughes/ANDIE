@@ -17,6 +17,9 @@ import java.util.*;
  */
 public class PosteriseFilter implements ImageOperation, java.io.Serializable {
 
+    /**
+     * An instance of the Random class
+     */
     Random r = new Random();
 
     /**
@@ -26,13 +29,14 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     
     /**
      * Construct a posterise filter with a given k value
+     * @param k the number of colors in the image to find
      */
     public PosteriseFilter (int k){
         this.k = k;
     }
 
     /**
-     * Constrct a posterise filter with the default k value of 10
+     * Construct a posterise filter with the default k value of 10
      */
     public PosteriseFilter (){
         this.k = 10;
@@ -58,8 +62,8 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
 
     /**
      * Splits a BufferedImage into a list of points. Each with an x, y coordinate, a color, and a representative centroid
-     * @param input
-     * @return
+     * @param input the input image filter is to be applied to
+     * @return returns an array of the image pixels' value
      */
     private ArrayList<Point> getPoints(BufferedImage input){
         ArrayList<Point> points = new ArrayList<>();
@@ -91,6 +95,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     /**
      * A method to place the centroids in random locations
      * @param points The complete set of points in the image
+     * @param centroids the cluster of what to find the mean of
      */
     private void distrubuteInitalCentroids(ArrayList<Point> points, Color[] centroids){
         Random r = new Random();
@@ -138,7 +143,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * Method to find the mean of a cluster of colors
      * @param points The complete set of points
      * @param centroid The cluster you want to find the mean of
-     * @return
+     * @return returns the mean color value of a cluster
      */
     private Color meanOfCluster(ArrayList<Point> points, Color centroid){
         double rSum = 0;
@@ -166,7 +171,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * Adapted from: https://stackoverflow.com/questions/23937825/calculating-the-distance-between-2-points-in-2d-and-3d
      * @param a the color of the first first pixel
      * @param b the color of the seconds second pixel
-     * @return
+     * @return returns the difference between the colors of two pixels
      */
     public double getDistance(Color a, Color b){
         double dx = a.getRed() - b.getRed();
@@ -184,17 +189,17 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * </p>
      */
     class Point {
-        Color value;
-        Color centroid;
-        int x;
-        int y;
+        Color value; // The color value of a pixel
+        Color centroid; // A pixel's representative
+        int x; // X co-ordinate
+        int y; // Y co-ordinate
 
         /**
          * Constructs a point with a position and a color, 
          * and an initial centroid that matches its color
-         * @param value
-         * @param x
-         * @param y
+         * @param value The colour of a pixel
+         * @param x The x co-ordinate of the pixel
+         * @param y The y co-ordinate of the pixel
          */
         Point(Color value, int x, int y) {
             this.value = value;

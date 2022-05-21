@@ -16,14 +16,12 @@ import java.awt.*;
  * </p>
  */
 public class DrawShapes implements ImageOperation, java.io.Serializable {
-    /**
-    * The co-ordinate values for the shape to be drawn
-    */
-    int xOrigin, yOrigin, xEnd, yEnd, weight;
-    JColorChooser tcc;
-    JLabel banner;
-    java.awt.Color color;
-    String type;
+
+    int xOrigin, yOrigin, xEnd, yEnd, weight; // Co-ordinate values
+    JColorChooser tcc; // Color chooser instance
+    JLabel banner; // Banner label object
+    java.awt.Color color; // Color object to be applied
+    String type; // The type of operation to be applied
     
     /**
      * <p>
@@ -39,6 +37,9 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      * @param yOrigin The upper-left most co-ordinates
      * @param xEnd The lower-right most co-ordinates
      * @param yEnd The lower-right most co-ordinates
+     * @param color The colour to be applied
+     * @param type The type of operation to be applied
+     * @param weight The width of the drawn line
      */
     DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd, java.awt.Color color, String type, int weight){
         this.xOrigin = xOrigin;

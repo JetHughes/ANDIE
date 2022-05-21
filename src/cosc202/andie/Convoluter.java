@@ -110,6 +110,12 @@ public class Convoluter {
         return val; //otherwise do nothing
     }
 
+    /**
+     * 
+     * @param flat a flattened array representing the image pixels
+     * @return returns a 2D array of the image's pixel values
+     * @throws Exception if invalid file or image type parsed
+     */
     private static float[][] getSquareArray(float[] flat) throws Exception{
         int radius = (int)Math.sqrt(flat.length);
 
