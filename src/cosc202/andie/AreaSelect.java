@@ -37,7 +37,7 @@ public class AreaSelect implements MouseListener {
         if(type != "crop"){
             cs = new ColorChooser();
             if(type.toLowerCase().contains("line")){
-                weight = Math.abs(PopUp.getSpinnerInt("Enter Line Weight", 1, 1, 50, 1));
+                weight = Math.abs(PopUp.getSpinnerInt("Enter Line Weight", 1, 1, 50, 5));
             }
         }
     }

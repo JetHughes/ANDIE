@@ -310,7 +310,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 50, 1);
+                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 50, 5);
                 if(k != -1){
                     target.getImage().apply(new PosteriseFilter(k));
                     target.repaint();
