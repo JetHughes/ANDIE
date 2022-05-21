@@ -41,7 +41,7 @@ public class PopUp {
     public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
         SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
 
-        JSlider Slider = new JSlider(JSlider.HORIZONTAL, min - 1, max, defaultValue);
+        JSlider Slider = new JSlider(JSlider.HORIZONTAL, -100, 100, defaultValue);
         Slider.setPaintLabels(true);
 
         //Slider.createStandardLabels(10, 1);
@@ -49,7 +49,7 @@ public class PopUp {
         Slider.setPaintTrack(true);
         Slider.setPaintTicks(true);
         Slider.setPaintLabels(true);
-        Slider.setMajorTickSpacing(10);
+        Slider.setMajorTickSpacing(50);
         Slider.setMinorTickSpacing(5);
 
         int option = JOptionPane.showOptionDialog(null, Slider, prompt + " | Min: " + min + "\t | Max: " + max,
