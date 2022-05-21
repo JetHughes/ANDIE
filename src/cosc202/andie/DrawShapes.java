@@ -66,25 +66,30 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      */
     public BufferedImage apply(BufferedImage input) {
         Graphics2D g2d = input.createGraphics();
+        
         if(type.toLowerCase().contains("rectangle")){
             g2d.setColor(color);
             if(type.toLowerCase().contains("line")){
                 g2d.setStroke(new BasicStroke(weight));
                 g2d.drawRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
-            }else{
+            }
+            else{
                 g2d.fillRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
             }
             g2d.dispose();
-        }else if(type.toLowerCase().contains("circle")){
+        }
+        else if(type.toLowerCase().contains("circle")){
             g2d.setColor(color);
             if(type.toLowerCase().contains("line")){
                 g2d.setStroke(new BasicStroke(weight));
                 g2d.drawOval(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
-            }else{
+            }
+            else{
                 g2d.fillOval(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
             }
             g2d.dispose();
-        }else{
+        }
+        else{
             g2d.setColor(color);
             g2d.setStroke(new BasicStroke(weight));
             g2d.drawLine(xEnd, yEnd, xOrigin, yOrigin);
