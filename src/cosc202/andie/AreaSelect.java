@@ -2,8 +2,6 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.event.*;
 
-import javafx.scene.shape.Rectangle;
-
 /**
  * <p>
  * Class to select an area for an operation
