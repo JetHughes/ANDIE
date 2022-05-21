@@ -84,18 +84,7 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
             float[] array = new float[size];
             Arrays.fill(array, 1.0f / size);
 
-            Kernel kernel = new Kernel(2 * radius + 1, 2 * radius + 1, array);
-            ConvolveOp convOp = new ConvolveOp(kernel);
-
-            // Apply image extension
-            BufferedImage tempImage = ImgExtend.extend(input, radius);
-
-            BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),
-                    tempImage.isAlphaPremultiplied(), null);
-            convOp.filter(tempImage, output);
-
-            // Remove added border
-            output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
+            BufferedImage output = Convoluter.applyConvolution(input, array, 0);
 
             return output;
         } catch (ArrayIndexOutOfBoundsException ex) {
