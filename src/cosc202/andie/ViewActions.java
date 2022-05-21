@@ -136,7 +136,7 @@ public class ViewActions {
 
         /**
          * <p>
-         * Callback for when the zoom-iout action is triggered.
+         * Callback for when the zoom-out action is triggered.
          * </p>
          * 
          * <p>
