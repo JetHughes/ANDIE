@@ -109,7 +109,10 @@ public class ImagePanel extends JPanel {
             double panelWidth = (double)getParent().getWidth();
             double panelHeight = (double)getParent().getHeight();
             double zoomFit = getFitScale(panelWidth, panelHeight, imageWidth, imageHeight);
+            //as a percentage
             zoomFit *= 100;
+            //allows zooming out to 1/4 of the image size
+            zoomFit *= 0.25;
             if(zoomPercent < zoomFit){
                 zoomPercent = zoomFit;
             }
