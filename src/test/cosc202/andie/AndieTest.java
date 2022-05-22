@@ -13,8 +13,6 @@ import cosc202.andie.PosteriseFilter;
 import cosc202.andie.FlipImage;
 import cosc202.andie.EditableImage;
 
-import java.awt.Color;
-
 public class AndieTest {
 
     @Test 
