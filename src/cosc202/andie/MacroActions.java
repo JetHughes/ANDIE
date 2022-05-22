@@ -71,8 +71,6 @@ public class MacroActions {
          */
         StartRecordMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            //putValue(Action.MNEMONIC_KEY, mnemonic);
-            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
         /**
          * <p>
@@ -88,7 +86,6 @@ public class MacroActions {
          */
         public void actionPerformed(ActionEvent e){
             if(!target.getImage().hasImage()){
-                //System.out.println("Export error handling");
                 PopUp.showMessageDialog("Error: Load an image before starting to record!");
 
             }
@@ -118,8 +115,6 @@ public class MacroActions {
          */
         StopRecordMacro(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            //putValue(Action.MNEMONIC_KEY, mnemonic);
-            //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
         /**
          * <p>
@@ -135,7 +130,6 @@ public class MacroActions {
          */
         public void actionPerformed(ActionEvent e){
             if(!target.getImage().hasImage()){
-                //System.out.println("Export error handling");
                 PopUp.showMessageDialog("Error: There is no image present!");
 
             } else if(!target.getImage().getRecording()){
@@ -167,10 +161,6 @@ public class MacroActions {
                         System.out.println(ex);
                     }
                 }
-                
-                
-               
-
             }
         }
     }
@@ -200,14 +190,13 @@ public class MacroActions {
          * 
          * <p>
          * This method is called whenever the ApplyRecord is triggered.
-         * It applys the effect of an .obs file to an image.
+         * It applys the effect of an .ops file to an image.
          * </p>
          * 
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e){
             if(!target.getImage().hasImage()){
-                //System.out.println("Export error handling");
                 PopUp.showMessageDialog("Error: There is no image loaded to apply changes to!");
 
             } else {
@@ -239,11 +228,7 @@ public class MacroActions {
                         return;
                         
                     }
-                }
-                
-
-
-                 
+                } 
             }
         }
     }

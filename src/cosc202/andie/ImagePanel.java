@@ -98,7 +98,7 @@ public class ImagePanel extends JPanel {
      * 
      * <p>
      * The percentage zoom is used for the external interface, where 100% is the original size, 50% is half-size, etc. 
-     * The zoom level is restricted to the range [50, 200].
+     * The most it will zoom out is 1/4 the image size and there is no max zoom in.
      * </p>
      * @param zoomPercent The new zoom level as a percentage.
      */
@@ -140,10 +140,8 @@ public class ImagePanel extends JPanel {
 
          if (iH * zoomFitWidth < pH){
              return zoomFitWidth;
-              //System.out.println("Zoom fit width to: " + zoomFitWidth);
          } else {
               return zoomFitHeight;
-             //System.out.println("Zoom fit height to: " + zoomFitHeight);
           }
      }
     
