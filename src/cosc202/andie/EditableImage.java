@@ -39,7 +39,7 @@ public class EditableImage {
     /** <p> The sequence of operations currently applied to the image. </p> */
     private Stack<ImageOperation> ops;
     /** <p> A memory of 'undone' operations to support 'redo'. </p> */
-    private Stack<ImageOperation> redoOps;
+    Stack<ImageOperation> redoOps;
     /** <p> The file where the original image is stored/ </p> */
     private String imageFilename;
     /** <p> The file where the operation sequence is stored. </p> */
