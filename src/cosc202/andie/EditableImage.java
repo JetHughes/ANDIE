@@ -220,7 +220,7 @@ public class EditableImage {
             PopUp.showMessageDialog("Error: There is nothing to save!");
         } catch (Exception ex){
             System.out.println(ex);
-            PopUp.showMessageDialog("Unkown Error has occured");
+            PopUp.showMessageDialog(ex.getMessage());
         } 
     }
 
@@ -434,7 +434,7 @@ public class EditableImage {
             
         } catch (Exception ex) {
             System.out.println(ex);
-            PopUp.showMessageDialog("Unkown Error has occured");
+            PopUp.showMessageDialog(ex.getMessage());
         }
     }
     
