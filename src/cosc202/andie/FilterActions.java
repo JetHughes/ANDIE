@@ -359,12 +359,10 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int direction = PopUp.getSpinnerInt("Entry type 1-10", 1, 1, 9, 1);
-                if(direction != -1){
-                    target.getImage().apply(new EmbossFilter(direction));
-                    target.repaint();
-                    target.getParent().revalidate();
-                }
+                int direction = PopUp.getSpinnerInt("Entry type 0-9", 0, 0, 9, 1);
+                target.getImage().apply(new EmbossFilter(direction));
+                target.repaint();
+                target.getParent().revalidate();
             }
         }
     }
