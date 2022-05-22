@@ -27,6 +27,7 @@ public class EmbossFilter implements ImageOperation {
      * <p>
      * Constructor method for the EmbossFilter class
      * </p>
+     * @param type the type of operation to be applied
      */
     public EmbossFilter(int type) {
         this.direction = type;
@@ -37,6 +38,9 @@ public class EmbossFilter implements ImageOperation {
      */
     public EmbossFilter() {}
 
+    /**
+     * 3D array containing all kernel variations
+     */
     private float[][][] kernels = {
         {{0, 0, 0},{1, 0, -1},{0, 0, 0}},
         {{0, 0, 0},{-1, 0, 1},{0, 0, 0}},

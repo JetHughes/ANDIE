@@ -16,13 +16,16 @@ import java.awt.*;
  * </p>
  */
 public class DrawShapes implements ImageOperation, java.io.Serializable {
-    /**
-    * The co-ordinate values for the shape to be drawn
-    */
+
+    /** Co-ordinate values */
     int xOrigin, yOrigin, xEnd, yEnd, weight;
+    /** Color chooser instance */
     JColorChooser tcc;
+    /** Banner label object */
     JLabel banner;
+    /** Color object to be applied */
     java.awt.Color color;
+    /** The type of operation to be applied */
     String type;
     
     /**
@@ -39,6 +42,9 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
      * @param yOrigin The upper-left most co-ordinates
      * @param xEnd The lower-right most co-ordinates
      * @param yEnd The lower-right most co-ordinates
+     * @param color The colour to be applied
+     * @param type The type of operation to be applied
+     * @param weight The width of the drawn line
      */
     DrawShapes(int xOrigin, int yOrigin, int xEnd, int yEnd, java.awt.Color color, String type, int weight){
         this.xOrigin = xOrigin;
@@ -89,11 +95,14 @@ public class DrawShapes implements ImageOperation, java.io.Serializable {
             }
             g2d.dispose();
         }
-        else{
+        else if(type.toLowerCase().contains("line")){
             g2d.setColor(color);
             g2d.setStroke(new BasicStroke(weight));
             g2d.drawLine(xEnd, yEnd, xOrigin, yOrigin);
             g2d.dispose();
+        }else{
+            g2d.setStroke(new BasicStroke(weight));
+            g2d.drawRect(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
         }
         return input;
     }

@@ -36,7 +36,7 @@ public class PopUp {
      * @param min The last numbe in the sequence
      * @param max The fist number in the sequence
      * @param stepSize The difference between numbers in the sequence
-     * @return
+     * @return returns value of spinner
      */
     public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
         SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);

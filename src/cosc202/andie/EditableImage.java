@@ -39,7 +39,7 @@ public class EditableImage {
     /** <p> The sequence of operations currently applied to the image. </p> */
     private Stack<ImageOperation> ops;
     /** <p> A memory of 'undone' operations to support 'redo'. </p> */
-    private Stack<ImageOperation> redoOps;
+    Stack<ImageOperation> redoOps;
     /** <p> The file where the original image is stored/ </p> */
     private String imageFilename;
     /** <p> The file where the operation sequence is stored. </p> */
@@ -337,7 +337,7 @@ public class EditableImage {
      * <p>
      * Replaces the current .ops file.
      * </p>
-     * 
+     * @param opsFilePath file path of the .ops file
      */
     public void setOps(String opsFilePath) {
         try {
@@ -363,7 +363,7 @@ public class EditableImage {
      * <p>
      * adds operations from a .ops file to the current .ops file.
      * </p>
-     * 
+     * @param opsFilePath file path of the .ops file
      */
     public void addOps(String opsFilePath) {
         try {
@@ -394,7 +394,7 @@ public class EditableImage {
      * <p>
      * adds operations from a .ops file to the current .ops file.
      * </p>
-     * 
+     * @param recording sets status of recording variable
      */
     public void setRecording(boolean recording) {
         this.recording = recording;
@@ -414,7 +414,8 @@ public class EditableImage {
      * <p>
      * Saves macro ops file.
      * </p>
-     * 
+     * @param macroFilePath the file path of the macro
+     * @throws FileNotFoundException if file does not exist
      */
     public void saveRecording(String macroFilePath) throws FileNotFoundException {
         

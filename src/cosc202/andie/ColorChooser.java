@@ -13,6 +13,7 @@ import javax.swing.*;
  * </p>
  */
 public class ColorChooser extends JFrame {
+    /** A new Color object */
     Color color;
 
     /**
