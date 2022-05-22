@@ -18,6 +18,13 @@ public class Convoluter {
      */
     public static BufferedImage applyConvolution(BufferedImage input, float[][] kernel, int offset) {
 
+        for (float[] fs : kernel) {
+            for (float f : fs) {
+                System.out.print(f + ", ");
+            }
+            System.out.println();
+        }
+
         //read image to 3d array
         float[][][] image = new float[4][input.getWidth()][input.getHeight()];
         // Faster (but more memory intensive) method of retrieving and setting an images colour values
@@ -79,14 +86,18 @@ public class Convoluter {
         float out = 0;
         int radius = (kernel.length-1)/2;
         //multiply the kernel matrix with the sub-matrix of the input surrounding the givel pixel
-        for (int i = 0; i < kernel.length; i++) {
-            for(int j = 0; j < kernel[i].length; j++) {
-                //We subtract the radius from the x, y values so that the kernel is "centered" on the pixel
-                //This means some pixels will be "outside" of the image
-                //So we constrain these pixels to the nearest valid pixel
-                int constrainedX = constrain(x+i-radius, input.length);
-                int constrainedY = constrain(y+i-radius, input[i].length);
-                out += (kernel[i][j] * input[constrainedX][constrainedY]);
+        //We subtract the radius from the x, y values so that the kernel is "centered" on the pixel
+        //This means some pixels will be "outside" of the image
+        //So we constrain these pixels to the nearest valid pixel
+        for (int kernelX = -radius; kernelX <= radius; kernelX++) {
+            for(int kernelY = -radius; kernelY <= radius; kernelY++) {
+                int constrainedX = constrain(x+kernelX, input.length);
+                int constrainedY = constrain(y+kernelY, input[0].length);
+
+                float kernelVal = kernel[kernelX+1][kernelY+1];
+                float imageVal = input[constrainedX][constrainedY];
+
+                out += (kernelVal * imageVal);
             }
         }
         //We also need to ensure the pixel does not go outside the range 0-255
