@@ -98,8 +98,8 @@ public class Convoluter {
     /**
      * Constrains a value to a range. 
      * Values below the range are set to zero
-     * Values above the reange are set to the maximum
-     * Values within the range are unchagned
+     * Values above the range are set to the maximum
+     * Values within the range are unchanged
      * @param val the value to be constrained
      * @param range the range to constrain the value to
      * @return a value within the range

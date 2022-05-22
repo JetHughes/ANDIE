@@ -21,7 +21,8 @@ public class EmbossFilter implements ImageOperation {
      * The direction of the embossing effect
      * </p>
      */
-    int direction = 0;
+    //int direction = 0;
+    String type;
 
     /**
      * <p>
@@ -29,8 +30,8 @@ public class EmbossFilter implements ImageOperation {
      * </p>
      * @param type the type of operation to be applied
      */
-    public EmbossFilter(int type) {
-        this.direction = type;
+    public EmbossFilter(String type) {
+        this.type = type;
     }
 
     /**
@@ -65,6 +66,7 @@ public class EmbossFilter implements ImageOperation {
      * @return The resulting (embossed) image.
      */
     public BufferedImage apply(BufferedImage input) {
+        int direction = Integer.parseInt(String.valueOf(type.charAt(type.length()-1)));
 
         BufferedImage output = Convoluter.applyConvolution(input, kernels[direction], 127);
 
