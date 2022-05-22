@@ -14,7 +14,7 @@ import java.awt.image.*;
  * </p>
  * 
  **/
-public class EmbossFilter implements ImageOperation {
+public class EmbossFilter implements ImageOperation, java.io.Serializable {
     
     /**
      * <p>
