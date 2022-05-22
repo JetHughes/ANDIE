@@ -152,8 +152,8 @@ public class AndieTest {
     //#region Posterise Tests
     @Test
     void testGetDistance(){
-        Color a = new Color(31, 78, 240);
-        Color b = new Color(228, 190, 10);
+        int a = (255 << 24) | (31 << 16) | (78 << 8) | 240;
+        int b = (255 << 24) | (228 << 16) | (190 << 8) | 10;
         PosteriseFilter p = new PosteriseFilter();
         Assertions.assertEquals(323, (int)Math.ceil(p.getDistance(a, b)));
     }

@@ -1,16 +1,15 @@
 package cosc202.andie;
 
 import java.awt.image.*;
-import java.awt.Color;
 import java.util.*;
 
 /**
  * <p>
- * ImageOperation to apply a Mean (simple blur) filter.
+ * ImageOperation to apply a Posterise filter.
  * </p>
  * 
  * <p>
- * A Mean reduced the number of colours in an image by replacing each pixel 
+ * Reduces the number of colours in an image by replacing each pixel 
  * with a representative colour, found using a k means clustering of the colours in the image
  * </p>
  *  
@@ -42,19 +41,23 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         this.k = 10;
     }
 
+    private RGB argbClass;
+
     /**
      * Applies a posterise filter to an image using the supplied k value
      * @param input the image to apply the filter to
      * @return the resulting posterised image
      */
     public BufferedImage apply(BufferedImage input) {
+        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);  
+        argbClass = new RGB(output);
+
         ArrayList<Point> points = getPoints(input);
         points = calculateCentroids(points);
-
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);  
-        
-        for (Point point : points) {            
-            output.setRGB(point.x, point.y, point.centroid.getRGB());
+   
+        for (Point point : points) {          
+            argbClass.setRGB(point.x, point.y, (point.centroid & 0x00FF0000) >> 16, (point.centroid & 0x0000FF00) >> 8, (point.centroid & 0x000000FF), 255);  
+            //output.setRGB(point.x, point.y, point.centroid.getRGB());
         }
         
         return output;
@@ -69,7 +72,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         ArrayList<Point> points = new ArrayList<>();
         for (int x = 0; x < input.getWidth(); x++) {
             for (int y = 0; y < input.getHeight(); y++) {
-                points.add(new Point(new Color(input.getRGB(x,y)), x, y));
+                points.add(new Point(argbClass.getRGB(x, y), x, y));
             }
         }
         return points;
@@ -81,7 +84,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @return An arraylist of the representative colors
      */
     private ArrayList<Point> calculateCentroids(ArrayList<Point> points){
-        Color[] centroids = new Color[k];
+        int[] centroids = new int[k];
         distrubuteInitalCentroids(points, centroids);
         assignPixels(points, centroids);
         for (int i = 0; i < 50; i++) {
@@ -97,7 +100,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @param points The complete set of points in the image
      * @param centroids the cluster of what to find the mean of
      */
-    private void distrubuteInitalCentroids(ArrayList<Point> points, Color[] centroids){
+    private void distrubuteInitalCentroids(ArrayList<Point> points, int[] centroids){
         Random r = new Random();
         
         boolean[] used = new boolean[points.size()];
@@ -111,14 +114,14 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Method to assign pixels to thier nearest centroid
+     * Method to assign pixels to their nearest centroid
      * @param points The complete set of points
      * @param centroids The list of centroids
      */
-    private void assignPixels(ArrayList<Point> points, Color[] centroids){
+    private void assignPixels(ArrayList<Point> points, int[] centroids){
         for (Point point : points) {
             double minDist = Double.MAX_VALUE;
-            for (Color centroid : centroids) {
+            for (int centroid : centroids) {
                 double dist = getDistance(point.value, centroid);
                 if(dist<minDist) {
                     minDist = dist;
@@ -133,8 +136,8 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @param points The complete set of points
      * @param centroids The current list of centroids
      */
-    private void updateCentroids(ArrayList<Point> points, Color[] centroids){
-        for (Color centroid : centroids) {
+    private void updateCentroids(ArrayList<Point> points, int[] centroids){
+        for (int centroid : centroids) {
             centroid = meanOfCluster(points, centroid);
         }
     }
@@ -145,16 +148,16 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @param centroid The cluster you want to find the mean of
      * @return returns the mean color value of a cluster
      */
-    private Color meanOfCluster(ArrayList<Point> points, Color centroid){
-        double rSum = 0;
-        double gSum = 0;
-        double bSum = 0;
-        double numPixels = 0;
+    private int meanOfCluster(ArrayList<Point> points, int centroid){
+        int rSum = 0;
+        int gSum = 0;
+        int bSum = 0;
+        int numPixels = 0;
         for (Point point : points) {
-            if(point.centroid.equals(centroid)){
-                rSum += point.value.getRed();
-                gSum += point.value.getGreen();
-                bSum += point.value.getBlue();
+            if(point.centroid == centroid){
+                rSum += (point.value & 0x00FF0000) >> 16;
+                gSum += (point.value & 0x0000FF00) >> 8;
+                bSum += (point.value & 0x000000FF);
             }
             numPixels ++;
         }
@@ -163,7 +166,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         gSum = gSum/numPixels;
         bSum = bSum/numPixels;
 
-        return new Color((int)rSum, (int)gSum, (int)bSum);
+        return (rSum << 16) | (gSum << 8) | bSum;
     }
 
     /**
@@ -173,10 +176,10 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @param b the color of the seconds second pixel
      * @return returns the difference between the colors of two pixels
      */
-    public double getDistance(Color a, Color b){
-        double dx = a.getRed() - b.getRed();
-        double dy = a.getGreen() - b.getGreen();
-        double dz = a.getBlue() - b.getBlue();
+    public double getDistance(int a, int b){
+        double dx = ((a & 0x00FF0000) >> 16) - ((b & 0x00FF0000) >> 16);
+        double dy = ((a & 0x0000FF00) >> 8) - ((b & 0x0000FF00) >> 8);
+        double dz = (a & 0x000000FF) - (b & 0x000000FF);
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
@@ -190,9 +193,9 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      */
     class Point {
         /** The color value of a pixel */
-        Color value;
+        int value;
         /** A pixel's representative */
-        Color centroid; 
+        int centroid; 
         /** X co-ordinate */
         int x; 
         /** Y co-ordinate */
@@ -205,7 +208,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
          * @param x The x co-ordinate of the pixel
          * @param y The y co-ordinate of the pixel
          */
-        Point(Color value, int x, int y) {
+        Point(int value, int x, int y) {
             this.value = value;
             this.centroid = value;
             this.x = x;
