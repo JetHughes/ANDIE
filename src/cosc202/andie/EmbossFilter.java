@@ -37,12 +37,14 @@ public class EmbossFilter implements ImageOperation {
     /**
      * Default Constructor for EmbossFilter
      */
-    public EmbossFilter() {}
+    public EmbossFilter() {
+        this.type = "0";
+    }
 
     /**
      * 3D array containing all kernel variations
      */
-    private float[][][] kernels = {
+    public float[][][] kernels = {
         {{0, 0, 0},{1, 0, -1},{0, 0, 0}},
         {{0, 0, 0},{-1, 0, 1},{0, 0, 0}},
         {{0, 0, 1},{0, 0, 0},{-1, 0, 0}},

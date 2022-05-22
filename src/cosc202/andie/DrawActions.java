@@ -104,7 +104,7 @@ public class DrawActions {
                 PopUp.showMessageDialog("Error: No image to draw on!");
 
             } else {
-                AreaSelect as = new AreaSelect(target, shape);
+                new AreaSelect(target, shape);
             }
         }
     }

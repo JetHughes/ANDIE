@@ -12,6 +12,7 @@ import cosc202.andie.MedianFilter;
 import cosc202.andie.PosteriseFilter;
 import cosc202.andie.FlipImage;
 import cosc202.andie.EditableImage;
+import cosc202.andie.EmbossFilter;
 
 public class AndieTest {
 
@@ -155,5 +156,13 @@ public class AndieTest {
         PosteriseFilter p = new PosteriseFilter();
         Assertions.assertEquals(323, (int)Math.ceil(p.getDistance(a, b)));
     }
+    //#endregion
+
+    //#region Emboss Tests
+    @Test
+    void testEmbossFilters(){
+        EmbossFilter test = new EmbossFilter();
+        Assertions.assertEquals(1, test.kernels[6][0][0]);
+        }
     //#endregion
 }

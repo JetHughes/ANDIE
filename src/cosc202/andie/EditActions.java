@@ -186,7 +186,7 @@ public class EditActions {
                 PopUp.showMessageDialog("Error: No image to crop!");
 
             } else {
-                AreaSelect as = new AreaSelect(target, "crop");
+                new AreaSelect(target, "crop");
             }
         }
     }
