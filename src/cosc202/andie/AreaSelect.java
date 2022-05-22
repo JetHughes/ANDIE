@@ -123,21 +123,21 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-        xEnd = e.getX();
-        yEnd = e.getY();
+        xEnd = (int) (e.getX()/zoomLevel);
+        yEnd = (int) (e.getY()/zoomLevel);
         if(done){
             target.getImage().undo();
             target.getImage().redoOps.pop();
             done = false;
         }
         if(xOrigin > xEnd && yOrigin > yEnd){
-            target.getImage().apply(new DrawShapes(xEnd, yEnd, xOrigin, yOrigin, color, "selecting", 1));
+            target.getImage().apply(new DrawShapes(xEnd, yEnd, xOrigin, yOrigin, color, "selecting", 2));
         }else if(xOrigin > xEnd){
-            target.getImage().apply(new DrawShapes(xEnd, yOrigin, xOrigin, yEnd, color, "selecting", 1));
+            target.getImage().apply(new DrawShapes(xEnd, yOrigin, xOrigin, yEnd, color, "selecting", 2));
         }else if(yOrigin > yEnd){
-            target.getImage().apply(new DrawShapes(xOrigin, yEnd, xEnd, yOrigin, color, "selecting", 1));
+            target.getImage().apply(new DrawShapes(xOrigin, yEnd, xEnd, yOrigin, color, "selecting", 2));
         }else{
-            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, color, "selecting", 1));
+            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, color, "selecting", 2));
         }
         target.repaint();
         target.getParent().revalidate();

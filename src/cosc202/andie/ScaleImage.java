@@ -50,9 +50,6 @@ public class ScaleImage implements ImageOperation, java.io.Serializable {
             int newWidth = (int) Math.round(input.getWidth() * scale);
             int newHeight = (int) Math.round(input.getHeight() * scale);
             BufferedImage output = new BufferedImage(newWidth, newHeight, input.getType());
-
-            // BufferedImage resized = new BufferedImage(newWidth, newHeight,
-            // input.getType());
             Graphics2D g = output.createGraphics();
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g.drawImage(input, 0, 0, newWidth, newHeight, 0, 0, input.getWidth(), input.getHeight(), null);

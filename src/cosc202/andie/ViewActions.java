@@ -94,7 +94,7 @@ public class ViewActions {
          * 
          * <p>
          * This method is called whenever the ZoomInAction is triggered.
-         * It increases the zoom level by 10%, to a maximum of 200%.
+         * It increases the zoom level by 10%.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -141,7 +141,7 @@ public class ViewActions {
          * 
          * <p>
          * This method is called whenever the ZoomOutAction is triggered.
-         * It decreases the zoom level by 10%, to a minimum of 50%.
+         * It decreases the zoom level by 10%.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -188,7 +188,7 @@ public class ViewActions {
          * 
          * <p>
          * This method is called whenever the ZoomFitAction is triggered.
-         * Makes the image maximally fit intot he panel
+         * Makes the image maximally fit into the panel
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -236,10 +236,8 @@ public class ViewActions {
 
             if (iH * zoomFitWidth < pH){
                 return zoomFitWidth;
-                //System.out.println("Zoom fit width to: " + zoomFitWidth);
             } else {
                 return zoomFitHeight;
-                //System.out.println("Zoom fit height to: " + zoomFitHeight);
             }
         }
 
@@ -278,7 +276,7 @@ public class ViewActions {
          * 
          * <p>
          * This method is called whenever the ZoomFullAction is triggered.
-         * It resets the Zoom level to 100%.
+         * It resets the Zoom level to 100% so the image can be seen in its original size.
          * </p>
          * 
          * @param e The event triggering this callback.
