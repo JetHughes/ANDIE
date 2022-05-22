@@ -94,7 +94,7 @@ public class Convoluter {
                 int constrainedX = constrain(x+kernelX, input.length);
                 int constrainedY = constrain(y+kernelY, input[0].length);
 
-                float kernelVal = kernel[kernelX+1][kernelY+1];
+                float kernelVal = kernel[kernelX+radius][kernelY+radius];
                 float imageVal = input[constrainedX][constrainedY];
 
                 out += (kernelVal * imageVal);
