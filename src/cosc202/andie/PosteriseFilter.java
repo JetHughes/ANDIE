@@ -42,7 +42,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Create an argbClass object for efficient colour controll
+     * Create an argbClass object for efficient colour control
      */
     private RGB argbClass;
 
@@ -52,8 +52,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @return the resulting posterised image
      */
     public BufferedImage apply(BufferedImage input) {
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);  
-        argbClass = new RGB(output);
+        argbClass = new RGB(input);
 
         ArrayList<Point> points = getPoints(input);
         points = calculateCentroids(points);
@@ -62,7 +61,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
             argbClass.setRGB(point.x, point.y, (point.centroid & 0x00FF0000) >> 16, (point.centroid & 0x0000FF00) >> 8, (point.centroid & 0x000000FF), 255);  
             //output.setRGB(point.x, point.y, point.centroid.getRGB());
         }
-        
+        BufferedImage output = new BufferedImage(input.getColorModel(), argbClass.getRaster(), input.isAlphaPremultiplied(), null);
         return output;
     }
 
