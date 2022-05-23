@@ -14,14 +14,15 @@ import java.awt.image.*;
  * </p>
  * 
  **/
-public class EmbossFilter implements ImageOperation {
+public class EmbossFilter implements ImageOperation, java.io.Serializable {
     
     /**
      * <p>
      * The direction of the embossing effect
      * </p>
      */
-    int direction = 0;
+    //int direction = 0;
+    String type;
 
     /**
      * <p>
@@ -29,19 +30,21 @@ public class EmbossFilter implements ImageOperation {
      * </p>
      * @param type the type of operation to be applied
      */
-    public EmbossFilter(int type) {
-        this.direction = type;
+    public EmbossFilter(String type) {
+        this.type = type;
     }
 
     /**
      * Default Constructor for EmbossFilter
      */
-    public EmbossFilter() {}
+    public EmbossFilter() {
+        this.type = "0";
+    }
 
     /**
      * 3D array containing all kernel variations
      */
-    private float[][][] kernels = {
+    public float[][][] kernels = {
         {{0, 0, 0},{1, 0, -1},{0, 0, 0}},
         {{0, 0, 0},{-1, 0, 1},{0, 0, 0}},
         {{0, 0, 1},{0, 0, 0},{-1, 0, 0}},
@@ -65,6 +68,7 @@ public class EmbossFilter implements ImageOperation {
      * @return The resulting (embossed) image.
      */
     public BufferedImage apply(BufferedImage input) {
+        int direction = Integer.parseInt(String.valueOf(type.charAt(type.length()-1)));
 
         BufferedImage output = Convoluter.applyConvolution(input, kernels[direction], 127);
 

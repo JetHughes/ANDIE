@@ -38,7 +38,7 @@ public class DrawActions {
 
     /**
      * <p>
-     * Create a menu contianing the list of Draw actions.
+     * Create a menu containing the list of Draw actions.
      * </p>
      * 
      * @return The draw menu UI element.
@@ -104,7 +104,7 @@ public class DrawActions {
                 PopUp.showMessageDialog("Error: No image to draw on!");
 
             } else {
-                AreaSelect as = new AreaSelect(target, shape);
+                new AreaSelect(target, shape);
             }
         }
     }

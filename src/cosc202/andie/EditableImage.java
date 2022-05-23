@@ -220,7 +220,7 @@ public class EditableImage {
             PopUp.showMessageDialog("Error: There is nothing to save!");
         } catch (Exception ex){
             System.out.println(ex);
-            PopUp.showMessageDialog("Unkown Error has occured");
+            PopUp.showMessageDialog(ex.getMessage());
         } 
     }
 
@@ -372,8 +372,12 @@ public class EditableImage {
             ObjectInputStream objIn = new ObjectInputStream(fileIn);
             @SuppressWarnings("unchecked")
             Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objIn.readObject();
+            Stack<ImageOperation> holder = new Stack<ImageOperation>();
             while(!opsFromFile.empty()){
-                ops.add(opsFromFile.pop());
+                holder.add(opsFromFile.pop());
+            }
+            while(!holder.empty()){
+                ops.add(holder.pop());
                 this.refresh();
             }
             
@@ -434,7 +438,7 @@ public class EditableImage {
             
         } catch (Exception ex) {
             System.out.println(ex);
-            PopUp.showMessageDialog("Unkown Error has occured");
+            PopUp.showMessageDialog(ex.getMessage());
         }
     }
     

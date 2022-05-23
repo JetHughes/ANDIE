@@ -94,6 +94,7 @@ public class MacroActions {
 
             } else {
                 target.getImage().setRecording(true);
+                target.macroLabel.setMacroLabel(true);
             }
         }
     }
@@ -136,8 +137,7 @@ public class MacroActions {
                 PopUp.showMessageDialog("Error: No recording to stop!");
 
             } else {
-                target.getImage().setRecording(false);
-
+                
                 System.out.println("Recording stopped!");
 
                 JFileChooser fileChooser = new JFileChooser();
@@ -160,6 +160,10 @@ public class MacroActions {
                     } catch (Exception ex) {
                         System.out.println(ex);
                     }
+                target.getImage().setRecording(false);
+                target.macroLabel.setMacroLabel(false);
+                } else {
+                    PopUp.showMessageDialog("Stopping canceled, recording continues");
                 }
             }
         }

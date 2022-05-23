@@ -41,13 +41,25 @@ public class FilterActions {
         actions.add(new GaussianFilterAction("Gaussian Filter", null, "Apply a gaussian filter", Integer.valueOf(KeyEvent.VK_G)));
         actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_D)));
         actions.add(new PosteriseFilterAction("Posterise Filter", null, "Apply a Posterise filter", Integer.valueOf(KeyEvent.VK_P)));
-        actions.add(new EmbossFilterAction("Emboss Filter", null, "Apply an Emboss filter", Integer.valueOf(KeyEvent.VK_E)));
+        //actions.add(new EmbossFilterAction("Emboss Filter", null, "Apply an Emboss filter", Integer.valueOf(KeyEvent.VK_E)));
+
+        actions.add(new EmbossFilterAction("Emboss0", null, "Emboss filter 0", KeyEvent.VK_0));
+        actions.add(new EmbossFilterAction("Emboss1", null, "Emboss filter 1", KeyEvent.VK_1));
+        actions.add(new EmbossFilterAction("Emboss2", null, "Emboss filter 2", KeyEvent.VK_2));
+        actions.add(new EmbossFilterAction("Emboss3", null, "Emboss filter 3", KeyEvent.VK_3));
+        actions.add(new EmbossFilterAction("Emboss4", null, "Emboss filter 4", KeyEvent.VK_4));
+        actions.add(new EmbossFilterAction("Emboss5", null, "Emboss filter 5", KeyEvent.VK_5));
+        actions.add(new EmbossFilterAction("Emboss6", null, "Emboss filter 6", KeyEvent.VK_6));
+        actions.add(new EmbossFilterAction("Emboss7", null, "Emboss filter 7", KeyEvent.VK_7));
+        actions.add(new EmbossFilterAction("Emboss8", null, "Emboss filter 8", KeyEvent.VK_8));
+        actions.add(new EmbossFilterAction("Emboss9", null, "Emboss filter 9", KeyEvent.VK_9));
 
     }
+ 
 
     /**
      * <p>
-     * Create a menu contianing the list of Filter actions.
+     * Create a menu containing the list of Filter actions.
      * </p>
      * 
      * @return The filter menu UI element.
@@ -55,8 +67,16 @@ public class FilterActions {
     public JMenu createMenu() {
         JMenu fileMenu = new JMenu("Filter");
 
-        for (Action action : actions) {
-            fileMenu.add(new JMenuItem(action));
+        for (int i = 0; i < 5; i++){
+        //for (Action action : actions) {
+            fileMenu.add(actions.get(i));
+        }
+
+        JMenu embossMenu = new JMenu("Emboss");
+        fileMenu.add(embossMenu);
+
+        for (int e = 5; e < actions.size(); e++){
+            embossMenu.add(actions.get(e));
         }
 
         return fileMenu;
@@ -328,7 +348,8 @@ public class FilterActions {
      * @see MedianFilter
      */
     public class EmbossFilterAction extends ImageAction {
-
+        /** The emboss filter to be applied */
+        private String embossFilter;
         /**
          * <p>
          * Create a new median-filter action.
@@ -341,6 +362,7 @@ public class FilterActions {
          */
         EmbossFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
+            this.embossFilter = desc;
             putValue(Action.MNEMONIC_KEY, mnemonic);
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
@@ -359,12 +381,12 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int direction = PopUp.getSpinnerInt("Entry type 1-10", 1, 1, 10, 1);
-                if(direction != -1){
-                    target.getImage().apply(new EmbossFilter(direction));
+                //int direction = PopUp.getSpinnerInt("Entry type 1-10", 1, 1, 10, 1);
+                //if(direction != -1){
+                    target.getImage().apply(new EmbossFilter(embossFilter));
                     target.repaint();
                     target.getParent().revalidate();
-                }
+                //}
             }
         }
     }

@@ -41,6 +41,9 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         this.k = 10;
     }
 
+    /**
+     * Create an argbClass object for efficient colour controll
+     */
     private RGB argbClass;
 
     /**

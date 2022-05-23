@@ -2,8 +2,6 @@ package cosc202.andie;
 
 import javax.swing.JOptionPane;
 
-import java.util.Hashtable;
-
 import javax.swing.*;
 
 /**
@@ -39,7 +37,7 @@ public class PopUp {
      * @return returns value of spinner
      */
     public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
-        SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
+        //SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
 
         if(min >= 1){
             min -= 1;
