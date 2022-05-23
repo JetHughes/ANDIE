@@ -98,6 +98,8 @@ public class HelpActions {
             l1.addElement("Exit           ");
             l1.addElement("Undo           ");
             l1.addElement("Redo           ");
+            l1.addElement("Image panning");
+            l1.addElement("Image Zooming");
             l1.addElement("Zoom In        ");
             l1.addElement("Zoom Out       ");
             l1.addElement("Zoom Fit       ");
@@ -116,6 +118,7 @@ public class HelpActions {
             l1.addElement("Flip Vertical  ");
             l1.addElement("Scale 150%     ");
             l1.addElement("Scale 50%      ");
+            
 
             l2.addElement("|                  CTRL + Shift + H");
             l2.addElement("|                  CTRL + O");
@@ -125,6 +128,8 @@ public class HelpActions {
             l2.addElement("|                  CTRL + W");
             l2.addElement("|                  CTRL + Z");
             l2.addElement("|                  CTRL + Y");
+            l2.addElement("|                  Mouse Button 1");
+            l2.addElement("|                  Mouse Scroll Wheel");
             l2.addElement("|                  CTRL + =");
             l2.addElement("|                  CTRL + -");
             l2.addElement("|                  CTRL + /");
@@ -143,6 +148,7 @@ public class HelpActions {
             l2.addElement("|                  CTRL + V");
             l2.addElement("|                  CTRL + ,");
             l2.addElement("|                  CTRL + .");
+            
             JList<String> list = new JList<>(l1);
             JList<String> list2 = new JList<>(l2);
             list.setSelectionModel(new NoSelectionModel());
