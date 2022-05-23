@@ -19,7 +19,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     /**
      * An instance of the Random class
      */
-    Random r = new Random();
+    static final Random R = new Random(1234);
 
     /**
      * The number of colors in the image to find
@@ -86,10 +86,9 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @return An arraylist of the representative colors
      */
     private ArrayList<Point> calculateCentroids(ArrayList<Point> points){
-        int[] centroids = new int[k];
-        distrubuteInitalCentroids(points, centroids);
+        int[] centroids = distrubuteInitalCentroids(points);
         assignPixels(points, centroids);
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 5; i++) {
             assignPixels(points, centroids);
             updateCentroids(points, centroids);   
         }
@@ -100,19 +99,15 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     /**
      * A method to place the centroids in random locations
      * @param points The complete set of points in the image
-     * @param centroids the cluster of what to find the mean of
      */
-    private void distrubuteInitalCentroids(ArrayList<Point> points, int[] centroids){
-        Random r = new Random();
-        
-        boolean[] used = new boolean[points.size()];
-        for (int i = 0; i < centroids.length; i++) {
+    private int[] distrubuteInitalCentroids(ArrayList<Point> points){
+        int[] centroids = new int[k];
+        for (int i = 0; i < k; i++) {
             int val;
-            do{
-                val = r.nextInt(points.size());
-            } while(used[val]);
-            centroids[i] = points.get(val).value;
+            val = points.get(R.nextInt(points.size())).value;
+            centroids[i] = val;
         }
+        return centroids;
     }
 
     /**

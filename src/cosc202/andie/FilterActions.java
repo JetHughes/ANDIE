@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.Cursor;
 
 /**
  * <p>
@@ -332,9 +333,11 @@ public class FilterActions {
             } else {
                 int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 50, 5);
                 if(k != -1){
+                    target.getParent().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     target.getImage().apply(new PosteriseFilter(k));
                     target.repaint();
                     target.getParent().revalidate();
+                    target.getParent().setCursor(new Cursor(Cursor.HAND_CURSOR));
                 }
             }
         }

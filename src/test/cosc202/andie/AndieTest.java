@@ -156,6 +156,22 @@ public class AndieTest {
         PosteriseFilter p = new PosteriseFilter();
         Assertions.assertEquals(323, (int)Math.ceil(p.getDistance(a, b)));
     }
+
+    @Test
+    void testGetDistanceMax(){
+        int a = (0 << 24) | (0 << 16) | (0 << 8) | 0;
+        int b = (255 << 24) | (255 << 16) | (255 << 8) | 255;
+        PosteriseFilter p = new PosteriseFilter();
+        Assertions.assertEquals(442, (int)Math.ceil(p.getDistance(a, b)));
+    }
+
+    @Test
+    void testGetDistanceMin(){
+        int a = (120 << 24) | (120 << 16) | (120 << 8) | 120;
+        int b = (120 << 24) | (120 << 16) | (120 << 8) | 120;
+        PosteriseFilter p = new PosteriseFilter();
+        Assertions.assertEquals(0, (int)Math.ceil(p.getDistance(a, b)));
+    }
     //#endregion
 
     //#region Emboss Tests
