@@ -18,12 +18,12 @@ public class Convoluter {
      */
     public static BufferedImage applyConvolution(BufferedImage input, float[][] kernel, int offset) {
 
-        for (float[] fs : kernel) {
-            for (float f : fs) {
-                System.out.print(f + ", ");
-            }
-            System.out.println();
-        }
+        // for (float[] fs : kernel) {
+        //     for (float f : fs) {
+        //         System.out.print(f + ", ");
+        //     }
+        //     System.out.println();
+        // }
 
         //read image to 3d array
         float[][][] image = new float[4][input.getWidth()][input.getHeight()];

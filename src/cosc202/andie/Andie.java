@@ -137,10 +137,15 @@ public class Andie {
         frame.setVisible(true);
     }
 
+    /**
+     * Function to listen for mouse action for image zoom and panning
+     */
     static class ZoomAndPanListener extends MouseAdapter {
+        /** Create a new ViewActions instance */
         ViewActions viewActions1 = new ViewActions();
+        /** Create a mouse zoom wheel action instance */
         ViewActions.ZoomController viewActions = viewActions1.new ZoomController(null, null, null, null);
-
+        /** Create a new Point object */
         private final Point pp = new Point();
 
         @Override 
