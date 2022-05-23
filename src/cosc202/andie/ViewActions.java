@@ -87,6 +87,18 @@ public class ViewActions {
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed EQUALS"));
         }
 
+
+        public void test(){
+            target.setZoom(target.getZoom()+10);
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+        public void test2(){
+            target.setZoom(target.getZoom()-10);
+            target.repaint();
+            target.getParent().revalidate();
+        }
         /**
          * <p>
          * Callback for when the zoom-in action is triggered.
@@ -134,6 +146,8 @@ public class ViewActions {
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(mnemonic, KeyEvent.CTRL_DOWN_MASK));
         }
 
+        
+        
         /**
          * <p>
          * Callback for when the zoom-out action is triggered.

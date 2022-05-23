@@ -3,7 +3,7 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
-
+import java.awt.event.*;
 
 /**
  * <p>
@@ -110,7 +110,16 @@ public class Andie {
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, scrollPane);
 
+
+
+        JViewport viewport = scrollPane.getViewport();
+        MouseAdapter mouseadapter = new ZoomAndPanListener();
+        viewport.addMouseMotionListener(mouseadapter);
+        viewport.addMouseListener(mouseadapter);
+        viewport.addMouseWheelListener(mouseadapter);
         
+
+
         Dimension minimumSize = new Dimension(100, 50);
         Dimension minimumSize2 = new Dimension(5, 50);
         sideBar.setMinimumSize(minimumSize2);
@@ -128,6 +137,39 @@ public class Andie {
         frame.setVisible(true);
     }
 
+    static class ZoomAndPanListener extends MouseAdapter {
+        ViewActions viewActions1 = new ViewActions();
+        ViewActions.ZoomInAction viewActions = viewActions1.new ZoomInAction(null, null, null, null);
+
+        private final Point pp = new Point();
+
+        @Override 
+        public void mouseDragged(MouseEvent e){
+            JViewport viewport = (JViewport)e.getSource();
+            JComponent component = (JComponent)viewport.getView();
+            Point xyofsource = e.getPoint();
+            Point pointy = viewport.getViewPosition();
+            pointy.translate(pp.x-xyofsource.x, pp.y-xyofsource.y);
+            component.scrollRectToVisible(new Rectangle(pointy, viewport.getSize()));
+            pp.setLocation(xyofsource);
+        }
+    
+        @Override 
+        public void mousePressed(MouseEvent e){
+            pp.setLocation(e.getPoint());
+        }
+
+
+        @Override 
+        public void mouseWheelMoved(MouseWheelEvent e){
+
+            if(e.getWheelRotation() == -1){
+                viewActions.test();
+            }else{
+                viewActions.test2();
+            } 
+        }
+    }
     /**
      * <p>
      * Main entry point to the ANDIE program.
