@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 /**
  * <p>
- * Class that shows the current state of recording in {@link EdiitableImage}
+ * Class that shows the current state of recording in {@link EditableImage}
  * </p>
  */
 public class MacroLabel extends JLabel {
