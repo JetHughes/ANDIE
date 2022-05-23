@@ -151,10 +151,20 @@ public class AndieTest {
     //#region Posterise Tests
     @Test
     void testGetDistance(){
-        int a = (255 << 24) | (31 << 16) | (78 << 8) | 240;
-        int b = (255 << 24) | (228 << 16) | (190 << 8) | 10;
         PosteriseFilter p = new PosteriseFilter();
-        Assertions.assertEquals(323, (int)Math.ceil(p.getDistance(a, b)));
+        Assertions.assertEquals(226, (int)Math.ceil(p.testGetDistance(255, 32, 78, 255, 228, 190)));
+    }
+
+    @Test
+    void testGetDistanceMax(){
+        PosteriseFilter p = new PosteriseFilter();
+        Assertions.assertEquals(442, (int)Math.ceil(p.testGetDistance(0, 0, 0, 255, 255, 255)));
+    }
+    
+    @Test
+    void testGetDistanceMin(){
+        PosteriseFilter p = new PosteriseFilter();
+    Assertions.assertEquals(0, (int)Math.ceil(p.testGetDistance(120, 120, 120, 120, 120, 120)));
     }
     //#endregion
 

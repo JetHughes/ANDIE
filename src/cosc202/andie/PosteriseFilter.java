@@ -1,7 +1,8 @@
 package cosc202.andie;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.awt.image.*;
-import java.util.*;
 
 /**
  * <p>
@@ -15,36 +16,42 @@ import java.util.*;
  *  
  */
 public class PosteriseFilter implements ImageOperation, java.io.Serializable {
-
     /**
      * An instance of the Random class
      */
-    Random r = new Random();
+    static final Random R = new Random();
 
     /**
      * The number of colors in the image to find
      */
-    private int k; 
+    private int k;
+
     
     /**
      * Construct a posterise filter with a given k value
+     * 
      * @param k the number of colors in the image to find
      */
-    public PosteriseFilter (int k){
+    public PosteriseFilter(int k) {
         this.k = k;
     }
-
+    
     /**
      * Construct a posterise filter with the default k value of 10
      */
-    public PosteriseFilter (){
-        this.k = 10;
+    public PosteriseFilter() {
+        this(5);
     }
-
+    
     /**
-     * Create an argbClass object for efficient colour controll
+     * Create an argbClass object for efficient colour control
      */
     private RGB argbClass;
+    
+    /**
+     * Arraylist containing information about each pixel
+     */
+    private ArrayList<Pixel> pixels = new ArrayList<Pixel>();
 
     /**
      * Applies a posterise filter to an image using the supplied k value
@@ -52,171 +59,195 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @return the resulting posterised image
      */
     public BufferedImage apply(BufferedImage input) {
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);  
-        argbClass = new RGB(output);
 
-        ArrayList<Point> points = getPoints(input);
-        points = calculateCentroids(points);
-   
-        for (Point point : points) {          
-            argbClass.setRGB(point.x, point.y, (point.centroid & 0x00FF0000) >> 16, (point.centroid & 0x0000FF00) >> 8, (point.centroid & 0x000000FF), 255);  
-            //output.setRGB(point.x, point.y, point.centroid.getRGB());
+        //read pixels
+        argbClass = new RGB(input);
+        for (int x = 0; x < input.getWidth(); x++) {
+            for (int y = 0; y < input.getHeight(); y++) {
+                int argb = argbClass.getRGB(x, y);
+                int a = (argb & 0xFF000000) >> 24;
+                int r = (argb & 0x00FF0000) >> 16;
+                int g = (argb & 0x0000FF00) >> 8;
+                int b = (argb & 0x000000FF);
+                pixels.add(new Pixel(x, y, r, g, b, a));
+            }
         }
+
+        //get inital random centroids
+        ArrayList<Centroid> centroids = initalCentroids();
         
+        //compute centroids
+        int runs = 5;
+        for (int run = 0; run < runs; run++) {
+            for (Pixel pixel : pixels) {
+                double minDist = Double.MAX_VALUE;
+                for (int i = 0; i < centroids.size(); i++) {
+                    double dist = getDistance(centroids.get(i), pixel);
+                    if(dist < minDist) {
+                        minDist = dist;
+                        pixel.clusterNo = i;
+                    }
+                }
+            }       
+            for (Centroid c : centroids) {
+                System.out.println(run + ": (" + c.r + ", " + c.g + ", " + c.b + ")");
+            }
+            centroids = recomputeCentroids(); 
+        }
+
+        //write image
+        for (Pixel pixel : pixels) {          
+            Centroid c = centroids.get(pixel.clusterNo); 
+            argbClass.setRGB(pixel.x, pixel.y, c.r, c.g, c.b, pixel.a);  
+        }
+        BufferedImage output = new BufferedImage(input.getColorModel(), argbClass.getRaster(), input.isAlphaPremultiplied(), null);
+        System.out.println("done");
         return output;
     }
 
     /**
-     * Splits a BufferedImage into a list of points. Each with an x, y coordinate, a color, and a representative centroid
-     * @param input the input image filter is to be applied to
-     * @return returns an array of the image pixels' value
+     * Randomly select k pixels for the starting points of the centroids
+     * @return An arraylist of {@link Centroid}
      */
-    private ArrayList<Point> getPoints(BufferedImage input){
-        ArrayList<Point> points = new ArrayList<>();
-        for (int x = 0; x < input.getWidth(); x++) {
-            for (int y = 0; y < input.getHeight(); y++) {
-                points.add(new Point(argbClass.getRGB(x, y), x, y));
-            }
+    private ArrayList<Centroid> initalCentroids(){
+        ArrayList<Centroid> centroids = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            int r = pixels.get(R.nextInt(pixels.size())).r;
+            int g = pixels.get(R.nextInt(pixels.size())).g;
+            int b = pixels.get(R.nextInt(pixels.size())).b;
+            
+            Centroid centroid = new Centroid(r, g, b);
+
+            centroids.add(centroid);
         }
-        return points;
+        return centroids;
     }
 
     /**
-     * Method to find the k colours (centroids) that best represent the image
-     * @param points The set of points that represents your image
-     * @return An arraylist of the representative colors
+     * Recomputer the center of each centroid
+     * @return An arraylist of {@link Centroid} each in the middle of their cluster
      */
-    private ArrayList<Point> calculateCentroids(ArrayList<Point> points){
-        int[] centroids = new int[k];
-        distrubuteInitalCentroids(points, centroids);
-        assignPixels(points, centroids);
-        for (int i = 0; i < 50; i++) {
-            assignPixels(points, centroids);
-            updateCentroids(points, centroids);   
+    private ArrayList<Centroid> recomputeCentroids(){
+        ArrayList<Centroid> centroids = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            centroids.add(calculateCentroid(i));
+        }
+        return centroids;
+    } 
+
+    /**
+     * Re-center a centroid on its cluster
+     * @param clusterNo which centroid to re-center on its cluster
+     * @return A new {@link Centroid} in the center of its cluster
+     */
+    private Centroid calculateCentroid(int clusterNo){        
+        ArrayList<Integer> pixelsInCluster = new ArrayList<>();
+        for (int i = 0; i < pixels.size(); i++) {
+            Pixel pixel = pixels.get(i);
+            if(pixel.clusterNo == clusterNo) {
+                pixelsInCluster.add(i);
+            }
+        }        
+        
+        double sumR = 0.0;
+        double sumG = 0.0;
+        double sumB = 0.0;
+        for (int i : pixelsInCluster) {
+            sumR += pixels.get(i).r;
+            sumG += pixels.get(i).g;
+            sumB += pixels.get(i).b;
         }
         
-        return points;
+        sumR /= pixelsInCluster.size();
+        sumG /= pixelsInCluster.size();
+        sumB /= pixelsInCluster.size();
+        return new Centroid((int)sumR, (int)sumG, (int)sumB);
     }
-    
+
     /**
-     * A method to place the centroids in random locations
-     * @param points The complete set of points in the image
-     * @param centroids the cluster of what to find the mean of
+     * Get the (euclidean) distance between a Centroid and a pixel
+     * @param centroid the centroid
+     * @param pixel the pixel
+     * @return A the distance between them as a double
      */
-    private void distrubuteInitalCentroids(ArrayList<Point> points, int[] centroids){
-        Random r = new Random();
-        
-        boolean[] used = new boolean[points.size()];
-        for (int i = 0; i < centroids.length; i++) {
-            int val;
-            do{
-                val = r.nextInt(points.size());
-            } while(used[val]);
-            centroids[i] = points.get(val).value;
-        }
+    public double getDistance(Centroid centroid, Pixel pixel){
+        double sum = 0;
+        sum += Math.pow(centroid.r - pixel.r, 2);
+        sum += Math.pow(centroid.g - pixel.g, 2);
+        sum += Math.pow(centroid.b - pixel.b, 2);
+
+        return Math.sqrt(sum);
     }
 
     /**
-     * Method to assign pixels to their nearest centroid
-     * @param points The complete set of points
-     * @param centroids The list of centroids
+     * Method for testing getdistance method
+     * @param r1 red value of pixel 1
+     * @param g1 green value of pixel 1
+     * @param b1 blue value of pixel 1
+     * @param r2 red value of pixel 2
+     * @param g2 green value of pixel 2
+     * @param b2 blue value of pixel 2
+     * @return The value of {@link getDistance} for a centroid and a pixel of these values
      */
-    private void assignPixels(ArrayList<Point> points, int[] centroids){
-        for (Point point : points) {
-            double minDist = Double.MAX_VALUE;
-            for (int centroid : centroids) {
-                double dist = getDistance(point.value, centroid);
-                if(dist<minDist) {
-                    minDist = dist;
-                    point.centroid = centroid;         
-                }
-            }
-        }
+    public double testGetDistance(int r1, int g1, int b1, int r2, int g2, int b2){
+        return getDistance(new Centroid(r1, g1, b1), new Pixel(0, 0, r2, g2, b2, 255));
     }
 
     /**
-     * Method which moves each centroid to the center of its cluster
-     * @param points The complete set of points
-     * @param centroids The current list of centroids
-     */
-    private void updateCentroids(ArrayList<Point> points, int[] centroids){
-        for (int centroid : centroids) {
-            centroid = meanOfCluster(points, centroid);
-        }
-    }
-
-    /**
-     * Method to find the mean of a cluster of colors
-     * @param points The complete set of points
-     * @param centroid The cluster you want to find the mean of
-     * @return returns the mean color value of a cluster
-     */
-    private int meanOfCluster(ArrayList<Point> points, int centroid){
-        int rSum = 0;
-        int gSum = 0;
-        int bSum = 0;
-        int numPixels = 0;
-        for (Point point : points) {
-            if(point.centroid == centroid){
-                rSum += (point.value & 0x00FF0000) >> 16;
-                gSum += (point.value & 0x0000FF00) >> 8;
-                bSum += (point.value & 0x000000FF);
-            }
-            numPixels ++;
-        }
-
-        rSum = rSum/numPixels;
-        gSum = gSum/numPixels;
-        bSum = bSum/numPixels;
-
-        return (rSum << 16) | (gSum << 8) | bSum;
-    }
-
-    /**
-     * Method to get the difference between the colors of two pixels, by representing their colors as points in 3d space
-     * Adapted from: https://stackoverflow.com/questions/23937825/calculating-the-distance-between-2-points-in-2d-and-3d
-     * @param a the color of the first first pixel
-     * @param b the color of the seconds second pixel
-     * @return returns the difference between the colors of two pixels
-     */
-    public double getDistance(int a, int b){
-        double dx = ((a & 0x00FF0000) >> 16) - ((b & 0x00FF0000) >> 16);
-        double dy = ((a & 0x0000FF00) >> 8) - ((b & 0x0000FF00) >> 8);
-        double dz = (a & 0x000000FF) - (b & 0x000000FF);
-        return Math.sqrt(dx * dx + dy * dy + dz * dz);
-    }
-
-    /**
-     * A helper class for the posterise filter.
+     * Helper class for Posterise filter
      * 
-     * <p>
-     * Each point represents a pixel on the image. 
-     * Its color, it's representative centroid, and it position
-     * </p>
+     * Contains a r, g and b value
      */
-    class Point {
-        /** The color value of a pixel */
-        int value;
-        /** A pixel's representative */
-        int centroid; 
-        /** X co-ordinate */
-        int x; 
-        /** Y co-ordinate */
-        int y; 
+    static class Centroid {
+        int r;
+        int g;
+        int b;
 
         /**
-         * Constructs a point with a position and a color, 
-         * and an initial centroid that matches its color
-         * @param value The colour of a pixel
-         * @param x The x co-ordinate of the pixel
-         * @param y The y co-ordinate of the pixel
+         * Constructor
+         * @param r red value
+         * @param g green value
+         * @param b blue value
          */
-        Point(int value, int x, int y) {
-            this.value = value;
-            this.centroid = value;
+        public Centroid(int r, int g, int b){
+            this.r = r;
+            this.g = g;
+            this.b = b;
+        }
+    }
+
+    /**
+     * Helper class for Posterise filter
+     * 
+     * Contains a pixels postition, separated rgba values, and which cluster it belongs to
+     */
+    static class Pixel {
+        int x;
+        int y;
+
+        int a;
+        int r;
+        int g;
+        int b;
+
+        int clusterNo;
+
+        /**
+         * Constructor
+         * @param x x position of the pixel
+         * @param y y position of the pixel
+         * @param r red value
+         * @param g green value
+         * @param b blue value
+         * @param a alpha value
+         */
+        public Pixel(int x, int y, int r, int g, int b, int a){
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
             this.x = x;
             this.y = y;
         }
     }
-
 }

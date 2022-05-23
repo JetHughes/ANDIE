@@ -81,13 +81,10 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             // Apply image extender
             BufferedImage tempImage = ImgExtend.extend(input, radius);
 
-            BufferedImage output = new BufferedImage(tempImage.getColorModel(), tempImage.copyData(null),
-                    tempImage.isAlphaPremultiplied(), null);
-
-            RGB argbClass = new RGB(output);
+            RGB argbClass = new RGB(tempImage);
             // Iterate over pixels within the image
-            for (int y = radius; y < output.getHeight() - radius ; y++) {
-                for (int x = radius; x < output.getWidth() - radius; x++) {
+            for (int y = radius; y < tempImage.getHeight() - radius ; y++) {
+                for (int x = radius; x < tempImage.getWidth() - radius; x++) {
 
                     // Initialise arrays to contain each pixel colour (and transparency) value
                     // within an area determined by the radius
@@ -132,7 +129,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             }
 
             // Remove extended images border
-            output = new BufferedImage(output.getColorModel(), argbClass.getRaster(), output.isAlphaPremultiplied(), null);
+            BufferedImage output = new BufferedImage(tempImage.getColorModel(), argbClass.getRaster(), tempImage.isAlphaPremultiplied(), null);
             output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
             System.out.println("applied median filter");

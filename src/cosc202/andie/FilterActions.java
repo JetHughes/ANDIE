@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.Cursor;
 
 /**
  * <p>
@@ -42,18 +43,18 @@ public class FilterActions {
         actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_D)));
         actions.add(new PosteriseFilterAction("Posterise Filter", null, "Apply a Posterise filter", Integer.valueOf(KeyEvent.VK_P)));
         //actions.add(new EmbossFilterAction("Emboss Filter", null, "Apply an Emboss filter", Integer.valueOf(KeyEvent.VK_E)));
-
-        actions.add(new EmbossFilterAction("Emboss0", null, "Emboss filter 0", KeyEvent.VK_0));
-        actions.add(new EmbossFilterAction("Emboss1", null, "Emboss filter 1", KeyEvent.VK_1));
-        actions.add(new EmbossFilterAction("Emboss2", null, "Emboss filter 2", KeyEvent.VK_2));
-        actions.add(new EmbossFilterAction("Emboss3", null, "Emboss filter 3", KeyEvent.VK_3));
-        actions.add(new EmbossFilterAction("Emboss4", null, "Emboss filter 4", KeyEvent.VK_4));
-        actions.add(new EmbossFilterAction("Emboss5", null, "Emboss filter 5", KeyEvent.VK_5));
-        actions.add(new EmbossFilterAction("Emboss6", null, "Emboss filter 6", KeyEvent.VK_6));
-        actions.add(new EmbossFilterAction("Emboss7", null, "Emboss filter 7", KeyEvent.VK_7));
-        actions.add(new EmbossFilterAction("Emboss8", null, "Emboss filter 8", KeyEvent.VK_8));
-        actions.add(new EmbossFilterAction("Emboss9", null, "Emboss filter 9", KeyEvent.VK_9));
-
+        
+        actions.add(new EmbossFilterAction("Emboss 1", null, "Emboss filter 0", KeyEvent.VK_0));
+        actions.add(new EmbossFilterAction("Emboss 1", null, "Emboss filter 1", KeyEvent.VK_1));
+        actions.add(new EmbossFilterAction("Emboss 2", null, "Emboss filter 2", KeyEvent.VK_2));
+        actions.add(new EmbossFilterAction("Emboss 3", null, "Emboss filter 3", KeyEvent.VK_3));
+        actions.add(new EmbossFilterAction("Emboss 4", null, "Emboss filter 4", KeyEvent.VK_4));
+        actions.add(new EmbossFilterAction("Emboss 5", null, "Emboss filter 5", KeyEvent.VK_5));
+        actions.add(new EmbossFilterAction("Emboss 6", null, "Emboss filter 6", KeyEvent.VK_6));
+        actions.add(new EmbossFilterAction("Emboss 7", null, "Emboss filter 7", KeyEvent.VK_7));
+        actions.add(new EmbossFilterAction("Sobel Vertical", null, "Emboss filter 8", KeyEvent.VK_8));
+        actions.add(new EmbossFilterAction("Sobel Horizontal", null, "Emboss filter 9", KeyEvent.VK_9));
+        
     }
  
 
@@ -129,7 +130,7 @@ public class FilterActions {
 
             } else {
                 // Determine the radius - ask the user.
-                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
+                int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
                 if(radius != -1){
                     // Create and apply the filter
                     target.getImage().apply(new MeanFilter(radius));
@@ -228,7 +229,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
+                int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
                 if(radius != -1){
                     target.getImage().apply(new GaussianFilter(radius));
                     target.repaint();
@@ -279,7 +280,7 @@ public class FilterActions {
 
             } else {
                 
-                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
+                int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
                 
                 if(radius != -1){
                     target.getImage().apply(new MedianFilter(radius));
@@ -330,11 +331,13 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 50, 5);
+                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 256, 5);
                 if(k != -1){
+                    target.getParent().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     target.getImage().apply(new PosteriseFilter(k));
                     target.repaint();
                     target.getParent().revalidate();
+                    target.getParent().setCursor(new Cursor(Cursor.HAND_CURSOR));
                 }
             }
         }
@@ -381,7 +384,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                //int direction = PopUp.getSpinnerInt("Entry type 1-10", 1, 1, 10, 1);
+                //int direction = PopUp.getSliderInt("Entry type 1-10", 1, 1, 10, 1);
                 //if(direction != -1){
                     target.getImage().apply(new EmbossFilter(embossFilter));
                     target.repaint();
