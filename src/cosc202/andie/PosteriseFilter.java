@@ -99,6 +99,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     /**
      * A method to place the centroids in random locations
      * @param points The complete set of points in the image
+     * @return k randomly selected colors from the image
      */
     private int[] distrubuteInitalCentroids(ArrayList<Point> points){
         int[] centroids = new int[k];
