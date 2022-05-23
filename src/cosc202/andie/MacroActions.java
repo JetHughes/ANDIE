@@ -94,6 +94,7 @@ public class MacroActions {
 
             } else {
                 target.getImage().setRecording(true);
+                target.macroLabel.setMacroLabel(true);
             }
         }
     }
@@ -137,7 +138,7 @@ public class MacroActions {
 
             } else {
                 target.getImage().setRecording(false);
-
+                target.macroLabel.setMacroLabel(false);
                 System.out.println("Recording stopped!");
 
                 JFileChooser fileChooser = new JFileChooser();

@@ -34,6 +34,11 @@ public class ImagePanel extends JPanel {
     public ZoomLabel zoomLabel;
 
     /**
+     * Current state of macro recording
+     */
+    public MacroLabel macroLabel;
+
+    /**
      * Minimum zoom level
      */
     public static double zoomMin = 0;
@@ -64,6 +69,8 @@ public class ImagePanel extends JPanel {
         scale = 1.0;
         zoomLabel = new ZoomLabel();
         zoomLabel.setZoom(this.getZoom());
+        macroLabel = new MacroLabel();
+        macroLabel.setMacroLabel(false);
     }
 
     /**
