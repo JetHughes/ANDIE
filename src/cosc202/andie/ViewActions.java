@@ -87,18 +87,6 @@ public class ViewActions {
 		    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed EQUALS"));
         }
 
-
-        public void test(){
-            target.setZoom(target.getZoom()+10);
-            target.repaint();
-            target.getParent().revalidate();
-        }
-
-        public void test2(){
-            target.setZoom(target.getZoom()-10);
-            target.repaint();
-            target.getParent().revalidate();
-        }
         /**
          * <p>
          * Callback for when the zoom-in action is triggered.
@@ -301,6 +289,35 @@ public class ViewActions {
             target.getParent().revalidate();
         }
 
+    }
+    /**
+     * <p>
+     * Action to manage the mouse wheel zoom actions
+     * </p>
+     * 
+     * <p>
+     * Note that this action only affects the way the image is displayed, not its actual contents.
+     * </p>
+     */
+    public class ZoomController extends ImageAction {
+        ZoomController(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        public void ZoomIn(){
+            target.setZoom(target.getZoom()+10);
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+        public void ZoomOut(){
+            target.setZoom(target.getZoom()-10);
+            target.repaint();
+            target.getParent().revalidate();
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+        }
     }
 
 

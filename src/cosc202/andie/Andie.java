@@ -139,7 +139,7 @@ public class Andie {
 
     static class ZoomAndPanListener extends MouseAdapter {
         ViewActions viewActions1 = new ViewActions();
-        ViewActions.ZoomInAction viewActions = viewActions1.new ZoomInAction(null, null, null, null);
+        ViewActions.ZoomController viewActions = viewActions1.new ZoomController(null, null, null, null);
 
         private final Point pp = new Point();
 
@@ -164,9 +164,9 @@ public class Andie {
         public void mouseWheelMoved(MouseWheelEvent e){
 
             if(e.getWheelRotation() == -1){
-                viewActions.test();
+                viewActions.ZoomIn();
             }else{
-                viewActions.test2();
+                viewActions.ZoomOut();
             } 
         }
     }
