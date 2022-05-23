@@ -130,7 +130,7 @@ public class FilterActions {
 
             } else {
                 // Determine the radius - ask the user.
-                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
+                int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
                 if(radius != -1){
                     // Create and apply the filter
                     target.getImage().apply(new MeanFilter(radius));
@@ -229,7 +229,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
+                int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
                 if(radius != -1){
                     target.getImage().apply(new GaussianFilter(radius));
                     target.repaint();
@@ -280,7 +280,7 @@ public class FilterActions {
 
             } else {
                 
-                int radius = PopUp.getSpinnerInt("Enter Filter radius", 1, 1, 10, 1);
+                int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
                 
                 if(radius != -1){
                     target.getImage().apply(new MedianFilter(radius));
@@ -331,7 +331,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 50, 5);
+                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 256, 5);
                 if(k != -1){
                     target.getParent().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     target.getImage().apply(new PosteriseFilter(k));
@@ -384,7 +384,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                //int direction = PopUp.getSpinnerInt("Entry type 1-10", 1, 1, 10, 1);
+                //int direction = PopUp.getSliderInt("Entry type 1-10", 1, 1, 10, 1);
                 //if(direction != -1){
                     target.getImage().apply(new EmbossFilter(embossFilter));
                     target.repaint();

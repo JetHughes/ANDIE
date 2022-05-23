@@ -28,16 +28,15 @@ public class PopUp {
     }
     
     /**
-     * Method to get an integer value from a JSpinner prompt
+     * Method to get an integer value from a JSlider prompt
      * @param prompt Message to show the user
      * @param defaultValue The inital value
      * @param min The last numbe in the sequence
      * @param max The fist number in the sequence
      * @param stepSize The difference between numbers in the sequence
-     * @return returns value of spinner
+     * @return returns value of slider
      */
-    public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
-        //SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
+    public static int getSliderInt(String prompt, int defaultValue, int min, int max, int stepSize){
 
         if(min >= 1){
             min -= 1;
@@ -61,6 +60,32 @@ public class PopUp {
         } else if (option == JOptionPane.OK_OPTION) {
             System.out.println(Slider.getValue());
             return  Slider.getValue();
+        }
+        return defaultValue;
+    } 
+
+    /**
+     * Method to get an integer value from a JSpinner prompt
+     * @param prompt Message to show the user
+     * @param defaultValue The inital value
+     * @param min The last numbe in the sequence
+     * @param max The fist number in the sequence
+     * @param stepSize The difference between numbers in the sequence
+     * @return returns value of spinner
+     */
+    public static int getSpinnerInt(String prompt, int defaultValue, int min, int max, int stepSize){
+        SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
+        JSpinner spinner = new JSpinner(radiusModel);
+
+        int option = JOptionPane.showOptionDialog(null, spinner, prompt + " | Min: " + min + "\t | Max: " + max,
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, defaultValue);
+
+        // Check the return value from the dialog box.
+        if (option == JOptionPane.CANCEL_OPTION) {            
+            return -1;
+        } else if (option == JOptionPane.OK_OPTION) {
+            System.out.println(radiusModel.getValue());
+            return  (int)radiusModel.getValue();
         }
         return defaultValue;
     } 
