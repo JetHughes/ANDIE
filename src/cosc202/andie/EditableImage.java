@@ -372,8 +372,12 @@ public class EditableImage {
             ObjectInputStream objIn = new ObjectInputStream(fileIn);
             @SuppressWarnings("unchecked")
             Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) objIn.readObject();
+            Stack<ImageOperation> holder = new Stack<ImageOperation>();
             while(!opsFromFile.empty()){
-                ops.add(opsFromFile.pop());
+                holder.add(opsFromFile.pop());
+            }
+            while(!holder.empty()){
+                ops.add(holder.pop());
                 this.refresh();
             }
             

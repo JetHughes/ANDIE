@@ -28,7 +28,7 @@ public class MacroLabel extends JLabel {
         if(recording){
             this.setIcon(macroIcon);
         } else {
-            this.setText("");
+            this.setIcon(null);
         }
     }
         
