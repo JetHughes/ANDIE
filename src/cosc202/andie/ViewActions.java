@@ -300,16 +300,32 @@ public class ViewActions {
      * </p>
      */
     public class ZoomController extends ImageAction {
+        /**
+         * <p>
+         * Create a new zoom controller.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
         ZoomController(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * Increases the image zoom by 10%
+         */
         public void ZoomIn(){
             target.setZoom(target.getZoom()+10);
             target.repaint();
             target.getParent().revalidate();
         }
 
+        /**
+         * Decreases the image zoom by 10%
+         */
         public void ZoomOut(){
             target.setZoom(target.getZoom()-10);
             target.repaint();
