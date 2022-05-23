@@ -25,7 +25,7 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     /** Colour picker instance */
     ColorChooser cs;
     /** Boolean values representing method article completion */
-    boolean released, done = false;
+    boolean recording, done = false;
     /** New Color object */
     java.awt.Color color = new Color(220, 220, 220);
 
@@ -64,6 +64,10 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
+        if(target.getImage().getRecording()){
+            recording = true;
+            target.getImage().setRecording(false);
+        }
         zoomLevel = target.getZoom()/100;
         xOrigin = (int) (e.getX()/zoomLevel);
         yOrigin = (int) (e.getY()/zoomLevel);
@@ -78,13 +82,13 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        target.getImage().setRecording(recording);
         target.getImage().undo();
         target.getImage().redoOps.pop();
         xEnd = (int) (e.getX()/zoomLevel);
         yEnd = (int) (e.getY()/zoomLevel);
         target.removeMouseListener(this);
         target.removeMouseMotionListener(this);
-        released = true;
 
         //makes it so that all mouse movements work
         if(type != "Draw Line"){
