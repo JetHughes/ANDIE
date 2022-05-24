@@ -5,8 +5,6 @@ import java.awt.event.*;
 
 import javax.swing.JPanel;
 
-import javafx.scene.Cursor;
-
 /**
  * <p>
  * Class to select an area for an operation
