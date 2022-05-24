@@ -43,11 +43,6 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     }
     
     /**
-     * Create an argbClass object for efficient colour control
-     */
-    private RGB argbClass;
-    
-    /**
      * Arraylist containing information about each pixel
      */
     private ArrayList<Pixel> pixels = new ArrayList<Pixel>();
@@ -58,9 +53,9 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * @return the resulting posterised image
      */
     public BufferedImage apply(BufferedImage input) {
-
+        
         //read pixels
-        argbClass = new RGB(input);
+        RGB argbClass = new RGB(input);
         for (int x = 0; x < input.getWidth(); x++) {
             for (int y = 0; y < input.getHeight(); y++) {
                 int argb = argbClass.getRGB(x, y);
@@ -216,7 +211,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * 
      * Contains a r, g and b value
      */
-    static class Centroid {
+    static class Centroid implements java.io.Serializable{
         /** The colour values of the centroid */
         int r, g, b;
 
@@ -238,7 +233,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * 
      * Contains a pixels postition, separated rgba values, and which cluster it belongs to
      */
-    static class Pixel {
+    static class Pixel implements java.io.Serializable {
         /** Integer values representing the co-ordinates of the pixel */
         int x, y;
         /** Integer values representing the colour and alpha values of a pixel */
