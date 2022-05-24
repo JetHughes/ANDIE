@@ -25,7 +25,6 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * The number of colors in the image to find
      */
     private int k;
-
     
     /**
      * Construct a posterise filter with a given k value
@@ -74,7 +73,7 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
         }
 
         //get inital random centroids
-        ArrayList<Centroid> centroids = initalCentroids();
+        ArrayList<Centroid> centroids = initalCentroids(input);
         
         //compute centroids
         int runs = 5;
@@ -112,19 +111,32 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Randomly select k pixels for the starting points of the centroids
+     * Select k pixels for the starting points of the centroids from an even, square grid
+     * @param input The to choose the centroids from
      * @return An arraylist of {@link Centroid}
      */
-    private ArrayList<Centroid> initalCentroids(){
+    private ArrayList<Centroid> initalCentroids(BufferedImage input){
         ArrayList<Centroid> centroids = new ArrayList<>();
-        for (int i = 0; i < k; i++) {
-            int r = pixels.get(R.nextInt(pixels.size())).r;
-            int g = pixels.get(R.nextInt(pixels.size())).g;
-            int b = pixels.get(R.nextInt(pixels.size())).b;
-            
-            Centroid centroid = new Centroid(r, g, b);
+        int gridDiameter = (int)Math.ceil(Math.sqrt(k));
+        double horzGap = input.getWidth()/(gridDiameter + 1);
+        double vertGap = input.getHeight()/(gridDiameter + 1);
+        for (int i = 0; i < gridDiameter; i++) {
+            for (int j = 0; j < gridDiameter; j++) {
+                if((((gridDiameter*i) + j) < k)){
+                    int x = (int)((i+1) * horzGap);    
+                    int y = (int)((j+1) * vertGap);    
 
-            centroids.add(centroid);
+                    int index = (input.getWidth() * y) + x;
+                    
+                    int r = pixels.get(index).r;
+                    int g = pixels.get(index).g;
+                    int b = pixels.get(index).b;
+                    
+                    Centroid centroid = new Centroid(r, g, b);
+        
+                    centroids.add(centroid);                
+                }
+            }
         }
         return centroids;
     }
