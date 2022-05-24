@@ -58,16 +58,16 @@ public class Andie {
         // The main content area is an ImagePanel
         JPanel sideBar = new JPanel();
         ToolBarActions toolBarActions = new ToolBarActions(); 
-
-
+        ImagePanel imagePanel = new ImagePanel();
+        sideBar.add(imagePanel.zoomLabel);
         sideBar.add(toolBarActions.createMenu());
         
         
-        ImagePanel imagePanel = new ImagePanel();
+        
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
-        sideBar.add(imagePanel.zoomLabel);
-        sideBar.add(imagePanel.macroLabel);
+        
+        
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
 
@@ -107,6 +107,7 @@ public class Andie {
         HelpActions helpactions = new HelpActions();
         menuBar.add(helpactions.createMenu());
 
+        menuBar.add(imagePanel.macroLabel);
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, scrollPane);
 
