@@ -25,13 +25,14 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     /** The action to be applied */
     String type;
     
-
+    /** New Color object */
     Color FinalColour = Andie.FinalColour;
 
 
     /** Boolean values representing method article completion */
     boolean recording, selecting = false;
 
+    /** New Color object */
     Color color = new Color(173,216,230);
     /**New JPanel object */
     JPanel window = new JPanel();

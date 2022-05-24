@@ -9,6 +9,11 @@ import java.awt.image.*;
  * default getRGB() and setRGB() methods as said methods are inefficient as they
  * conduct many checks not required for ANDIE
  * </p>
+ * <p>
+ * This class acts as the extender for filters without a set kernel, said
+ * filters are unable to be passed into the convoluter class and must be 
+ * extended elsewhere (thus this class has been created).
+ * </p>
  * Influenced by the following articles:
  * https://stackoverflow.com/questions/6319465/fast-loading-and-drawing-of-rgb-data-in-bufferedimage/12062505#12062505
  * https://stackoverflow.com/questions/6524196/java-get-pixel-array-from-image

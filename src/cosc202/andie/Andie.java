@@ -22,6 +22,9 @@ import java.awt.event.*;
  * @version 1.0
  */
 public class Andie {
+
+    /** Creates a new Color object */
+    public static Color FinalColour = Color.red;
     
     /**
      * <p>
@@ -46,9 +49,6 @@ public class Andie {
      * 
      * @throws Exception if something goes wrong.
      */
-
-    public static Color FinalColour = Color.red;
-
     private static void createAndShowGUI() throws Exception{
         
         // Set up the main GUI frame

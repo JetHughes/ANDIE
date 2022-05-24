@@ -199,9 +199,8 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * Contains a r, g and b value
      */
     static class Centroid {
-        int r;
-        int g;
-        int b;
+        /** The colour values of the centroid */
+        int r, g, b;
 
         /**
          * Constructor
@@ -222,14 +221,11 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
      * Contains a pixels postition, separated rgba values, and which cluster it belongs to
      */
     static class Pixel {
-        int x;
-        int y;
-
-        int a;
-        int r;
-        int g;
-        int b;
-
+        /** Integer values representing the co-ordinates of the pixel */
+        int x, y;
+        /** Integer values representing the colour and alpha values of a pixel */
+        int a, r, g, b;
+        /** Represents the cluster the pixel belongs to */
         int clusterNo;
 
         /**
