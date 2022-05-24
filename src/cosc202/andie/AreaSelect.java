@@ -3,6 +3,8 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.event.*;
 
+import javax.swing.JPanel;
+
 /**
  * <p>
  * Class to select an area for an operation
@@ -28,9 +30,11 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
 
 
     /** Boolean values representing method article completion */
-    boolean recording, done = false;
-    /** New Color object */
-    java.awt.Color color = new Color(220, 220, 220);
+    boolean recording, selecting = false;
+
+    Color color = new Color(173,216,230);
+    /**New JPanel object */
+    JPanel window = new JPanel();
 
     /**
      * <p>
@@ -50,6 +54,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
         this.type = type;
         target.addMouseListener(this);
         target.addMouseMotionListener(this);
+        target.add(window);
+        window.setBackground(color);
         if(type != "crop"){
 
             if(type.toLowerCase().contains("line")){
@@ -71,6 +77,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
             recording = true;
             target.getImage().setRecording(false);
         }
+        window.setVisible(true);
+        selecting = true;
         zoomLevel = target.getZoom()/100;
         xOrigin = (int) (e.getX()/zoomLevel);
         yOrigin = (int) (e.getY()/zoomLevel);
@@ -85,9 +93,7 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        target.getImage().setRecording(recording);
-        target.getImage().undo();
-        target.getImage().redoOps.pop();
+        window.setVisible(false);
         xEnd = (int) (e.getX()/zoomLevel);
         yEnd = (int) (e.getY()/zoomLevel);
         target.removeMouseListener(this);
@@ -120,6 +126,21 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     }
 
     @Override
+	public void mouseDragged(MouseEvent e) {
+        xEnd = (int) (e.getX()/zoomLevel);
+        yEnd = (int) (e.getY()/zoomLevel);
+        if(xOrigin > xEnd && yOrigin > yEnd){
+            window.setBounds(xEnd, yEnd, xOrigin - xEnd, yOrigin - yEnd);
+        }else if(xOrigin > xEnd){
+            window.setBounds(xEnd, yOrigin, xOrigin - xEnd, yEnd - yOrigin);
+        }else if(yOrigin > yEnd){
+            window.setBounds(xOrigin, yEnd, xEnd - xOrigin, yOrigin - yEnd);
+        }else{
+            window.setBounds(xOrigin, yOrigin, xEnd - xOrigin, yEnd - yOrigin);
+        }
+	}
+
+    @Override
     public void mouseClicked(MouseEvent e) {}
 
     @Override
@@ -127,29 +148,6 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-        xEnd = (int) (e.getX()/zoomLevel);
-        yEnd = (int) (e.getY()/zoomLevel);
-        if(done){
-            target.getImage().undo();
-            target.getImage().redoOps.pop();
-            done = false;
-        }
-        if(xOrigin > xEnd && yOrigin > yEnd){
-            target.getImage().apply(new DrawShapes(xEnd, yEnd, xOrigin, yOrigin, color, "selecting", 2));
-        }else if(xOrigin > xEnd){
-            target.getImage().apply(new DrawShapes(xEnd, yOrigin, xOrigin, yEnd, color, "selecting", 2));
-        }else if(yOrigin > yEnd){
-            target.getImage().apply(new DrawShapes(xOrigin, yEnd, xEnd, yOrigin, color, "selecting", 2));
-        }else{
-            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, color, "selecting", 2));
-        }
-        target.repaint();
-        target.getParent().revalidate();
-        done = true;
-	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {}
