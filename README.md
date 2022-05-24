@@ -44,6 +44,17 @@
 
 ---
 
+### Posterise Filter
+**Contributors:** Jet
+
+**Access:** Menu, Keyboard Shortcuts (Ctrl-P)
+
+**Testing:** JUnit testing of the getDistance method. Also manual printf testing of Centroid distribution
+
+**Known Issues:** Runs a bit slow, no severe bugs
+
+---
+
 ### Brightness Adjustment
 **Contributors:** Jet, Arlo
 
