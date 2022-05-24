@@ -45,13 +45,13 @@ public class FilterActions {
         //actions.add(new EmbossFilterAction("Emboss Filter", null, "Apply an Emboss filter", Integer.valueOf(KeyEvent.VK_E)));
         
         actions.add(new EmbossFilterAction("Emboss 1", null, "Emboss filter 0", KeyEvent.VK_0));
-        actions.add(new EmbossFilterAction("Emboss 1", null, "Emboss filter 1", KeyEvent.VK_1));
-        actions.add(new EmbossFilterAction("Emboss 2", null, "Emboss filter 2", KeyEvent.VK_2));
-        actions.add(new EmbossFilterAction("Emboss 3", null, "Emboss filter 3", KeyEvent.VK_3));
-        actions.add(new EmbossFilterAction("Emboss 4", null, "Emboss filter 4", KeyEvent.VK_4));
-        actions.add(new EmbossFilterAction("Emboss 5", null, "Emboss filter 5", KeyEvent.VK_5));
-        actions.add(new EmbossFilterAction("Emboss 6", null, "Emboss filter 6", KeyEvent.VK_6));
-        actions.add(new EmbossFilterAction("Emboss 7", null, "Emboss filter 7", KeyEvent.VK_7));
+        actions.add(new EmbossFilterAction("Emboss 2", null, "Emboss filter 1", KeyEvent.VK_1));
+        actions.add(new EmbossFilterAction("Emboss 3", null, "Emboss filter 2", KeyEvent.VK_2));
+        actions.add(new EmbossFilterAction("Emboss 4", null, "Emboss filter 3", KeyEvent.VK_3));
+        actions.add(new EmbossFilterAction("Emboss 5", null, "Emboss filter 4", KeyEvent.VK_4));
+        actions.add(new EmbossFilterAction("Emboss 6", null, "Emboss filter 5", KeyEvent.VK_5));
+        actions.add(new EmbossFilterAction("Emboss 7", null, "Emboss filter 6", KeyEvent.VK_6));
+        actions.add(new EmbossFilterAction("Emboss 8", null, "Emboss filter 7", KeyEvent.VK_7));
         actions.add(new EmbossFilterAction("Sobel Vertical", null, "Emboss filter 8", KeyEvent.VK_8));
         actions.add(new EmbossFilterAction("Sobel Horizontal", null, "Emboss filter 9", KeyEvent.VK_9));
         
@@ -296,7 +296,7 @@ public class FilterActions {
      * Action to posterise an image.
      * </p>
      * 
-     * @see MedianFilter
+     * @see PosteriseFilter
      */
     public class PosteriseFilterAction extends ImageAction {
 
@@ -348,7 +348,7 @@ public class FilterActions {
      * Action to emboss an image.
      * </p>
      * 
-     * @see MedianFilter
+     * @see EmbossFilter
      */
     public class EmbossFilterAction extends ImageAction {
         /** The emboss filter to be applied */
