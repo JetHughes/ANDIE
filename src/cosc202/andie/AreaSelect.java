@@ -22,8 +22,11 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     ImagePanel target;
     /** The action to be applied */
     String type;
-    /** Colour picker instance */
-    ColorChooser cs;
+    
+
+    Color FinalColour = Andie.FinalColour;
+
+
     /** Boolean values representing method article completion */
     boolean recording, done = false;
     /** New Color object */
@@ -48,7 +51,7 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
         target.addMouseListener(this);
         target.addMouseMotionListener(this);
         if(type != "crop"){
-            cs = new ColorChooser();
+
             if(type.toLowerCase().contains("line")){
                 weight = Math.abs(PopUp.getSliderInt("Enter Line Weight", 1, 1, 50, 5));
             }
@@ -110,7 +113,7 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
             target.getParent().revalidate();
         }
         else{
-            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, cs.color, type, weight));
+            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, FinalColour, type, weight));
             target.repaint();
             target.getParent().revalidate();
         }

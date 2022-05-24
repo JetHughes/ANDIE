@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
 import java.awt.event.*;
-
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
@@ -23,7 +22,7 @@ import java.awt.event.*;
  * @version 1.0
  */
 public class Andie {
-
+    
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -47,10 +46,14 @@ public class Andie {
      * 
      * @throws Exception if something goes wrong.
      */
+
+    public static Color FinalColour = Color.red;
+
     private static void createAndShowGUI() throws Exception{
+        
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
-
+        
         Image image = ImageIO.read(new File("./src/icon.png"));
         frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +62,7 @@ public class Andie {
         JPanel sideBar = new JPanel();
         ToolBarActions toolBarActions = new ToolBarActions(); 
         ImagePanel imagePanel = new ImagePanel();
+        
         sideBar.add(imagePanel.zoomLabel);
         sideBar.add(toolBarActions.createMenu());
         
@@ -109,6 +113,24 @@ public class Andie {
 
         menuBar.add(imagePanel.macroLabel);
 
+        JButton b = new JButton();
+        
+        b.setBackground(FinalColour);
+        b.setPreferredSize(new Dimension(40, 40));
+
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (b.isEnabled()) {
+                    ColorChooser CC = new ColorChooser();
+                    FinalColour = CC.color;
+                    b.setBackground(FinalColour);
+                    
+                }
+            }
+        });
+    
+        sideBar.add(b);
+
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sideBar, scrollPane);
 
 
@@ -132,8 +154,7 @@ public class Andie {
         splitPane.setEnabled( false );
         frame.setJMenuBar(menuBar);
         frame.add(splitPane);
-        
-
+        frame.setPreferredSize(new Dimension(700, 700));
         frame.pack();
         frame.setVisible(true);
     }
@@ -169,11 +190,12 @@ public class Andie {
         @Override 
         public void mouseWheelMoved(MouseWheelEvent e){
 
-            if(e.getWheelRotation() == -1){
+            
+            if(e.getWheelRotation() == -1 ){
                 viewActions.ZoomIn();
-            }else{
+            }else if(e.getWheelRotation() == 1 ){
                 viewActions.ZoomOut();
-            } 
+            }       
         }
     }
     /**
