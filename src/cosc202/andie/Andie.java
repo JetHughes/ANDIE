@@ -65,9 +65,10 @@ public class Andie {
 
 
         JLabel ZoomLabel = new JLabel("Zoom %");
-        sideBar.add(ZoomLabel);
+        
 
         sideBar.add(imagePanel.zoomLabel);
+        sideBar.add(ZoomLabel);
         sideBar.add(toolBarActions.createMenu());
         
         
