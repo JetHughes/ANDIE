@@ -62,7 +62,11 @@ public class Andie {
         JPanel sideBar = new JPanel();
         ToolBarActions toolBarActions = new ToolBarActions(); 
         ImagePanel imagePanel = new ImagePanel();
-        
+
+
+        JLabel ZoomLabel = new JLabel("Zoom %");
+        sideBar.add(ZoomLabel);
+
         sideBar.add(imagePanel.zoomLabel);
         sideBar.add(toolBarActions.createMenu());
         
@@ -110,6 +114,8 @@ public class Andie {
         //Help documentation
         HelpActions helpactions = new HelpActions();
         menuBar.add(helpactions.createMenu());
+        
+        
 
         menuBar.add(imagePanel.macroLabel);
 
