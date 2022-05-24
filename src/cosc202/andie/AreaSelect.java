@@ -24,14 +24,10 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     ImagePanel target;
     /** The action to be applied */
     String type;
-    
     /** New Color object */
     Color FinalColour = Andie.FinalColour;
-
-
     /** Boolean values representing method article completion */
     boolean recording, selecting = false;
-
     /** New Color object */
     Color color = new Color(173,216,230);
     /**New JPanel object */
@@ -74,10 +70,6 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        if(target.getImage().getRecording()){
-            recording = true;
-            target.getImage().setRecording(false);
-        }
         window.setVisible(true);
         selecting = true;
         zoomLevel = target.getZoom()/100;
