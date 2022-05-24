@@ -33,6 +33,17 @@
 
 ---
 
+### Emboss Filter
+**Contributors:** Jet, Riley
+
+**Access:** Menu, Keyboard Shortcuts (Ctrl-{1-9})
+
+**Testing** JUnit testing to ensure emboss Kernels are correct.
+
+**Known Issues:** No known issues
+
+---
+
 ### Brightness Adjustment
 **Contributors:** Jet, Arlo
 
@@ -40,7 +51,7 @@
 
 **Testing:** JUnit testing with various pixel and adjustment values
 
-**Known Issues:**
+**Known Issues:** No known issues
 
 ---
 
@@ -125,14 +136,21 @@ and flips in a row does not ruin the image or cause unexpected reults.
 
 **General Errors Caught:** Added error handling to all functions that require an image if being used without an image loaded.  Added error handling for save, open and export cases (no file, incorrect file name or type). Added error handling for empty stacks in undo and redo.  Replaced System.exit in exception handling to a less aggressive forms of handling (method exiting and/or error messages).
 
+### Image Extending/Convolution
+**Contributors:** Jet, Riley
+
+**Brief Discussion:** Convoluter class takes desired Kernel and the image and applies the Kernel in a process that extends the desired filter Kernel to the ends of the image and also accounts for negative pixel values. - Class creation headed by Jet. ImgExtend class extends the parameterised BufferedImage object to the radius of the Kernel so the filter is applied to the edges of the image. A sub image of the created image is required to remove the excess border created by the class. - Class creation headed by Riley.
+
 ---
 
 # Other Features
 
-### Continuous Integration, Testing & Javadoc
+### Continuous Integration, Testing & Javadoc Documentation
 **Contributors:** Riley
 
-**Brief Discussion:** Created JUnit testing and added in depth Javadoc commenting to all code, and added JUnit testing and Javadoc documentation to be created to the on git push into the continuous Integration pipeline.
+**Brief Discussion:** Created JUnit testing and added in depth Javadoc commenting to all code, added said functionality to the Gitlab continuous integration pipeline.
+
+---
 
 ### Zoom Fit
 **Contributors:** Jet
@@ -142,3 +160,12 @@ and flips in a row does not ruin the image or cause unexpected reults.
 **Testing:** Testing with portrait and landscape images fitting to a varitey of windows shapes and sizes.
 
 **Known Issues:** Sometimes after fitting it wont refresh
+
+---
+
+### Image Colour Getter and Setter - RGB.class
+**Contributors:** Riley
+
+**Bried Discussion:** Creates Raster object equal to that of the input image, reads colour values at given x, y values and can set argb values in the new Raster to be returned later. Purpose of class is to bypass the extremely slow Color object getRGB/setRGB methods. Without the constant colour space checking and converting the RGB class is much faster (whilst somewhat more memory intensive) and allows for larger more thorough covolution. 
+
+**Testing:** Tested with all applicable filters through the Convoluter class, or directly i.e. the Posterise or Median filter
