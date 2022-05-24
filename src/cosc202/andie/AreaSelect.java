@@ -81,8 +81,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
         window.setVisible(true);
         selecting = true;
         zoomLevel = target.getZoom()/100;
-        xOrigin = (int) (e.getX()/zoomLevel);
-        yOrigin = (int) (e.getY()/zoomLevel);
+        xOrigin = (int) (e.getX());
+        yOrigin = (int) (e.getY());
     }
 
     /**
@@ -95,8 +95,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         window.setVisible(false);
-        xEnd = (int) (e.getX()/zoomLevel);
-        yEnd = (int) (e.getY()/zoomLevel);
+        xEnd = (int) (e.getX());
+        yEnd = (int) (e.getY());
         target.removeMouseListener(this);
         target.removeMouseMotionListener(this);
 
@@ -115,12 +115,12 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
         }
 
         if(type == "crop"){
-            target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
+            target.getImage().apply(new Crop((int) (xOrigin/zoomLevel), (int) (yOrigin/zoomLevel), (int) (xEnd/zoomLevel), (int) (yEnd/zoomLevel)));
             target.repaint();
             target.getParent().revalidate();
         }
         else{
-            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, FinalColour, type, weight));
+            target.getImage().apply(new DrawShapes((int) (xOrigin/zoomLevel), (int) (yOrigin/zoomLevel), (int) (xEnd/zoomLevel), (int) (yEnd/zoomLevel), FinalColour, type, weight));
             target.repaint();
             target.getParent().revalidate();
         }
@@ -128,8 +128,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
 
     @Override
 	public void mouseDragged(MouseEvent e) {
-        xEnd = (int) (e.getX()/zoomLevel);
-        yEnd = (int) (e.getY()/zoomLevel);
+        xEnd = (int) (e.getX());
+        yEnd = (int) (e.getY());
         if(xOrigin > xEnd && yOrigin > yEnd){
             window.setBounds(xEnd, yEnd, xOrigin - xEnd, yOrigin - yEnd);
         }else if(xOrigin > xEnd){
