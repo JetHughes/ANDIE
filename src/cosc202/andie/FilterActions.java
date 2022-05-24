@@ -131,7 +131,7 @@ public class FilterActions {
             } else {
                 // Determine the radius - ask the user.
                 int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
-                if(radius != -1){
+                if(radius != -1 || radius != 0){
                     // Create and apply the filter
                     target.getImage().apply(new MeanFilter(radius));
                     target.repaint();
@@ -230,7 +230,7 @@ public class FilterActions {
 
             } else {
                 int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
-                if(radius != -1){
+                if(radius != -1  || radius != 0){
                     target.getImage().apply(new GaussianFilter(radius));
                     target.repaint();
                     target.getParent().revalidate();
@@ -282,7 +282,7 @@ public class FilterActions {
                 
                 int radius = PopUp.getSliderInt("Enter Filter radius", 1, 1, 10, 1);
                 
-                if(radius != -1){
+                if(radius != -1 || radius != 0){
                     target.getImage().apply(new MedianFilter(radius));
                     target.repaint();
                     target.getParent().revalidate();
@@ -331,7 +331,7 @@ public class FilterActions {
                 PopUp.showMessageDialog("Error: No image to apply filter to!");
 
             } else {
-                int k = PopUp.getSpinnerInt("Enter k radius", 5, 1, 256, 5);
+                int k = PopUp.getSpinnerInt("Enter k radius", 5, 5, 256, 5);
                 if(k != -1){
                     target.getParent().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     target.getImage().apply(new PosteriseFilter(k));
