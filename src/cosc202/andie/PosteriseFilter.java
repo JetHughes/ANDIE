@@ -100,9 +100,15 @@ public class PosteriseFilter implements ImageOperation, java.io.Serializable {
             Centroid c = centroids.get(pixel.clusterNo); 
             argbClass.setRGB(pixel.x, pixel.y, c.r, c.g, c.b, pixel.a);  
         }
-        BufferedImage output = new BufferedImage(input.getColorModel(), argbClass.getRaster(), input.isAlphaPremultiplied(), null);
-        System.out.println("done");
-        return output;
+        try {
+            BufferedImage output = new BufferedImage(input.getColorModel(), argbClass.getRaster(), input.isAlphaPremultiplied(), null);
+            System.out.println("done");
+            return output;
+        } catch (Exception e) {
+            System.out.println(e);
+            PopUp.showMessageDialog("An unknown error has occured. Returning input");
+            return input;
+        }
     }
 
     /**

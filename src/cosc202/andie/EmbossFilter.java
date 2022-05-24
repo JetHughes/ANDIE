@@ -68,10 +68,20 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable {
      * @return The resulting (embossed) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        int direction = Integer.parseInt(String.valueOf(type.charAt(type.length()-1)));
+        try{
+            int direction = Integer.parseInt(String.valueOf(type.charAt(type.length()-1)));
 
-        BufferedImage output = Convoluter.applyConvolution(input, kernels[direction], 127);
+            BufferedImage output = Convoluter.applyConvolution(input, kernels[direction], 127);
 
-        return output;
+            return output;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println(ex);
+            PopUp.showMessageDialog("An ArrayIndexOutOfBounds has occured. Returning input");
+            return input;
+        } catch (Exception e) {
+            System.out.println(e);
+            PopUp.showMessageDialog("An unknown error has occured. Returning input");
+            return input;
+        }
     }
 }
