@@ -115,6 +115,32 @@ and flips in a row does not ruin the image or cause unexpected reults.
 
 ---
 
+### Draw Shapes
+**Contributors:** Bradley, 
+
+**Access:** Menu, Keyboard Shortcut
+
+**Testing:** Tested drawing shapes from different points, ensured
+that shapes draw correctly based on the zoom level of the image, ensured
+that shapes could be drawn from all different directions (right to left etc)
+
+**Known Issues:** No known issues
+
+---
+
+### Crop Image
+**Contributors:** Bradley, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl - Q)
+
+**Testing:** Tested crop from different points, ensured that
+it crops correctly based on the zoom level of the image, ensured
+that image could be cropped from all different directions (right to left etc)
+
+**Known Issues:** No known issues
+
+---
+
 ### Image Export
 **Contributors:** Arlo, 
 
