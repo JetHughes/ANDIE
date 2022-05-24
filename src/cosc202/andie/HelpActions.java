@@ -98,8 +98,9 @@ public class HelpActions {
             l1.addElement("Exit           ");
             l1.addElement("Undo           ");
             l1.addElement("Redo           ");
-            l1.addElement("Image panning");
-            l1.addElement("Image Zooming");
+            l1.addElement("Crop           ");
+            l1.addElement("Image panning  ");
+            l1.addElement("Image Zooming  ");
             l1.addElement("Zoom In        ");
             l1.addElement("Zoom Out       ");
             l1.addElement("Zoom Fit       ");
@@ -108,6 +109,7 @@ public class HelpActions {
             l1.addElement("Sharpen Filter ");
             l1.addElement("Gaussian Filter");
             l1.addElement("Median Filter  ");
+            l1.addElement("Posteries Filter");
             l1.addElement("Greyscale      ");
             l1.addElement("Brightness     ");
             l1.addElement("Contrast       ");
@@ -128,6 +130,7 @@ public class HelpActions {
             l2.addElement("|                  CTRL + W");
             l2.addElement("|                  CTRL + Z");
             l2.addElement("|                  CTRL + Y");
+            l2.addElement("|                  CTRL + Q");
             l2.addElement("|                  Mouse Button 1");
             l2.addElement("|                  Mouse Scroll Wheel");
             l2.addElement("|                  CTRL + =");
@@ -138,6 +141,7 @@ public class HelpActions {
             l2.addElement("|                  CTRL + J");
             l2.addElement("|                  CTRL + G");
             l2.addElement("|                  CTRL + D");
+            l2.addElement("|                  CTRL + P");
             l2.addElement("|                  CTRL + A");
             l2.addElement("|                  CTRL + B");
             l2.addElement("|                  CTRL + C");
