@@ -161,7 +161,7 @@ that image could be cropped from all different directions (right to left etc)
 
 **Testing:**
 
-**Known Issues:**
+**Known Issues:** .png files with transparent pixel won't save as a jpg
 
 ---
 
