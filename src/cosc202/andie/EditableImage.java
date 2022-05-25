@@ -201,7 +201,7 @@ public class EditableImage {
             }
             // Write image file based on file extension
             String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-            ImageIO.write(original, extension, new File(imageFilename));
+            ImageIO.write(current, extension, new File(imageFilename));
             // Write operations file
             FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
             ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -240,11 +240,8 @@ public class EditableImage {
      * @param newName The file location to save the image to.
      * @throws FileNotFoundException If something goes wrong.
      */
-    public void saveAs(File newNameFile) throws FileNotFoundException {
+    public void saveAs(String newName) throws FileNotFoundException {
         try{
-            ImageIO.write(current, "ops", newNameFile);
-
-            String newName = newNameFile.getAbsolutePath();
             if(newName.contains(".")){ //if the user added their own extension
                 this.imageFilename = newName;
                 this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
