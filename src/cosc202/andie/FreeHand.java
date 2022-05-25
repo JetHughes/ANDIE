@@ -16,7 +16,7 @@ public class FreeHand {
 
     public FreeHand() {
         actions = new ArrayList<Action>();
-        actions.add(new FreeHandAction("Zoom Out", null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new FreeHandAction("Free Hand Drawing", null, "Free Hand Drawing", Integer.valueOf(KeyEvent.VK_BACK_SLASH)));
 
 
     }
@@ -54,7 +54,7 @@ public class FreeHand {
 
     public class FreeHandDraw implements MouseListener, MouseMotionListener{
 
-        int xOrigin, yOrigin, xEnd, yEnd, weight;
+        int xOrigin, yOrigin, xEnd, yEnd, weight = 10;
 
         double zoomLevel;
 
@@ -77,20 +77,21 @@ public class FreeHand {
         private boolean first = true;
 
 
+
+
         public FreeHandDraw(ImagePanel target){
             this.target = target;
             target.addMouseListener(this);
             target.addMouseMotionListener(this);
             target.add(window);
             window.setBackground(color);   
-            weight = Math.abs(PopUp.getSliderInt("Enter Line Weight", 1, 1, 50, 5));
+            
                 
             
 
         }
 
         public void mouseDragged(MouseEvent e) {
-            System.out.println("f");
         xOrigin = xEnd;
         yOrigin = yEnd;
         xEnd = (int) (e.getX()/zoomLevel);
@@ -116,15 +117,21 @@ public class FreeHand {
 
         @Override
         public void mousePressed(MouseEvent e){
-            if(target.getImage().getRecording()){
-                recording = true;
-                target.getImage().setRecording(false);
+            if (SwingUtilities.isLeftMouseButton(e)) {
+                if(target.getImage().getRecording()){
+                    recording = true;
+                    target.getImage().setRecording(false);
+                }
+                window.setVisible(true);
+                selecting = true;
+                zoomLevel = target.getZoom()/100;
+                xOrigin = (int) (e.getX()/zoomLevel);
+                yOrigin = (int) (e.getY()/zoomLevel);
             }
-            window.setVisible(true);
-            selecting = true;
-            zoomLevel = target.getZoom()/100;
-            xOrigin = (int) (e.getX()/zoomLevel);
-            yOrigin = (int) (e.getY()/zoomLevel);
+
+            if (SwingUtilities.isRightMouseButton(e)) {
+                weight = Math.abs(PopUp.getSliderInt("Enter Line Weight", 1, 1, 50, 5));
+            }
         }
 
         @Override

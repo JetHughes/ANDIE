@@ -10,11 +10,16 @@ import javax.swing.*;
 public class PopUp {
 
     /**
+     * used to center the dialogs
+     */
+    static JFrame parent;
+
+    /**
      * Method to show a message box
      * @param message String to show in the pop up box
      */
     public static void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message);
+        JOptionPane.showMessageDialog(parent, message);
     }
 
     /**
@@ -51,7 +56,7 @@ public class PopUp {
         Slider.setMajorTickSpacing(max/2);
         Slider.setMinorTickSpacing(stepSize);
 
-        int option = JOptionPane.showOptionDialog(null, Slider, prompt + " | Min: " + min + "\t | Max: " + max,
+        int option = JOptionPane.showOptionDialog(parent, Slider, prompt + " | Min: " + min + "\t | Max: " + max,
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
         // Check the return value from the dialog box.
@@ -77,7 +82,7 @@ public class PopUp {
         SpinnerNumberModel radiusModel = new SpinnerNumberModel(defaultValue, min, max, stepSize);
         JSpinner spinner = new JSpinner(radiusModel);
 
-        int option = JOptionPane.showOptionDialog(null, spinner, prompt + " | Min: " + min + "\t | Max: " + max,
+        int option = JOptionPane.showOptionDialog(parent, spinner, prompt + " | Min: " + min + "\t | Max: " + max,
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, defaultValue);
 
         // Check the return value from the dialog box.

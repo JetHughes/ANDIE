@@ -5,6 +5,7 @@ import javax.imageio.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.awt.*;
 /**
  * <p>
  * Class that shows the current state of recording in {@link EditableImage}
@@ -21,7 +22,11 @@ public class MacroLabel extends JLabel {
      */
     public void setMacroLabel(boolean recording){
         try {
-            macroIcon = new ImageIcon(ImageIO.read(new File("./src/macroIcon.png")));
+            ImageIcon imageIcon = new ImageIcon("./src/macroIcon.png"); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it 
+            Image newimg = image.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
+            macroIcon = new ImageIcon(newimg);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

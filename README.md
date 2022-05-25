@@ -210,6 +210,15 @@ that image could be cropped from all different directions (right to left etc)
 ### Image Colour Getter and Setter - RGB.class
 **Contributors:** Riley
 
-**Bried Discussion:** Creates Raster object equal to that of the input image, reads colour values at given x, y values and can set argb values in the new Raster to be returned later. Purpose of class is to bypass the extremely slow Color object getRGB/setRGB methods. Without the constant colour space checking and converting the RGB class is much faster (whilst somewhat more memory intensive) and allows for larger more thorough covolution. 
+**Brief Discussion:** Creates Raster object equal to that of the input image, reads colour values at given x, y values and can set argb values in the new Raster to be returned later. Purpose of class is to bypass the extremely slow Color object getRGB/setRGB methods. Without the constant colour space checking and converting the RGB class is much faster (whilst somewhat more memory intensive) and allows for larger more thorough covolution. 
+
+---
+
+### PopUp class
+
+**Contributors:** Jet, Arlo
+
+**Brief Discussion:** Static class used to display various dialogs and messages (Spinner, slider, message) to the user.
+
 
 **Testing:** Tested with all applicable filters through the Convoluter class, or directly i.e. the Posterise or Median filter
