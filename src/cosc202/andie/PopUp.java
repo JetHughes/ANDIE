@@ -19,7 +19,7 @@ public class PopUp {
      * @param message String to show in the pop up box
      */
     public static void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message);
+        JOptionPane.showMessageDialog(parent, message);
     }
 
     /**
