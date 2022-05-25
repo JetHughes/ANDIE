@@ -336,7 +336,7 @@ public class FileActions {
                             String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath()+output;
                             target.getImage().export(imageFilepath);
                         } catch (Exception ex) {
-                            System.exit(1);
+                            PopUp.showMessageDialog(ex.getMessage());
                         }
                     }
                 }
