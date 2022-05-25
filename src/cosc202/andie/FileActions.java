@@ -4,7 +4,7 @@ import java.util.*;
 import java.awt.event.*;
 import java.io.*;
 
-
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -217,11 +217,11 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
-            int result = fileChooser.showOpenDialog(target);
+            int result = fileChooser.showSaveDialog(target);
 
             if (result == JFileChooser.APPROVE_OPTION) {
                 try {
-                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                    String imageFilepath = fileChooser.getSelectedFile().getAbsolutePath();
                     target.getImage().saveAs(imageFilepath);
                 } catch (Exception ex) {
                     System.exit(1);
@@ -336,7 +336,7 @@ public class FileActions {
                             String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath()+output;
                             target.getImage().export(imageFilepath);
                         } catch (Exception ex) {
-                            System.exit(1);
+                            PopUp.showMessageDialog(ex.getMessage());
                         }
                     }
                 }

@@ -94,7 +94,7 @@ public class EditableImage {
      * 
      * <p>
      * This method makes a cloned copy of a BufferedImage.
-     * This requires knoweldge of some details about the internals of the BufferedImage,
+     * This requires knowledge of some details about the internals of the BufferedImage,
      * but essentially comes down to making a new BufferedImage made up of copies of
      * the internal parts of the input.
      * </p>
@@ -201,7 +201,7 @@ public class EditableImage {
             }
             // Write image file based on file extension
             String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-            ImageIO.write(original, extension, new File(imageFilename));
+            ImageIO.write(current, extension, new File(imageFilename));
             // Write operations file
             FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
             ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -242,11 +242,11 @@ public class EditableImage {
      */
     public void saveAs(String newName) throws FileNotFoundException {
         try{
-            if(newName.contains(".")){ //if the user added thier own extension
-                this.imageFilename = newName;
+            this.imageFilename = newName;
+            if(newName.contains(".")){ //if the user added their own extension
                 this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
             } else {    
-                this.imageFilename = newName + this.imageFilename.substring(imageFilename.length()-4);
+                //this.imageFilename = newName + this.imageFilename.substring(imageFilename.length()-4);
                 this.opsFilename = newName + ".ops";
             }
 
@@ -275,7 +275,10 @@ public class EditableImage {
             this.imageFilename = imageFilename;
             String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
             ImageIO.write(current, extension, new File(imageFilename));
-        } catch (Exception ex) {
+        } catch (IOException ex) {
+            System.out.println(ex);
+            PopUp.showMessageDialog("Error: Invalid filename! Please try again with a valid filename.");
+        }catch (Exception ex) {
             System.out.println(ex);
             PopUp.showMessageDialog("Unknown error");
         }
