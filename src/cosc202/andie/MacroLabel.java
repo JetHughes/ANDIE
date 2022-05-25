@@ -1,7 +1,5 @@
 package cosc202.andie;
 
-import java.io.*;
-import javax.imageio.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
