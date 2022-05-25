@@ -159,6 +159,13 @@ that image could be cropped from all different directions (right to left etc)
 
 ---
 
+### Macro
+**Contributors:** Will 
+
+**Brief Discussion:** Macro allows you to record a series of operations is a seperate .ops file, which can then be applied to other photos. 
+
+---
+
 ### Keyboard Shortcuts
 **Contributors:** Arlo, 
 
@@ -171,7 +178,7 @@ that image could be cropped from all different directions (right to left etc)
 
 **Testing:** On going testing attempting to break the program, find and resolve issues
 
-**General Errors Caught:** Added error handling to all functions that require an image if being used without an image loaded.  Added error handling for save, open and export cases (no file, incorrect file name or type). Added error handling for empty stacks in undo and redo.  Replaced System.exit in exception handling to a less aggressive forms of handling (method exiting and/or error messages).
+**General Errors Caught:** Added error handling to all functions that require an image if being used without an image loaded.  Added error handling for save, open and export cases (no file, incorrect file name or type). Added error handling for empty stacks in undo and redo.  Replaced System.exit in exception handling to a less aggressive forms of handling (method exiting and/or error messages).  New errors caught in export (incorrect file names handling). Fixed Macro not applying immediatly.  Found bug where macro applied operations in the wrong order, fixed. Found errors where filters would be called every time there was an undo.  Fixed bugs and changed functionality of zoom so that it works in conjunction with scale. 
 
 ### Image Extending/Convolution
 **Contributors:** Jet, Riley
