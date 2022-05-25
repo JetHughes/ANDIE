@@ -255,6 +255,8 @@ public class EditableImage {
                 throw new Exception("File already exists");
             } else {
                 save();
+                this.opsFilename = imageFilename + ".png";
+                save();
             }
         } catch (Exception ex){
             System.out.println(ex);
