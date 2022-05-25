@@ -201,7 +201,7 @@ public class EditableImage {
             }
             // Write image file based on file extension
             String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-            ImageIO.write(current, extension, new File(imageFilename));
+            ImageIO.write(original, extension, new File(imageFilename));
             // Write operations file
             FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
             ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
