@@ -250,7 +250,7 @@ public class EditableImage {
                 throw new Exception("File already exists");
             } else {
                 this.imageFilename = newName;
-                this.opsFilename = newName + ".ops";
+                this.opsFilename = newName.substring(0, newName.length()-4) + ".ops";
                 save();
             }
         } catch (Exception ex){
