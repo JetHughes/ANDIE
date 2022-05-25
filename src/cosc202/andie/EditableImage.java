@@ -37,7 +37,7 @@ public class EditableImage {
     /** <p> The current image, the result of applying {@link ops} to {@link original}. </p> */
     private BufferedImage current;
     /** <p> The sequence of operations currently applied to the image. </p> */
-    private Stack<ImageOperation> ops;
+    Stack<ImageOperation> ops;
     /** <p> A memory of 'undone' operations to support 'redo'. </p> */
     Stack<ImageOperation> redoOps;
     /** <p> The file where the original image is stored/ </p> */
