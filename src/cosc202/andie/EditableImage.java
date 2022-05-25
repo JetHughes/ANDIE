@@ -94,7 +94,7 @@ public class EditableImage {
      * 
      * <p>
      * This method makes a cloned copy of a BufferedImage.
-     * This requires knoweldge of some details about the internals of the BufferedImage,
+     * This requires knowledge of some details about the internals of the BufferedImage,
      * but essentially comes down to making a new BufferedImage made up of copies of
      * the internal parts of the input.
      * </p>
@@ -240,8 +240,11 @@ public class EditableImage {
      * @param newName The file location to save the image to.
      * @throws FileNotFoundException If something goes wrong.
      */
-    public void saveAs(String newName) throws FileNotFoundException {
+    public void saveAs(File newNameFile) throws FileNotFoundException {
         try{
+            ImageIO.write(current, "ops", newNameFile);
+
+            String newName = newNameFile.getAbsolutePath();
             if(newName.contains(".")){ //if the user added their own extension
                 this.imageFilename = newName;
                 this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
