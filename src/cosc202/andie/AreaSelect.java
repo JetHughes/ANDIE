@@ -2,10 +2,7 @@ package cosc202.andie;
 
 import java.awt.Color;
 import java.awt.event.*;
-
 import javax.swing.JPanel;
-
-import cosc202.andie.Andie.ZoomAndPanListener;
 
 /**
  * <p>
@@ -28,8 +25,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     String type;
     /** New Color object */
     Color FinalColour = Andie.FinalColour;
-    /** New Color object */
-    Color color = new Color(173,216,230);
+    /** New COlor Object */
+    Color color = new Color(150, 200, 220);
     /**New JPanel object */
     JPanel window = new JPanel();
 
@@ -52,7 +49,11 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
         target.addMouseListener(this);
         target.addMouseMotionListener(this);
         target.add(window);
-        window.setBackground(color);
+        if(type.toLowerCase().contains("rectangle")){
+            window.setBackground(FinalColour);
+        }else{
+            window.setBackground(color);
+        }
         if(type != "crop"){
 
             if(type.toLowerCase().contains("line")){
