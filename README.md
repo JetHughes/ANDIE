@@ -44,6 +44,17 @@
 
 ---
 
+### Posterise Filter
+**Contributors:** Jet
+
+**Access:** Menu, Keyboard Shortcuts (Ctrl-P)
+
+**Testing:** JUnit testing of the getDistance method. Also manual printf testing of Centroid distribution
+
+**Known Issues:** Runs a bit slow, no severe bugs
+
+---
+
 ### Brightness Adjustment
 **Contributors:** Jet, Arlo
 
@@ -99,6 +110,32 @@ and flips in a row does not ruin the image or cause unexpected reults.
 **Testing:** Ensured that images with different width/height ratios dont get 
 cropped or muddled up during the flip. Ensured that doing multiple rotations
 and flips in a row does not ruin the image or cause unexpected reults.
+
+**Known Issues:** No known issues
+
+---
+
+### Draw Shapes
+**Contributors:** Bradley, 
+
+**Access:** Menu, Keyboard Shortcut
+
+**Testing:** Tested drawing shapes from different points, ensured
+that shapes draw correctly based on the zoom level of the image, ensured
+that shapes could be drawn from all different directions (right to left etc)
+
+**Known Issues:** No known issues
+
+---
+
+### Crop Image
+**Contributors:** Bradley, 
+
+**Access:** Menu, Keyboard Shortcut (Ctrl - Q)
+
+**Testing:** Tested crop from different points, ensured that
+it crops correctly based on the zoom level of the image, ensured
+that image could be cropped from all different directions (right to left etc)
 
 **Known Issues:** No known issues
 

@@ -109,7 +109,8 @@ public class HelpActions {
             l1.addElement("Sharpen Filter ");
             l1.addElement("Gaussian Filter");
             l1.addElement("Median Filter  ");
-            l1.addElement("Posteries Filter");
+            l1.addElement("Posterise Filter");
+            l1.addElement("Emboss Filters");
             l1.addElement("Greyscale      ");
             l1.addElement("Brightness     ");
             l1.addElement("Contrast       ");
@@ -135,13 +136,14 @@ public class HelpActions {
             l2.addElement("|                  Mouse Scroll Wheel");
             l2.addElement("|                  CTRL + =");
             l2.addElement("|                  CTRL + -");
-            l2.addElement("|                  CTRL + /");
-            l2.addElement("|                  CTRL + Shift + /");
+            l2.addElement("|                  CTRL + \\");
+            l2.addElement("|                  CTRL + Shift + \\");
             l2.addElement("|                  CTRL + M");
             l2.addElement("|                  CTRL + J");
             l2.addElement("|                  CTRL + G");
             l2.addElement("|                  CTRL + D");
             l2.addElement("|                  CTRL + P");
+            l2.addElement("|                  CTRL + 0-9");
             l2.addElement("|                  CTRL + A");
             l2.addElement("|                  CTRL + B");
             l2.addElement("|                  CTRL + C");

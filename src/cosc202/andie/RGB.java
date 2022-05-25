@@ -30,7 +30,7 @@ public class RGB {
     private int pixelLength;
     /** An array representing the colour values of pixels in the image */ 
     private byte[] pixels; 
-    /** An editable raster representing the pixel colour values in the new image */
+    /** An editable raster representing the pixel colour values */
     private WritableRaster raster; 
 
     /**

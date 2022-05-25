@@ -24,14 +24,10 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     ImagePanel target;
     /** The action to be applied */
     String type;
-    
     /** New Color object */
     Color FinalColour = Andie.FinalColour;
-
-
     /** Boolean values representing method article completion */
     boolean recording, selecting = false;
-
     /** New Color object */
     Color color = new Color(173,216,230);
     /**New JPanel object */
@@ -74,15 +70,11 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        if(target.getImage().getRecording()){
-            recording = true;
-            target.getImage().setRecording(false);
-        }
         window.setVisible(true);
         selecting = true;
         zoomLevel = target.getZoom()/100;
-        xOrigin = (int) (e.getX()/zoomLevel);
-        yOrigin = (int) (e.getY()/zoomLevel);
+        xOrigin = (int) (e.getX());
+        yOrigin = (int) (e.getY());
     }
 
     /**
@@ -113,23 +105,32 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
                 yEnd = n;
             }
         }
+        xOrigin = (int) (xOrigin/zoomLevel);
+        yOrigin = (int) (yOrigin/zoomLevel);
 
-        if(type == "crop"){
-            target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
-            target.repaint();
-            target.getParent().revalidate();
-        }
-        else{
-            target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, FinalColour, type, weight));
-            target.repaint();
-            target.getParent().revalidate();
+        System.out.println(target.getWidth() + " " + target.getHeight());
+
+        if(!(xOrigin > target.getWidth() || xEnd > target.getWidth() || yOrigin > target.getHeight()
+        || yEnd > target.getHeight() || xOrigin < target.getX() || yOrigin < target.getY() || xEnd < target.getX() || yEnd < target.getY())){
+            if(type == "crop"){
+                target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
+                target.repaint();
+                target.getParent().revalidate();
+            }
+            else{
+                target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, FinalColour, type, weight));
+                target.repaint();
+                target.getParent().revalidate();
+            }
+        }else{
+            PopUp.showMessageDialog("Error: Selection is outside image bounds");
         }
     }
 
     @Override
 	public void mouseDragged(MouseEvent e) {
-        xEnd = (int) (e.getX()/zoomLevel);
-        yEnd = (int) (e.getY()/zoomLevel);
+        xEnd = (int) (e.getX());
+        yEnd = (int) (e.getY());
         if(xOrigin > xEnd && yOrigin > yEnd){
             window.setBounds(xEnd, yEnd, xOrigin - xEnd, yOrigin - yEnd);
         }else if(xOrigin > xEnd){

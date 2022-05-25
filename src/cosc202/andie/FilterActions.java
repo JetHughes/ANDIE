@@ -37,9 +37,9 @@ public class FilterActions {
      */
     public FilterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a sharpen filter", Integer.valueOf(KeyEvent.VK_J)));
-        actions.add(new GaussianFilterAction("Gaussian Filter", null, "Apply a gaussian filter", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new MeanFilterAction("Mean filter", null, "Apply a Mean filter", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new SharpenFilterAction("Sharpen Filter", null, "Apply a Sharpen filter", Integer.valueOf(KeyEvent.VK_J)));
+        actions.add(new GaussianFilterAction("Gaussian Filter", null, "Apply a Gaussian filter", Integer.valueOf(KeyEvent.VK_G)));
         actions.add(new MedianFilterAction("Median Filter", null, "Apply a Median filter", Integer.valueOf(KeyEvent.VK_D)));
         actions.add(new PosteriseFilterAction("Posterise Filter", null, "Apply a Posterise filter", Integer.valueOf(KeyEvent.VK_P)));
         //actions.add(new EmbossFilterAction("Emboss Filter", null, "Apply an Emboss filter", Integer.valueOf(KeyEvent.VK_E)));
