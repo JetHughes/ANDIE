@@ -115,6 +115,19 @@ and flips in a row does not ruin the image or cause unexpected reults.
 
 ---
 
+### Area Select
+**Contributors:** Bradley, 
+
+**Access:** Used by crop and Draw Shapes classes
+
+**Testing:** Tested ensuring that all directions of drawing
+are valid, so that a selection can start and finish anywhere
+within the image bounds
+
+**Known Issues:** No known issues
+
+---
+
 ### Draw Shapes
 **Contributors:** Bradley, 
 
