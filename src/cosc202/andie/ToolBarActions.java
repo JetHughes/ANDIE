@@ -64,7 +64,7 @@ public class ToolBarActions {
         ViewActions.ZoomOutAction Zoomoutaction = viewactions.new ZoomOutAction(null, zoomout, "Zoom Out (Ctrl + -)", Integer.valueOf(KeyEvent.VK_MINUS));
         
         FreeHand drawActions = new FreeHand();
-        FreeHand.FreeHandAction freehandaction = drawActions.new FreeHandAction(null, FreeHandIcon, "Zoom In (Ctrl + =)", Integer.valueOf(KeyEvent.VK_EQUALS));
+        FreeHand.FreeHandAction freehandaction = drawActions.new FreeHandAction(null, FreeHandIcon, "Free Hand Draw (Ctrl + \\)", Integer.valueOf(KeyEvent.VK_EQUALS));
 
         actions.add(zoominaction);
         actions.add(Zoomoutaction);
