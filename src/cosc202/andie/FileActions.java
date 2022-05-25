@@ -215,15 +215,21 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
-            int result = fileChooser.showSaveDialog(target);
+            if(!target.getImage().hasImage()){
+                //System.out.println("Export error handling");
+                PopUp.showMessageDialog("Error: No image to save!");
 
-            if (result == JFileChooser.APPROVE_OPTION) {
-                try {
-                    String imageFilepath = fileChooser.getSelectedFile().getAbsolutePath();
-                    target.getImage().saveAs(imageFilepath);
-                } catch (Exception ex) {
-                    System.exit(1);
+            } else {
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showSaveDialog(target);
+
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String imageFilepath = fileChooser.getSelectedFile().getAbsolutePath();
+                        target.getImage().saveAs(imageFilepath);
+                    } catch (Exception ex) {
+                        System.exit(1);
+                    }
                 }
             }
         }

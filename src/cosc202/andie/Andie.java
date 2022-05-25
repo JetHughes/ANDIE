@@ -120,6 +120,7 @@ public class Andie {
         
 
         menuBar.add(imagePanel.macroLabel);
+        menuBar.add(FreeHand.macroLabel);
 
         JButton b = new JButton();
         
