@@ -208,7 +208,7 @@ public class ColourActions {
                 PopUp.showMessageDialog("Error: No image to apply change to!");
 
             } else {
-                double contrast = PopUp.getSliderInt("Enter Contast Value", 0, -1000, 1000, 10);
+                double contrast = PopUp.getSliderInt("Enter Contast Value", 0, -100, 1000, 10);
 
                 // If they entered a value outside of the range `contrast` will be zero so we should alert them and cancel the operation
                 if(contrast == 0) {
