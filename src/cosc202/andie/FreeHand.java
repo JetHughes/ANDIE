@@ -16,8 +16,11 @@ public class FreeHand {
     ImagePanel target = Andie.target;
     /** Type of drawing (line settings) */
     String type;
+    /** Represents if function is on */
     boolean on = false;
+    /** Creates new JLabel */
     public static JLabel macroLabel = new JLabel("");
+    /** Creates new list of actions */
     protected ArrayList<Action> actions;
 
     /** Method to initialise function accessability */
