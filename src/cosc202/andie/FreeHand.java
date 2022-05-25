@@ -18,8 +18,6 @@ public class FreeHand {
     public FreeHand() {
         actions = new ArrayList<Action>();
         actions.add(new FreeHandAction("Free Hand Drawing", null, "Free Hand Drawing", Integer.valueOf(KeyEvent.VK_BACK_SLASH)));
-
-
     }
 
 
@@ -74,16 +72,6 @@ public class FreeHand {
 
         Color FinalColour = Andie.FinalColour;
 
-        boolean recording, selecting = false;
-
-        JPanel window = new JPanel();
-
-        JColorChooser tcc;
-
-        JLabel banner;
-
-        java.awt.Color color;
-
         private boolean first = true;
 
 
@@ -93,12 +81,6 @@ public class FreeHand {
             this.target = target;
             target.addMouseListener(this);
             target.addMouseMotionListener(this);
-            target.add(window);
-            window.setBackground(color);   
-            
-                
-            
-
         }
 
         public void mouseDragged(MouseEvent e) {
@@ -120,21 +102,9 @@ public class FreeHand {
         }
 
         @Override
-        public void mouseMoved(MouseEvent e){}
-
-        @Override
-        public void mouseClicked(MouseEvent e){}
-
-        @Override
         public void mousePressed(MouseEvent e){
             
             if (SwingUtilities.isLeftMouseButton(e)) {
-                if(target.getImage().getRecording()){
-                    recording = true;
-                    target.getImage().setRecording(false);
-                }
-                window.setVisible(true);
-                selecting = true;
                 zoomLevel = target.getZoom()/100;
                 xOrigin = (int) (e.getX()/zoomLevel);
                 yOrigin = (int) (e.getY()/zoomLevel);
@@ -151,7 +121,6 @@ public class FreeHand {
             
             if(on == true){
                 macroLabel.setText("");
-                window.setVisible(false);
 
                 xEnd = (int) (e.getX()/zoomLevel);
                 yEnd = (int) (e.getY()/zoomLevel);
@@ -181,6 +150,12 @@ public class FreeHand {
 
         @Override
         public void mouseExited(MouseEvent e){}
+        
+        @Override
+        public void mouseMoved(MouseEvent e){}
+
+        @Override
+        public void mouseClicked(MouseEvent e){}
     }
 
 }

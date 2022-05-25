@@ -37,7 +37,7 @@ public class EditableImage {
     /** <p> The current image, the result of applying {@link ops} to {@link original}. </p> */
     private BufferedImage current;
     /** <p> The sequence of operations currently applied to the image. </p> */
-    private Stack<ImageOperation> ops;
+    Stack<ImageOperation> ops;
     /** <p> A memory of 'undone' operations to support 'redo'. </p> */
     Stack<ImageOperation> redoOps;
     /** <p> The file where the original image is stored/ </p> */
@@ -201,7 +201,7 @@ public class EditableImage {
             }
             // Write image file based on file extension
             String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-            ImageIO.write(current, extension, new File(imageFilename));
+            ImageIO.write(original, extension, new File(imageFilename));
             // Write operations file
             FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
             ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -241,19 +241,16 @@ public class EditableImage {
      * @throws FileNotFoundException If something goes wrong.
      */
     public void saveAs(String newName) throws FileNotFoundException {
-        try{
-            this.imageFilename = newName;
-            if(newName.contains(".")){ //if the user added their own extension
-                this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
-            } else {    
-                //this.imageFilename = newName + this.imageFilename.substring(imageFilename.length()-4);
-                this.opsFilename = newName + ".ops";
+        try{            
+            if(!newName.contains(".")){ //if the user added their own extension
+                newName += ".png";
             }
 
-            if(new File(this.imageFilename).exists()){
-                //PopUp.showMessageDialog("Error, this file already exists");
+            if(new File(newName).exists()){
                 throw new Exception("File already exists");
             } else {
+                this.imageFilename = newName;
+                this.opsFilename = newName.substring(0, newName.length()-4) + ".ops";
                 save();
             }
         } catch (Exception ex){

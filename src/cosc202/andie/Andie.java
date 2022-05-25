@@ -53,6 +53,7 @@ public class Andie {
         
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
+        PopUp.parent = frame;
         
         Image image = ImageIO.read(new File("./src/icon.png"));
         frame.setIconImage(image);
