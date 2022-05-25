@@ -25,7 +25,7 @@ public class Andie {
 
     /** Creates a new Color object */
     public static Color FinalColour = Color.red;
-    
+    public static ImagePanel target;
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
