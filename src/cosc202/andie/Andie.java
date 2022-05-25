@@ -25,7 +25,7 @@ public class Andie {
 
     /** Creates a new Color object */
     public static Color FinalColour = Color.red;
-    
+    public static ImagePanel target;
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -161,7 +161,7 @@ public class Andie {
         splitPane.setEnabled( false );
         frame.setJMenuBar(menuBar);
         frame.add(splitPane);
-        frame.setPreferredSize(new Dimension(700, 700));
+        frame.setPreferredSize(new Dimension(700, 710));
         frame.pack();
         frame.setVisible(true);
     }

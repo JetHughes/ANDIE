@@ -4,7 +4,6 @@ import java.util.*;
 import java.awt.event.*;
 import java.io.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -172,7 +171,7 @@ public class FileActions {
             } catch (IOException ex) {
                 System.out.println("IO EXCEPTION");
                 PopUp.showMessageDialog("IO EXCEPTION");
-                System.exit(1);
+                //System.exit(1);
             }
         }
 

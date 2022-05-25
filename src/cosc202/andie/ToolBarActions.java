@@ -46,6 +46,7 @@ public class ToolBarActions {
         ImageIcon flipvIcon = new ImageIcon(ImageIO.read(new File("./src/flipverticalicon.png")));
         ImageIcon rotateRIcon = new ImageIcon(ImageIO.read(new File("./src/Rotate90RIcon.png")));
         ImageIcon rotateLIcon = new ImageIcon(ImageIO.read(new File("./src/Rotate90LIcon.png")));
+        ImageIcon FreeHandIcon = new ImageIcon(ImageIO.read(new File("./src/FreeHand.png")));
         actions = new ArrayList<Action>();
 
         EditActions editactions = new EditActions();
@@ -62,11 +63,16 @@ public class ToolBarActions {
         ViewActions.ZoomInAction zoominaction = viewactions.new ZoomInAction(null, zoomin, "Zoom In (Ctrl + =)", Integer.valueOf(KeyEvent.VK_EQUALS));
         ViewActions.ZoomOutAction Zoomoutaction = viewactions.new ZoomOutAction(null, zoomout, "Zoom Out (Ctrl + -)", Integer.valueOf(KeyEvent.VK_MINUS));
         
+        FreeHand drawActions = new FreeHand();
+        FreeHand.FreeHandAction freehandaction = drawActions.new FreeHandAction(null, FreeHandIcon, "Zoom In (Ctrl + =)", Integer.valueOf(KeyEvent.VK_EQUALS));
+
         actions.add(zoominaction);
         actions.add(Zoomoutaction);
 
         actions.add(undobutton);
         actions.add(redobutton);
+
+        actions.add(freehandaction);
 
         actions.add(rotate90L);
         actions.add(rotate90R);
