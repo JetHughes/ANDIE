@@ -87,8 +87,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         window.setVisible(false);
-        xEnd = (int) (e.getX());
-        yEnd = (int) (e.getY());
+        xEnd = (int) (e.getX()/zoomLevel);
+        yEnd = (int) (e.getY()/zoomLevel);
         target.removeMouseListener(this);
         target.removeMouseMotionListener(this);
 
@@ -105,16 +105,25 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
                 yEnd = n;
             }
         }
+        xOrigin = (int) (xOrigin/zoomLevel);
+        yOrigin = (int) (yOrigin/zoomLevel);
 
-        if(type == "crop"){
-            target.getImage().apply(new Crop((int) (xOrigin/zoomLevel), (int) (yOrigin/zoomLevel), (int) (xEnd/zoomLevel), (int) (yEnd/zoomLevel)));
-            target.repaint();
-            target.getParent().revalidate();
-        }
-        else{
-            target.getImage().apply(new DrawShapes((int) (xOrigin/zoomLevel), (int) (yOrigin/zoomLevel), (int) (xEnd/zoomLevel), (int) (yEnd/zoomLevel), FinalColour, type, weight));
-            target.repaint();
-            target.getParent().revalidate();
+        System.out.println(target.getWidth() + " " + target.getHeight());
+
+        if(!(xOrigin > target.getWidth() || xEnd > target.getWidth() || yOrigin > target.getHeight()
+        || yEnd > target.getHeight() || xOrigin < target.getX() || yOrigin < target.getY() || xEnd < target.getX() || yEnd < target.getY())){
+            if(type == "crop"){
+                target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
+                target.repaint();
+                target.getParent().revalidate();
+            }
+            else{
+                target.getImage().apply(new DrawShapes(xOrigin, yOrigin, xEnd, yEnd, FinalColour, type, weight));
+                target.repaint();
+                target.getParent().revalidate();
+            }
+        }else{
+            PopUp.showMessageDialog("Error: Selection is outside image bounds");
         }
     }
 
