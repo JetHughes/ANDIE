@@ -54,12 +54,22 @@ public class Crop implements ImageOperation, java.io.Serializable {
      * @return The resulting image.
      */
     public BufferedImage apply(BufferedImage input) {
-        BufferedImage output = new BufferedImage(xEnd - xOrigin, yEnd - yOrigin, input.getType());
-        for (int y = yOrigin; y < yEnd; y++) {
-            for (int x = xOrigin; x < xEnd; x++) {
-                output.setRGB(x - xOrigin, y - yOrigin, input.getRGB(x, y));
+        try {
+            BufferedImage output = new BufferedImage(xEnd - xOrigin, yEnd - yOrigin, input.getType());
+            for (int y = yOrigin; y < yEnd; y++) {
+                for (int x = xOrigin; x < xEnd; x++) {
+                    output.setRGB(x - xOrigin, y - yOrigin, input.getRGB(x, y));
+                }
             }
+            return output;
+        }catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println(ex);
+            PopUp.showMessageDialog("Selection is outside image bounds.");
+            return input;
+        }catch (Exception e) {
+            System.out.println(e);
+            PopUp.showMessageDialog("An unknown error has occured. Returning input");
+            return input;
         }
-        return output;
     }
 }
