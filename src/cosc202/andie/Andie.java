@@ -25,6 +25,7 @@ public class Andie {
 
     /** Creates a new Color object */
     public static Color FinalColour = Color.red;
+    /** Creates a new ImagePanel object */
     public static ImagePanel target;
     /**
      * <p>
