@@ -241,21 +241,16 @@ public class EditableImage {
      * @throws FileNotFoundException If something goes wrong.
      */
     public void saveAs(String newName) throws FileNotFoundException {
-        try{
-            this.imageFilename = newName;
-            if(newName.contains(".")){ //if the user added their own extension
-                this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
-            } else {    
-                //this.imageFilename = newName + this.imageFilename.substring(imageFilename.length()-4);
-                this.opsFilename = newName + ".ops";
+        try{            
+            if(!newName.contains(".")){ //if the user added their own extension
+                newName += ".png";
             }
 
-            if(new File(this.imageFilename).exists()){
-                //PopUp.showMessageDialog("Error, this file already exists");
+            if(new File(newName).exists()){
                 throw new Exception("File already exists");
             } else {
-                save();
-                this.opsFilename = imageFilename + ".png";
+                this.imageFilename = newName;
+                this.opsFilename = newName + ".ops";
                 save();
             }
         } catch (Exception ex){
