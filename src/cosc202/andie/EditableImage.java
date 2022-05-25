@@ -240,24 +240,21 @@ public class EditableImage {
      * @param newName The file location to save the image to.
      * @throws FileNotFoundException If something goes wrong.
      */
-    public void saveAs(File newNameFile) throws FileNotFoundException {
+    public void saveAs(String newName) throws FileNotFoundException {
         try{
-            String newName = newNameFile.getAbsolutePath();
             this.imageFilename = newName;
-            //if(newName.contains(".")){ //if the user added their own extension
-            //    this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
-            //} else {    
+            if(newName.contains(".")){ //if the user added their own extension
+                this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
+            } else {    
                 //this.imageFilename = newName + this.imageFilename.substring(imageFilename.length()-4);
-            //    this.opsFilename = newName + ".ops";
-            //}
+                this.opsFilename = newName + ".ops";
+            }
 
             if(new File(this.imageFilename).exists()){
                 //PopUp.showMessageDialog("Error, this file already exists");
                 throw new Exception("File already exists");
             } else {
-                String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
-
-                ImageIO.write(current, extension, newNameFile);
+                save();
             }
         } catch (Exception ex){
             System.out.println(ex);
@@ -298,12 +295,6 @@ public class EditableImage {
         current = op.apply(current);
         ops.add(op);
         if(recording) macroOps.add(op);
-    }
-
-    public void applyFreeHand(ImageOperation op) {
-        current = op.apply(current);
-        //ops.add(op);
-        //if(recording) macroOps.add(op);
     }
 
     /**
