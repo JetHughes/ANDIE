@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 import javax.swing.JPanel;
 
+import cosc202.andie.Andie.ZoomAndPanListener;
+
 /**
  * <p>
  * Class to select an area for an operation
@@ -26,8 +28,6 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     String type;
     /** New Color object */
     Color FinalColour = Andie.FinalColour;
-    /** Boolean values representing method article completion */
-    boolean recording, selecting = false;
     /** New Color object */
     Color color = new Color(173,216,230);
     /**New JPanel object */
@@ -71,10 +71,8 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     @Override
     public void mousePressed(MouseEvent e) {
         window.setVisible(true);
-        selecting = true;
-        zoomLevel = target.getZoom()/100;
-        xOrigin = (int) (e.getX());
-        yOrigin = (int) (e.getY());
+        xOrigin = e.getX();
+        yOrigin = e.getY();
     }
 
     /**
@@ -87,8 +85,11 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         window.setVisible(false);
+        zoomLevel = target.getZoom()/100;
         xEnd = (int) (e.getX()/zoomLevel);
         yEnd = (int) (e.getY()/zoomLevel);
+        xOrigin = (int) (xOrigin/zoomLevel);
+        yOrigin = (int) (yOrigin/zoomLevel);
         target.removeMouseListener(this);
         target.removeMouseMotionListener(this);
 
@@ -105,13 +106,9 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
                 yEnd = n;
             }
         }
-        xOrigin = (int) (xOrigin/zoomLevel);
-        yOrigin = (int) (yOrigin/zoomLevel);
 
-        System.out.println(target.getWidth() + " " + target.getHeight());
-
-        if(!(xOrigin > target.getWidth() || xEnd > target.getWidth() || yOrigin > target.getHeight()
-        || yEnd > target.getHeight() || xOrigin < target.getX() || yOrigin < target.getY() || xEnd < target.getX() || yEnd < target.getY())){
+        // if(!(xOrigin > target.getWidth() || xEnd > target.getWidth() || yOrigin > target.getHeight()
+        // || yEnd > target.getHeight() || xOrigin < 0 || yOrigin < 0 || xEnd < 0 || yEnd < 0)){
             if(type == "crop"){
                 target.getImage().apply(new Crop(xOrigin, yOrigin, xEnd, yEnd));
                 target.repaint();
@@ -122,9 +119,9 @@ public class AreaSelect implements MouseListener, MouseMotionListener {
                 target.repaint();
                 target.getParent().revalidate();
             }
-        }else{
-            PopUp.showMessageDialog("Error: Selection is outside image bounds");
-        }
+        // }else{
+        //     PopUp.showMessageDialog("Error: Selection is outside image bounds");
+        // }
     }
 
     @Override
