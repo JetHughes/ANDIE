@@ -172,7 +172,7 @@ public class FileActions {
             } catch (IOException ex) {
                 System.out.println("IO EXCEPTION");
                 PopUp.showMessageDialog("IO EXCEPTION");
-                System.exit(1);
+                //System.exit(1);
             }
         }
 
