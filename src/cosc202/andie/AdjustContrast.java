@@ -1,7 +1,6 @@
 package cosc202.andie;
 
 import java.awt.image.*;
-import java.awt.Color;
 
 /** 
  * <p>
@@ -76,24 +75,25 @@ public class AdjustContrast implements ImageOperation, java.io.Serializable{
      */
     public BufferedImage apply(BufferedImage input) {
 
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
+        RGB argbClass = new RGB(input);
         for (int y = 0; y < input.getHeight(); y++) {// loops for image matrix
             for (int x = 0; x < input.getWidth(); x++) {
-                Color c = new Color(input.getRGB(x, y));
+                int argb = argbClass.getRGB(x, y);
 
                 // adding factor to rgb values
-                int r = c.getRed();
-                int b = c.getBlue();
-                int g = c.getGreen();
-                int a = c.getAlpha();
+                int r = ((argb & 0x00FF0000) >> 16);
+                int b = (argb & 0x000000FF);
+                int g = ((argb & 0x0000FF00) >> 8);
+                int a = ((argb & 0xFF000000) >> 24);
 
                 r = (int) getAdjustedValue(contrast, r);
                 g = (int) getAdjustedValue(contrast, g);
                 b = (int) getAdjustedValue(contrast, b);
 
-                output.setRGB(x, y, new Color(r,g,b,a).getRGB());
+                argbClass.setRGB(x, y, r, g, b, a);
             }
         }
+        BufferedImage output = new BufferedImage(input.getColorModel(), argbClass.getRaster(), input.isAlphaPremultiplied(), null);
 
         return output;
     }

@@ -242,7 +242,7 @@ public class EditableImage {
      */
     public void saveAs(String newName) throws FileNotFoundException {
         try{
-            if(newName.contains(".")){ //if the user added thier own extension
+            if(newName.contains(".")){ //if the user added their own extension
                 this.imageFilename = newName;
                 this.opsFilename = imageFilename.substring(0, imageFilename.length() - 4) + ".ops"; //replace extension with .ops
             } else {    
