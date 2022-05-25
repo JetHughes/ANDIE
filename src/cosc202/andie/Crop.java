@@ -64,7 +64,7 @@ public class Crop implements ImageOperation, java.io.Serializable {
             return output;
         }catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println(ex);
-            PopUp.showMessageDialog("Selection is outside image bounds.");
+            PopUp.showMessageDialog("Error: Selection is outside image bounds");
             return input;
         }catch (Exception e) {
             System.out.println(e);
