@@ -255,7 +255,9 @@ public class EditableImage {
                 //PopUp.showMessageDialog("Error, this file already exists");
                 throw new Exception("File already exists");
             } else {
-                ImageIO.write(current, "ops", newNameFile);
+                String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+
+                ImageIO.write(current, extension, newNameFile);
             }
         } catch (Exception ex){
             System.out.println(ex);
