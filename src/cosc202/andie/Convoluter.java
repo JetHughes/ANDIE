@@ -48,7 +48,7 @@ public class Convoluter {
                 int blue = convolvePixel(image[2], x, y, kernel, offset);
 
                 //Write new pixel to output image, alpha is not changed
-                argbClass.setRGB(x, y, red, green, blue, (int)(image[3][x][y]) << 24);
+                argbClass.setRGB(x, y, red, green, blue, (int)(image[3][x][y]));
             }
         }
         // Create a new image based off of the updated Raster
