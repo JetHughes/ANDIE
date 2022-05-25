@@ -275,7 +275,10 @@ public class EditableImage {
             this.imageFilename = imageFilename;
             String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
             ImageIO.write(current, extension, new File(imageFilename));
-        } catch (Exception ex) {
+        } catch (IOException ex) {
+            System.out.println(ex);
+            PopUp.showMessageDialog("Error: Invalid filename! Please try again with a valid filename.");
+        }catch (Exception ex) {
             System.out.println(ex);
             PopUp.showMessageDialog("Unknown error");
         }
