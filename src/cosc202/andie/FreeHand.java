@@ -16,8 +16,8 @@ public class FreeHand {
     ImagePanel target = Andie.target;
     /** Type of drawing (line settings) */
     String type;
-
-    /** Arraylist containing completed actions */
+    boolean on = false;
+    public static JLabel macroLabel = new JLabel("");
     protected ArrayList<Action> actions;
 
     /** Method to initialise function accessability */
@@ -74,11 +74,20 @@ public class FreeHand {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            if (!target.getImage().hasImage()) {
-                PopUp.showMessageDialog("Error: No image to draw on!");
+            
+            if(on == true){
+                on = false;
+                macroLabel.setText("");
+            }else if(on == false){
 
-            } else {
-                new FreeHandDraw(target);
+                if(!target.getImage().hasImage()){
+                    PopUp.showMessageDialog("Error: No image to draw on!");
+
+                } else {
+                    macroLabel.setText("RIGHT CLICK TO CHANGE PEN SIZE");
+                    on = true;
+                    new FreeHandDraw(target);
+                }
             }
         }
 
@@ -135,7 +144,8 @@ public class FreeHand {
          * @param e The mouse event
         */
         @Override
-        public void mousePressed(MouseEvent e) {
+        public void mousePressed(MouseEvent e){
+            
             if (SwingUtilities.isLeftMouseButton(e)) {
                 zoomLevel = target.getZoom() / 100;
                 xOrigin = (int) (e.getX() / zoomLevel);
@@ -148,9 +158,33 @@ public class FreeHand {
         }
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-            target.removeMouseListener(this);
-            target.removeMouseMotionListener(this);
+        public void mouseReleased(MouseEvent e){
+            
+            
+            if(on == true){
+                macroLabel.setText("");
+
+                xEnd = (int) (e.getX()/zoomLevel);
+                yEnd = (int) (e.getY()/zoomLevel);
+
+                target.removeMouseListener(this);
+                target.removeMouseMotionListener(this);
+
+                if(type != "Draw Line"){
+                    if(xOrigin > xEnd){
+                        int n = xOrigin;
+                        xOrigin = xEnd;
+                        xEnd = n;
+                    }
+                    if(yOrigin > yEnd){
+                        int n = yOrigin;
+                        yOrigin = yEnd;
+                        yEnd = n;
+                    }
+                }  
+            }
+
+             
         }
 
         @Override

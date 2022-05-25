@@ -238,6 +238,7 @@ public class EditableImage {
      * </p>
      * 
      * @param newName The file location to save the image to.
+     * 
      * @throws FileNotFoundException If something goes wrong.
      */
     public void saveAs(String newName) throws FileNotFoundException {
@@ -250,7 +251,7 @@ public class EditableImage {
                 throw new Exception("File already exists");
             } else {
                 this.imageFilename = newName;
-                this.opsFilename = newName.substring(0, newName.length()-4) + ".ops";
+                this.opsFilename = newName.substring(0, newName.lastIndexOf(".")) + ".ops";
                 save();
             }
         } catch (Exception ex){
